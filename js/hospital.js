@@ -69,3 +69,4 @@ function navigateTo(page) {
         window.location.href = 'dashboard.html';
     }
 }
+

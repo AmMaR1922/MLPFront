@@ -68,3 +68,212 @@ button:hover {
     margin-top: 10px;
     color: #336699;
 }
+
+
+.biological-container {
+    padding: 20px;
+}
+
+.biological-list {
+    margin-bottom: 20px;
+}
+
+.biological-item {
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin-bottom: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    background-color: #f9f9f9;
+}
+
+.biological-item p {
+    margin: 5px 0;
+}
+
+.add-biological-form {
+    margin-top: 20px;
+    padding: 15px;
+    border: 1px solid #ccc;
+    background-color: #f1f1f1;
+    display: none;
+}
+
+.add-biological-form label {
+    display: block;
+    margin-top: 10px;
+}
+
+.add-biological-form input {
+    width: 100%;
+    padding: 8px;
+    margin-top: 5px;
+    margin-bottom: 10px;
+}
+
+button {
+    padding: 10px 20px;
+    background-color: #336699;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #254d7b;
+}
+
+#responseMessage {
+    margin-top: 15px;
+    color: green;
+    font-weight: bold;
+}
+
+
+
+
+
+/* Basic container styling */
+.biological-container {
+    padding: 20px;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.biological-list {
+    margin-bottom: 20px;
+}
+
+.biological-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.biological-table th, .biological-table td {
+    border: 1px solid #ccc;
+    padding: 10px;
+    text-align: left;
+}
+
+.biological-table th {
+    background-color: #f0f0f0;
+}
+
+.add-biological-form {
+    display: none;
+    margin-top: 20px;
+    padding: 15px;
+    border: 1px solid #ccc;
+    background-color: #f9f9f9;
+}
+
+.add-biological-form label {
+    display: block;
+    margin-top: 10px;
+}
+
+.add-biological-form input {
+    width: 100%;
+    padding: 8px;
+    margin-top: 5px;
+    margin-bottom: 10px;
+}
+
+button {
+    padding: 10px 20px;
+    background-color: #336699;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #254d7b;
+}
+
+#responseMessage {
+    margin-top: 15px;
+    color: green;
+    font-weight: bold;
+}
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* General styling for the page */
+body, html {
+    font-family: Arial, sans-serif;
+    background-color: #f0f4f8;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+/* Biological Indicator container */
+.biological-container {
+    max-width: 1000px;
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+/* Form and table styling */
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+label {
+    margin-bottom: 8px;
+}
+
+input, select {
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+button {
+    padding: 10px 20px;
+    background-color: #336699;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #254d7b;
+}
+
+/* Table styling */
+.biological-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.biological-table th, .biological-table td {
+    padding: 10px;
+    border: 1px solid #ccc;
+    text-align: left;
+}
+
+.biological-table th {
+    background-color: #f4f4f4;
+}
+
+#responseMessage {
+    margin-top: 15px;
+    color: green;
+    font-weight: bold;
+}

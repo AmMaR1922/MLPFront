@@ -1,40 +1,57 @@
-<!DOCTYPE html>
+<!DOCTYPE html> 
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Add/View Biological Indicator</title>
+    <title>Biological Indicators</title>
     <link rel="stylesheet" href="css/biological.css">
 </head>
 <body>
     <div class="biological-container">
-        <h2>Add Biological Indicator Information</h2>
-        <form id="biologicalForm">
-            <label for="date">Date:</label>
-            <input type="date" id="date" name="date" required>
+        <h2>Biological Indicators</h2>
 
-            <label for="healthConditionScore">Health Condition Score:</label>
-            <input type="number" id="healthConditionScore" name="healthConditionScore" required>
+        <!-- Display Patient Name -->
+        <h3 id="patientName">Patient Name: </h3>
 
-            <label for="healthCondition">Health Condition:</label>
-            <input type="text" id="healthCondition" name="healthCondition" required>
+        <!-- Display Existing Biological Indicators -->
+        <div id="biologicalList" class="biological-list"></div>
 
-            <label for="sugarPercentage">Sugar Percentage:</label>
-            <input type="number" step="0.01" id="sugarPercentage" name="sugarPercentage" required>
+        <!-- Add Biological Indicator Form -->
+        <div id="addBiologicalForm" class="add-biological-form" style="display: none;">
+            <h3>Add a New Biological Indicator</h3>
+            <form id="biologicalForm">
+                <label for="date">Date:</label>
+                <input type="date" id="date" name="date" required>
 
-            <label for="bloodPressure">Blood Pressure:</label>
-            <input type="text" id="bloodPressure" name="bloodPressure" required>
+                <label for="healthConditionScore">Health Condition Score:</label>
+                <input type="number" id="healthConditionScore" name="healthConditionScore" required>
 
-            <label for="averageTemperature">Average Temperature:</label>
-            <input type="number" step="0.1" id="averageTemperature" name="averageTemperature" required>
+                <label for="healthCondition">Health Condition:</label>
+                <input type="text" id="healthCondition" name="healthCondition" required>
 
-            <label for="time">Time:</label>
-            <input type="time" id="time" name="time" required>
+                <label for="sugarPercentage">Sugar Percentage:</label>
+                <input type="number" id="sugarPercentage" name="sugarPercentage" required>
 
-            <button type="submit">Save Indicator</button>
-        </form>
-        <p id="responseMessage"></p>
+                <label for="bloodPressure">Blood Pressure:</label>
+                <input type="text" id="bloodPressure" name="bloodPressure" required>
+
+                <label for="averageTemperature">Average Temperature:</label>
+                <input type="number" step="0.1" id="averageTemperature" name="averageTemperature" required>
+
+                <label for="time">Time:</label>
+                <input type="time" id="time" name="time" required>
+
+                <button type="submit">Save Biological Indicator</button>
+            </form>
+        </div>
+
+        <button id="addBiologicalButton" onclick="toggleAddForm()">Add Biological Indicator</button>
+
+        <div id="responseMessage"></div>
+
+        <button onclick="navigateTo('dashboard')">Back to Dashboard</button>
     </div>
+
     <script src="js/biological.js"></script>
 </body>
 </html>
