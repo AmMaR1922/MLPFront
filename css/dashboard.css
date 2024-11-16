@@ -173,3 +173,17 @@ hr {
     border: 0;
     border-top: 1px solid #ccc;
 }
+.dashboard-container {
+    max-width: 600px;
+    margin: 0 auto;
+    text-align: center;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+}
+
+.options button {
+    margin: 10px;
+    padding: 10px 20px;
+    font-size: 16px;
+}

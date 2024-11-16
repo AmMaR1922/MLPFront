@@ -1,199 +1,109 @@
-/* Global Reset */
-* {
+/* General Styles */
+body {
+    font-family: 'Arial', sans-serif;
     margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-body, html {
-    height: 100%;
-    font-family: Arial, sans-serif;
-    background-color: #f0f4f8;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-/* Patient Container */
-.patient-container {
-    max-width: 1200px;
     padding: 20px;
-    margin: 0 auto;
-    background-color: #ffffff;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    text-align: center;
+    background-color: #f4f4f9;
 }
 
-/* Headers */
-h2, h3 {
-    color: #336699;
-    margin-bottom: 20px;
-    text-align: center;
+/* Container for patient list */
+#patientList {
+    display: block;
+    margin-top: 20px;
 }
 
-/* Patient Table */
+/* Patient Table Styles */
 .patient-table {
     width: 100%;
     border-collapse: collapse;
-    margin-bottom: 20px;
+    margin-top: 20px;
+    background-color: #fff;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
 }
 
 .patient-table th, .patient-table td {
-    border: 1px solid #ccc;
-    padding: 10px;
-    text-align: left;
+    padding: 12px;
+    text-align: center;
+    border: 1px solid #ddd;
 }
 
 .patient-table th {
-    background-color: #f4f4f4;
+    background-color: #007BFF;
+    color: white;
+}
+
+.patient-table td {
+    background-color: #f9f9f9;
 }
 
 .patient-table tr:nth-child(even) {
-    background-color: #f9f9f9;
+    background-color: #f1f1f1;
 }
 
-/* Forms */
-form {
+.patient-table tr:hover {
+    background-color: #f0f0f0;
+}
+
+/* Patient Card Styling (if needed) */
+.patient-card {
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+    padding: 20px;
     display: flex;
-    flex-direction: column;
-    margin-top: 20px;
-    padding: 15px;
-    background-color: #f9f9f9;
-    border: 1px solid #ccc;
-    border-radius: 5px;
+    justify-content: space-between;
+    align-items: center;
 }
 
-form label {
-    margin: 5px 0;
-    text-align: left;
-    color: #333;
-    font-weight: bold;
-}
-
-form input, form select {
-    width: 100%;
-    padding: 10px;
-    margin-top: 5px;
-    margin-bottom: 15px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    font-size: 16px;
-}
-
-form button {
-    padding: 10px 20px;
-    background-color: #007bff;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 16px;
-}
-
-form button:hover {
-    background-color: #0056b3;
+.patient-card h3 {
+    margin: 0;
 }
 
 /* Button Styling */
 button {
-    padding: 10px 20px;
-    background-color: #336699;
+    background-color: #007BFF;
     color: white;
     border: none;
+    margin-top: 15px;
+    padding: 10px 20px;
     border-radius: 5px;
     cursor: pointer;
+    transition: background-color 0.3s ease;
 }
 
 button:hover {
-    background-color: #254d7b;
+    background-color: #0056b3;
 }
 
-button.secondary {
-    background-color: #ff6666;
-}
-
-button.secondary:hover {
-    background-color: #cc4d4d;
-}
-
-/* Response Message */
-#responseMessage {
-    margin-top: 15px;
-    color: green;
-    font-weight: bold;
-    font-size: 16px;
-}
-
-/* Hidden Form for Adding Patients */
-#patientFormContainer, .add-patient-form {
-    display: none;
-    margin-top: 20px;
-    padding: 15px;
-    border: 1px solid #ccc;
-    background-color: #f9f9f9;
-    border-radius: 5px;
-}
-
-/* Resetting margins, padding, and setting box-sizing */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-/* General page styling */
-body, html {
-    font-family: Arial, sans-serif;
-    background-color: #f0f4f8;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100%;
-}
-
-/* Container for patient info */
-.patient-container {
-    max-width: 1000px;
-    padding: 20px;
-    background-color: #ffffff;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    text-align: center;
-}
-
-/* Table and button styling */
-.patient-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 20px;
-}
-
-.patient-table th, .patient-table td {
+/* Add/View Patient Form Styles */
+#addPatientForm input,
+#addPatientForm select {
     padding: 10px;
-    border: 1px solid #ccc;
-    text-align: left;
-}
-
-.patient-table th {
-    background-color: #f4f4f4;
-}
-
-button {
-    padding: 10px 20px;
-    background-color: #336699;
-    color: white;
-    border: none;
+    margin: 10px 0;
+    width: 100%;
     border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+#addPatientForm input[type="submit"] {
+    background-color: #007BFF;
+    color: white;
     cursor: pointer;
 }
 
-button:hover {
-    background-color: #254d7b;
+#addPatientForm input[type="submit"]:hover {
+    background-color: #0056b3;
 }
 
-#responseMessage {
-    margin-top: 15px;
-    color: green;
+.patient-list-header {
+    display: flex;
+    justify-content: space-between;
     font-weight: bold;
+    background-color: #007BFF;
+    color: white;
+    padding: 10px;
+    border-radius: 8px;
+    text-align: center;
 }

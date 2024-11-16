@@ -1,53 +1,113 @@
-// Store patients and their biological indicators in localStorage
-const getPatients = () => JSON.parse(localStorage.getItem('patients')) || [];
-const savePatients = (patients) => localStorage.setItem('patients', JSON.stringify(patients));
+const hospitalsApiUrl = 'https://anteshnatsh.tryasp.net/api/Hospital/GetHospitals';
+const patientApiUrl = 'https://anteshnatsh.tryasp.net/api/Patient/CreatePatient';
+const allPatientsApiUrl = 'https://anteshnatsh.tryasp.net/api/Patient/AllNames';
 
-// Display patients in a table format
-function displayPatients() {
-    const patients = getPatients();
-    const patientListDiv = document.getElementById('patientList');
-    const addPatientFormDiv = document.getElementById('addPatientForm');
+// Helper function to get the authorization token
+function getToken() {
+    return 'eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9naXZlbm5hbWUiOiJNb2hhbWVkXzEwIiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvZW1haWxhZGRyZXNzIjoiTW83YW1lZDYxMDIwMDNAZ21haWwuY29tIiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9yb2xlIjoiQWRtaW4iLCJleHAiOjE3MzE4OTE1NzcsImlzcyI6Imh0dHBzOi8vYW50ZXNobmF0c2gudHJ5YXNwLm5ldCIsImF1ZCI6Ik15U2VjdXJlS2V5In0.Kcc4cffOFXempRLToI9gi8lFleSFcz32k4ynWNz0RJ0';
+}
 
-    if (patients.length === 0) {
-        patientListDiv.innerHTML = '<p>No patients found.</p>';
-    } else {
-        patientListDiv.innerHTML = `
-            <table class="patient-table">
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Name</th>
-                        <th>Phone Number</th>
-                        <th>Address</th>
-                        <th>Sex</th>
-                        <th>Pregnant</th>
-                        <th>Number of Births</th>
-                        <th>Action</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    ${patients.map(patient => `
-                        <tr>
-                            <td>${patient.id}</td>
-                            <td>${patient.name}</td>
-                            <td>${patient.phoneNumber}</td>
-                            <td>${patient.address}</td>
-                            <td>${patient.sex}</td>
-                            <td>${patient.pregnant || '-'}</td>
-                            <td>${patient.numberOfBirths || '-'}</td>
-                            <td>
-                                <button onclick="addBiologicalIndicator(${patient.id})">
-                                    Add Biological Indicator
-                                </button>
-                            </td>
-                        </tr>
-                    `).join('')}
-                </tbody>
-            </table>
-        `;
+// Fetch all hospitals from the API
+let hospitals = [];
+async function fetchHospitals() {
+    const token = getToken();
+    try {
+        const response = await fetch(hospitalsApiUrl, {
+            method: 'GET',
+            headers: {
+                'Authorization': `Bearer ${token}`,
+                'Content-Type': 'application/json',
+            }
+        });
+
+        if (!response.ok) {
+            throw new Error('Failed to fetch hospitals.');
+        }
+
+        hospitals = await response.json();
+        
+        // Log hospitals to verify they are being fetched correctly
+        console.log("Fetched hospitals:", hospitals);
+
+        populateHospitalSelect(); // Call the function to populate the select dropdown after fetching hospitals
+
+    } catch (error) {
+        console.error('Error fetching hospitals:', error);
     }
+}
 
-    addPatientFormDiv.style.display = patients.length > 0 ? 'none' : 'block';
+// Populate the hospital select dropdown
+function populateHospitalSelect() {
+    const hospitalSelect = document.getElementById('hospital');
+    hospitalSelect.innerHTML = '<option value="">Select a Hospital</option>'; // Clear any existing options
+
+    // Add each hospital as an option in the select dropdown
+    hospitals.forEach(hospital => {
+        const option = document.createElement('option');
+        option.value = hospital.id;  // Use the hospital ID as the value
+        option.textContent = hospital.name;  // Display the hospital name in the dropdown
+        hospitalSelect.appendChild(option);
+    });
+
+    // Log to check if the dropdown is populated
+    console.log("Populated hospital dropdown:", hospitalSelect);
+}
+
+// Fetch all patients from the API
+async function fetchPatients() {
+    const token = getToken();
+    const patientListDiv = document.getElementById('patientList');
+
+    try {
+        const response = await fetch(allPatientsApiUrl, {
+            method: 'GET',
+            headers: {
+                'Authorization': `Bearer ${token}`,
+                'Content-Type': 'application/json',
+            }
+        });
+
+        if (!response.ok) {
+            throw new Error('Failed to fetch patients.');
+        }
+
+        const patients = await response.json();
+
+        // Display patients in a table format
+        if (patients.length === 0) {
+            patientListDiv.innerHTML = '<p>No patients found.</p>';
+        } else {
+            patientListDiv.innerHTML = `
+                <table class="patient-table">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>State</th>
+                            <th>Hospital</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        ${patients.map(patient => `
+                            <tr>
+                                <td>${patient.name}</td>
+                                <td>${patient.state}</td>
+                                <td>${getHospitalName(patient.hospitalId)}</td>
+                            </tr>
+                        `).join('')}
+                    </tbody>
+                </table>
+            `;
+        }
+
+    } catch (error) {
+        console.error('Error fetching patients:', error);
+    }
+}
+
+// Get hospital name by hospitalId
+function getHospitalName(hospitalId) {
+    const hospital = hospitals.find(h => h.id === hospitalId);
+    return hospital ? hospital.name : 'Unknown';
 }
 
 // Toggle the Add Patient Form
@@ -65,79 +125,56 @@ function toggleAddPatientForm() {
 }
 
 // Save new patient data
-document.getElementById('patientForm').addEventListener('submit', function (e) {
+document.getElementById('patientForm').addEventListener('submit', async function (e) {
     e.preventDefault();
 
-    const patients = getPatients();
-
+    const token = getToken();
     const newPatient = {
-        id: patients.length + 1,
         name: document.getElementById('name').value,
         phoneNumber: document.getElementById('phoneNumber').value,
         address: document.getElementById('address').value,
-        sex: document.getElementById('sex').value,
-        pregnant: document.getElementById('pregnant').value || null,
-        numberOfBirths: document.getElementById('numberOfBirths').value || null
+        sex: document.getElementById('sex').value === 'true', // Convert to boolean
+        pregnant: document.getElementById('pregnant').value === 'true', // Convert to boolean
+        numberOfBirth: document.getElementById('numberOfBirths').value || 0,
+        hospitalId: document.getElementById('hospital').value
     };
 
-    patients.push(newPatient);
-    savePatients(patients);
-
-    document.getElementById('responseMessage').textContent = 'Patient added successfully!';
-    document.getElementById('patientForm').reset();
-
-    displayPatients();
-    setTimeout(() => {
-        document.getElementById('responseMessage').textContent = '';
-    }, 2000);
-});
-
-// Navigate to the biological indicator form
-function addBiologicalIndicator(patientId) {
-    localStorage.setItem('currentPatientId', patientId);
-    window.location.href = 'biological.html';
-}
-
-// Show or hide fields based on selected sex
-document.getElementById('sex').addEventListener('change', function () {
-    const pregnantField = document.getElementById('pregnantField');
-    const numberOfBirthsField = document.getElementById('numberOfBirthsField');
-
-    if (this.value === 'female') {
-        pregnantField.style.display = 'block';
-        document.getElementById('pregnant').addEventListener('change', function () {
-            if (this.value === 'yes') {
-                numberOfBirthsField.style.display = 'block';
-            } else {
-                numberOfBirthsField.style.display = 'none';
-            }
+    try {
+        const response = await fetch(patientApiUrl, {
+            method: 'POST',
+            headers: {
+                'Authorization': `Bearer ${token}`,
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(newPatient)
         });
-    } else {
-        pregnantField.style.display = 'none';
-        numberOfBirthsField.style.display = 'none';
+
+        if (response.ok) {
+            document.getElementById('responseMessage').innerText = 'Patient added successfully!';
+            toggleAddPatientForm();
+            fetchPatients(); // Refresh the patient list
+        } else {
+            throw new Error('Failed to save patient.');
+        }
+
+    } catch (error) {
+        console.error('Error adding patient:', error);
+        document.getElementById('responseMessage').innerText = 'Error adding patient.';
     }
 });
 
-// Navigate to another page
+// Navigate to another page (e.g., Dashboard)
 function navigateTo(page) {
-    if (page === 'dashboard') {
-        window.location.href = 'dashboard.html';
-    }
+    window.location.href = `${page}.html`;
 }
 
-// Load patients when the page loads
-displayPatients();
-// Navigate to the biological indicator form and store patient name
-function addBiologicalIndicator(patientId) {
-    const patients = getPatients();
-    const patient = patients.find(p => p.id === patientId);
-
-    // Store patient's name in localStorage
-    localStorage.setItem('currentPatientName', patient.name);
-
-    // Store patient ID in localStorage for later use
-    localStorage.setItem('currentPatientId', patientId);
-
-    // Redirect to the biological indicator page
-    window.location.href = 'biological.html';
+// Load hospitals and patients when the page loads
+async function init() {
+    await fetchHospitals(); // Fetch hospitals before fetching patients
+    fetchPatients(); // Then fetch and display patients
 }
+
+
+
+// Call the init function to load hospitals and patients
+init();

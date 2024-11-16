@@ -32,16 +32,16 @@
                 <label for="sex">Sex:</label>
                 <select id="sex" name="sex" required>
                     <option value="">Select</option>
-                    <option value="male">Male</option>
-                    <option value="female">Female</option>
+                    <option value="true">Male</option>
+                    <option value="false">Female</option>
                 </select>
 
                 <div id="pregnantField" style="display: none;">
                     <label for="pregnant">Pregnant:</label>
                     <select id="pregnant" name="pregnant">
                         <option value="">Select</option>
-                        <option value="yes">Yes</option>
-                        <option value="no">No</option>
+                        <option value="true">Yes</option>
+                        <option value="false">No</option>
                     </select>
                 </div>
 
@@ -50,9 +50,24 @@
                     <input type="number" id="numberOfBirths" name="numberOfBirths" min="0">
                 </div>
 
+                <label for="hospital">Hospital:</label>
+                <select id="hospital" name="hospital" required>
+                    <option value="">Select a Hospital</option>
+                    <!-- Hospitals will be populated here -->
+                </select>
+
                 <button type="submit">Save Patient</button>
             </form>
         </div>
+
+        <div id="patientList">
+    <!-- Patient list will be dynamically inserted here -->
+</div>
+
+<!-- Add Patient Form -->
+<div id="addPatientForm" style="display:none;">
+    <!-- Form fields for adding a new patient -->
+</div>
 
         <p id="responseMessage"></p>
 
