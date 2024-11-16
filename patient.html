@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Patient Information</title>
+    <title>Patient Management</title>
     <link rel="stylesheet" href="css/patient.css">
 </head>
 <body>
     <div class="patient-container">
-        <h2>Patient Information</h2>
+        <h2>Patient Management System</h2>
 
         <!-- Patient List Section -->
         <div id="patientList" class="patient-list"></div>
@@ -53,21 +53,11 @@
                 <label for="hospital">Hospital:</label>
                 <select id="hospital" name="hospital" required>
                     <option value="">Select a Hospital</option>
-                    <!-- Hospitals will be populated here -->
                 </select>
 
                 <button type="submit">Save Patient</button>
             </form>
         </div>
-
-        <div id="patientList">
-    <!-- Patient list will be dynamically inserted here -->
-</div>
-
-<!-- Add Patient Form -->
-<div id="addPatientForm" style="display:none;">
-    <!-- Form fields for adding a new patient -->
-</div>
 
         <p id="responseMessage"></p>
 
