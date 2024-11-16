@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Add Bio</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <h2>Add Biological Indicators</h2>
+    <form id="bioForm">
+        <input type="hidden" id="patientId" />
+        <div>
+            <label for="healthCondition">Health Condition:</label>
+            <input type="text" id="healthCondition" value="string" readonly required />
+        </div>
+        <div>
+            <label for="sugarPercentage">Sugar Percentage:</label>
+            <input type="number" id="sugarPercentage" value="0" required />
+        </div>
+        <div>
+            <label for="bloodPressure">Blood Pressure:</label>
+            <input type="number" id="bloodPressure" value="0" required />
+        </div>
+        <div>
+            <label for="averageTemperature">Average Temperature:</label>
+            <input type="number" id="averageTemperature" value="0" required />
+        </div>
+        <div>
+            <label for="date">Date:</label>
+            <input type="date" id="date" value="2024-11-16" required />
+        </div>
+        <div>
+            <label for="time">Time:</label>
+            <input type="text" id="time" value="string" required />
+        </div>
+        <button type="submit">Submit</button>
+    </form>
+
+    <script src="/js/addBio.js"></script>
+</body>
+</html>

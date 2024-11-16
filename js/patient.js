@@ -3,7 +3,7 @@ const patientApiUrl = 'https://anteshnatsh.tryasp.net/api/Patient/CreatePatient'
 const allPatientsApiUrl = 'https://anteshnatsh.tryasp.net/api/Patient/AllNames';
 const addBioApiUrl = 'https://anteshnatsh.tryasp.net/api/Patient/AddBio/';
 const getBioApiUrl = 'https://anteshnatsh.tryasp.net/api/Patient/';
-const deletePatientApiUrl = 'https://anteshnatsh.tryasp.net/api/Patient/DeleteBio/';
+const deletePatientApiUrl = 'https://anteshnatsh.tryasp.net/api/Patient/DeletePatient/';
 
 function getToken() {
     return localStorage.getItem('authToken');
@@ -60,8 +60,8 @@ function renderPatients(patients) {
                         <td>${patient.state}</td>
                         <td>${getHospitalName(patient.hospitalId)}</td>
                         <td>
-                            <button onclick="addBio('${patient.id}')">Add Bio</button>
-                            <button onclick="viewBio('${patient.name}')">View Bio</button>
+                            <button onclick="window.location.href='addBio.html?patientId=${patient.id}'">Add Bio</button>
+                            <button onclick="window.location.href='viewBio.html?patientName=${patient.name}'">View Bio</button>
                             <button onclick="deletePatient('${patient.id}')">Delete</button>
                         </td>
                     </tr>
@@ -99,17 +99,35 @@ async function viewBio(patientName) {
 // Delete patient
 async function deletePatient(patientId) {
     const token = getToken();
-    const response = await fetch(`${deletePatientApiUrl}${patientId}`, {
-        method: 'POST',
-        headers: { 'Authorization': `Bearer ${token}` }
-    });
-    if (response.ok) {
-        alert('Patient Deleted!');
-        fetchPatients();
-    } else {
-        alert('Failed to Delete Patient');
+    const url = `${deletePatientApiUrl}${patientId}`;
+
+    try {
+        const response = await fetch(url, {
+            method: 'POST',
+            headers: {
+                'Authorization': `Bearer ${token}`,
+                'Content-Type': 'application/json', // Adding this header
+            }
+        });
+
+        console.log("Deleting Patient ID:", patientId);
+        console.log("Deleting Patient ID:", token);
+
+
+        if (response.ok) {
+            alert('Patient Deleted!');
+            fetchPatients();
+        } else {
+            const errorDetails = await response.json();
+            console.error('Error:', errorDetails);
+            alert(`Failed to Delete Patient: ${errorDetails.title}`);
+        }
+    } catch (error) {
+        console.error('Request Error:', error);
+        alert(`Request failed: ${error.message}`);
     }
 }
+
 
 // Toggle Add Patient Form
 function toggleAddPatientForm() {

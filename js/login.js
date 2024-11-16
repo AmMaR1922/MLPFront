@@ -22,6 +22,7 @@ document.getElementById('loginForm').addEventListener('submit', async (e) => {
 
         // Save the token to localStorage
         localStorage.setItem('authToken', data.token);
+        console.log("Deleting Patient ID:", data.token);
 
         // Redirect to the dashboard after successful login
         window.location.href = 'dashboard.html';
