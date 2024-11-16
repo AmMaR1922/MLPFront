@@ -3,39 +3,49 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hospital Information</title>
+    <title>Hospital Management</title>
     <link rel="stylesheet" href="css/hospital.css">
 </head>
 <body>
-    <div class="hospital-container">
-        <h2>Hospital Information</h2>
+    <div class="container">
+        <h1>Hospitals</h1>
 
-        <!-- This will show hospital data or "No hospitals found" -->
-        <div id="hospitalList" class="hospital-list"></div>
+        <!-- Button to add new hospital -->
+        <button id="addHospitalBtn" class="btn">Add Hospital</button>
+
+        <!-- Hospital Table -->
+        <table id="hospitalTable">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Address</th>
+                    <th>City</th>
+                    <th>Country</th>
+                </tr>
+            </thead>
+            <tbody id="hospitalList"></tbody>
+        </table>
 
         <!-- Add Hospital Form -->
-        <div id="addHospitalForm" class="add-hospital-form" style="display: none;">
-            <h3>Add a New Hospital</h3>
+        <div id="addHospitalForm" class="form-container">
+            <h2>Add New Hospital</h2>
             <form id="hospitalForm">
-                <label for="name">Hospital Name:</label>
-                <input type="text" id="name" name="name" required>
-
+                <input type="hidden" name="">
+                <label for="name">Name:</label>
+                <input type="text" id="name" required>
                 <label for="address">Address:</label>
-                <input type="text" id="address" name="address" required>
-
+                <input type="text" id="address" required>
                 <label for="city">City:</label>
-                <input type="text" id="city" name="city" required>
-
+                <input type="text" id="city" required>
                 <label for="country">Country:</label>
-                <input type="text" id="country" name="country" required>
-
-                <button type="submit">Save Hospital</button>
+                <input type="text" id="country" required>
+                <button type="submit" class="btn">Add Hospital</button>
             </form>
+            <button id="closeFormBtn" class="btn">Cancel</button>
         </div>
 
-        <button onclick="toggleAddForm()">Add Hospital</button>
+        <!-- Response Message -->
         <p id="responseMessage"></p>
-        <button onclick="navigateTo('dashboard')">Back to Dashboard</button>
     </div>
 
     <script src="js/hospital.js"></script>

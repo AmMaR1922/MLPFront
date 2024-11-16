@@ -24,52 +24,55 @@ function fetchHospitals() {
     .catch(error => console.error('Error fetching hospitals:', error));
 }
 
-// Display hospitals or "No hospitals found"
+// Display hospitals in the table
 function displayHospitals(hospitals) {
     const hospitalListDiv = document.getElementById('hospitalList');
-    const addHospitalFormDiv = document.getElementById('addHospitalForm');
 
     if (hospitals.length === 0) {
-        hospitalListDiv.innerHTML = '<p>No hospitals found.</p>';
+        hospitalListDiv.innerHTML = '<tr><td colspan="4">No hospitals found.</td></tr>';
     } else {
         hospitalListDiv.innerHTML = hospitals.map(hospital => `
-            <div class="hospital-item">
-                <p><strong>Hospital Name:</strong> ${hospital.name}</p>
-                <p><strong>Address:</strong> ${hospital.address}</p>
-                <p><strong>City:</strong> ${hospital.city}</p>
-                <p><strong>Country:</strong> ${hospital.country}</p>
-            </div>
+            <tr>
+                <td>${hospital.name}</td>
+                <td>${hospital.address}</td>
+                <td>${hospital.city}</td>
+                <td>${hospital.country}</td>
+            </tr>
         `).join('');
     }
-
-    // Hide the add hospital form once we have hospitals
-    addHospitalFormDiv.style.display = hospitals.length > 0 ? 'none' : 'block';
 }
 
 // Show the form to add a new hospital
-function toggleAddForm() {
-    const addHospitalFormDiv = document.getElementById('addHospitalForm');
-    const hospitalListDiv = document.getElementById('hospitalList');
-    
-    if (addHospitalFormDiv.style.display === 'none') {
-        addHospitalFormDiv.style.display = 'block';
-        hospitalListDiv.style.display = 'none';
-    } else {
-        addHospitalFormDiv.style.display = 'none';
-        hospitalListDiv.style.display = 'block';
-    }
-}
+document.getElementById('addHospitalBtn').addEventListener('click', function() {
+    document.getElementById('addHospitalForm').style.display = 'block';
+    document.getElementById('hospitalTable').style.display = 'none';
+});
 
-// Add a new hospital to the API with token
+// Close the add hospital form
+document.getElementById('closeFormBtn').addEventListener('click', function() {
+    document.getElementById('addHospitalForm').style.display = 'none';
+    document.getElementById('hospitalTable').style.display = 'block';
+});
+
+// Add a new hospital to the API
 document.getElementById('hospitalForm').addEventListener('submit', function(event) {
     event.preventDefault();
 
     const hospitalData = {
-        name: document.getElementById('name').value,
-        address: document.getElementById('address').value,
-        city: document.getElementById('city').value,
-        country: document.getElementById('country').value
+        name: document.getElementById('name').value.trim(),
+        address: document.getElementById('address').value.trim(),
+        city: document.getElementById('city').value.trim(),
+        country: document.getElementById('country').value.trim()
     };
+
+    // Log hospital data for debugging
+    console.log('Hospital Data:', hospitalData);
+
+    // Validate the fields are not empty
+    if (!hospitalData.name || !hospitalData.address || !hospitalData.city || !hospitalData.country) {
+        document.getElementById('responseMessage').textContent = 'Please fill in all required fields: Name, Address, City, and Country.';
+        return;
+    }
 
     const token = getAuthToken();
 
@@ -87,35 +90,40 @@ document.getElementById('hospitalForm').addEventListener('submit', function(even
         },
         body: JSON.stringify(hospitalData),
     })
-    .then(response => response.json())
+    .then(response => {
+        if (!response.ok) {
+            return response.json().then(errorData => {
+                throw new Error(`Failed to save hospital. Status: ${response.status}, Error: ${JSON.stringify(errorData)}`);
+            });
+        }
+        return response.json();
+    })
     .then(data => {
+        // Show success message
         document.getElementById('responseMessage').textContent = 'Hospital added successfully!';
+        
+        // Reset the form
         document.getElementById('hospitalForm').reset();
-        // Refresh the list of hospitals
+
+        // Hide the form and show the hospital list
+        document.getElementById('addHospitalForm').style.display = 'none';
+        document.getElementById('hospitalTable').style.display = 'block';
+
+        // Refresh the hospital list
         fetchHospitals();
+
+        // Clear the success message after 2 seconds
         setTimeout(() => {
-            document.getElementById('responseMessage').textContent = '';  // Clear message
+            document.getElementById('responseMessage').textContent = '';  
         }, 2000);
     })
     .catch(error => {
         console.error('Error adding hospital:', error);
-        document.getElementById('responseMessage').textContent = 'Failed to add hospital.';
+        document.getElementById('responseMessage').textContent = `Failed to add hospital: ${error.message}`;
     });
 });
-
-// Navigate back to dashboard
-function navigateTo(page) {
-    if (page === 'dashboard') {
-        window.location.href = 'dashboard.html';
-    }
-}
 
 // Fetch and display hospitals when the page loads
 window.onload = function() {
     fetchHospitals();
 };
-
-// Navigate to the hospital form page
-document.getElementById('addHospitalBtn').addEventListener('click', function() {
-    window.location.href = 'add-hospital.html';  // Navigate to the hospital form page
-});
