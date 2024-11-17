@@ -7,6 +7,7 @@ function getPatientNameFromUrl() {
 const patientName = getPatientNameFromUrl(); // Get patient name from URL
 const token = localStorage.getItem('authToken'); // Get auth token from localStorage
 const getBioApiUrl = `https://anteshnatsh.tryasp.net/api/Patient/${patientName}`; // API endpoint
+const deleteBioApiUrl = 'https://anteshnatsh.tryasp.net/api/Patient/DeleteBio/'; // Delete Bio endpoint
 
 // Function to fetch and display all bio entries for the patient
 async function fetchAndDisplayBioData() {
@@ -35,6 +36,32 @@ async function fetchAndDisplayBioData() {
     }
 }
 
+// Function to delete a bio entry by ID
+async function deleteBio(bioId) {
+    const url = `${deleteBioApiUrl}${bioId}`;
+    try {
+        const response = await fetch(url, {
+            method: 'POST', // Assuming DELETE method might be blocked, using POST as provided
+            headers: {
+                'Authorization': `Bearer ${token}`,
+                'Content-Type': 'application/json'
+            }
+        });
+
+        if (response.ok) {
+            alert('Bio entry deleted successfully.');
+            fetchAndDisplayBioData(); // Refresh the table
+        } else {
+            const errorDetails = await response.json();
+            console.error('Error:', errorDetails);
+            alert(`Failed to delete bio entry: ${errorDetails.title}`);
+        }
+    } catch (error) {
+        console.error('Request Error:', error);
+        alert(`Request failed: ${error.message}`);
+    }
+}
+
 // Function to render the bio data in a table format
 function renderBioData(bioDataList) {
     const bioListContainer = document.getElementById('bioList');
@@ -55,6 +82,7 @@ function renderBioData(bioDataList) {
                     <th>Average Temperature</th>
                     <th>Date</th>
                     <th>Time</th>
+                    <th>Actions</th> <!-- Added actions column for Delete button -->
                 </tr>
             </thead>
             <tbody>
@@ -70,6 +98,9 @@ function renderBioData(bioDataList) {
                 <td>${bio.averageTemprature}</td>
                 <td>${bio.date}</td>
                 <td>${bio.time}</td>
+                <td>
+                    <button class="delete-button" onclick="deleteBio(${bio.id})">Delete</button>
+                </td>
             </tr>
         `;
     });

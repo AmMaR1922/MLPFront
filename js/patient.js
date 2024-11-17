@@ -63,6 +63,7 @@ function renderPatients(patients) {
                             <button onclick="window.location.href='addBio.html?patientId=${patient.id}'">Add Bio</button>
                             <button onclick="window.location.href='viewBio.html?patientName=${patient.name}'">View Bio</button>
                             <button onclick="deletePatient('${patient.id}')">Delete</button>
+                            <button onclick="window.location.href='updatePatient.html?patientId=${patient.id}'">Update</button>
                         </td>
                     </tr>
                 `).join('')}
@@ -76,58 +77,54 @@ function getHospitalName(hospitalId) {
     return hospital ? hospital.name : 'Unknown';
 }
 
-// Add bio
-async function addBio(patientId) {
-    const token = getToken();
-    const response = await fetch(`${addBioApiUrl}${patientId}`, {
-        method: 'POST',
-        headers: { 'Authorization': `Bearer ${token}` }
-    });
-    alert(response.ok ? 'Biological Indicator Added!' : 'Failed to Add Bio');
-}
+// Save new patient
+async function savePatient(event) {
+    event.preventDefault();
 
-// View bio
-async function viewBio(patientName) {
     const token = getToken();
-    const response = await fetch(`${getBioApiUrl}${patientName}`, {
-        headers: { 'Authorization': `Bearer ${token}` }
-    });
-    const bioIndicators = await response.json();
-    alert(`Bio Indicators for ${patientName}: ${JSON.stringify(bioIndicators)}`);
-}
 
-// Delete patient
-async function deletePatient(patientId) {
-    const token = getToken();
-    const url = `${deletePatientApiUrl}${patientId}`;
+    // Gather form data
+    const name = document.getElementById('name').value;
+    const phoneNumber = document.getElementById('phoneNumber').value;
+    const address = document.getElementById('address').value;
+    const sex = document.getElementById('sex').value === 'true';
+    const pregnant = document.getElementById('pregnant').value === 'true';
+    const numberOfBirths = parseInt(document.getElementById('numberOfBirths').value, 10);
+    const hospitalId = parseInt(document.getElementById('hospital').value, 10);
+
+    const patientData = {
+        id: 0,
+        name,
+        phoneNumber,
+        address,
+        sex,
+        pregnant: sex ? false : pregnant, // Set to false if male
+        numberOfBirth: numberOfBirths || 0,
+        hospitalId
+    };
 
     try {
-        const response = await fetch(url, {
+        const response = await fetch(patientApiUrl, {
             method: 'POST',
             headers: {
                 'Authorization': `Bearer ${token}`,
-                'Content-Type': 'application/json', // Adding this header
-            }
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(patientData)
         });
 
-        console.log("Deleting Patient ID:", patientId);
-        console.log("Deleting Patient ID:", token);
-
-
         if (response.ok) {
-            alert('Patient Deleted!');
+            alert('Patient added successfully!');
             fetchPatients();
+            toggleAddPatientForm(); // Hide the form
         } else {
             const errorDetails = await response.json();
-            console.error('Error:', errorDetails);
-            alert(`Failed to Delete Patient: ${errorDetails.title}`);
+            alert(`Failed to add patient: ${errorDetails.title}`);
         }
     } catch (error) {
-        console.error('Request Error:', error);
         alert(`Request failed: ${error.message}`);
     }
 }
-
 
 // Toggle Add Patient Form
 function toggleAddPatientForm() {
@@ -135,10 +132,25 @@ function toggleAddPatientForm() {
     form.style.display = form.style.display === 'none' ? 'block' : 'none';
 }
 
+// Show/hide pregnancy-related fields based on sex selection
+document.getElementById('sex').addEventListener('change', function () {
+    const sex = this.value;
+    const pregnantField = document.getElementById('pregnantField');
+    const numberOfBirthsField = document.getElementById('numberOfBirthsField');
+
+    if (sex === 'false') {
+        pregnantField.style.display = 'block';
+        numberOfBirthsField.style.display = 'block';
+    } else {
+        pregnantField.style.display = 'none';
+        numberOfBirthsField.style.display = 'none';
+    }
+});
+
 // Initialize
 async function init() {
     await fetchHospitals();
     await fetchPatients();
+    document.getElementById('patientForm').addEventListener('submit', savePatient);
 }
-
 init();
