@@ -133,3 +133,20 @@ button[type="button"] {
 button[type="button"]:hover {
     background-color: #5a6268;
 }
+#name{
+    background-color: #dc3545;
+}
+#update{
+    background-color: #52c202;
+}
+#delete{
+    background-color: #dc3545;
+}
+
+#update:hover{
+    background-color: #15db0b;
+}
+
+#delete:hover{
+    background-color: #d6091d;
+}
