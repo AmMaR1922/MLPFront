@@ -1,38 +1,26 @@
 const hospitalsApiUrl = 'https://anteshnatsh.tryasp.net/api/Hospital/GetHospitals';
-const patientApiUrl = 'https://anteshnatsh.tryasp.net/api/Patient/CreatePatient';
 const allPatientsApiUrl = 'https://anteshnatsh.tryasp.net/api/Patient/AllNames';
-const addBioApiUrl = 'https://anteshnatsh.tryasp.net/api/Patient/AddBio/';
-const getBioApiUrl = 'https://anteshnatsh.tryasp.net/api/Patient/';
-const deletePatientApiUrl = 'https://anteshnatsh.tryasp.net/api/Patient/DeletePatient/';
+const deletePatientApiUrl = 'https://anteshnatsh.tryasp.net/api/Patient/DeletePatient/'; // API endpoint for deleting a patient
+let hospitals = [];
 
+// Get the token from localStorage
 function getToken() {
     return localStorage.getItem('authToken');
 }
 
-let hospitals = [];
-
-// Fetch hospitals and populate dropdown
+// Fetch hospitals and store them globally
 async function fetchHospitals() {
     const token = getToken();
     const response = await fetch(hospitalsApiUrl, {
         headers: { 'Authorization': `Bearer ${token}` }
     });
     hospitals = await response.json();
-    populateHospitalSelect();
 }
 
-function populateHospitalSelect() {
-    const hospitalSelect = document.getElementById('hospital');
-    hospitals.forEach(hospital => {
-        const option = document.createElement('option');
-        option.value = hospital.id;
-        option.textContent = hospital.name;
-        hospitalSelect.appendChild(option);
-    });
-}
-
-// Fetch and display patients
+// Fetch and display patients after hospitals data is loaded
 async function fetchPatients() {
+    await fetchHospitals(); // Ensure hospitals are fetched first
+
     const token = getToken();
     const response = await fetch(allPatientsApiUrl, {
         headers: { 'Authorization': `Bearer ${token}` }
@@ -41,6 +29,7 @@ async function fetchPatients() {
     renderPatients(patients);
 }
 
+// Render the patients in the table
 function renderPatients(patients) {
     const patientList = document.getElementById('patientList');
     patientList.innerHTML = `
@@ -72,85 +61,36 @@ function renderPatients(patients) {
     `;
 }
 
+// Get the hospital name based on hospitalId
 function getHospitalName(hospitalId) {
     const hospital = hospitals.find(h => h.id === hospitalId);
     return hospital ? hospital.name : 'Unknown';
 }
 
-// Save new patient
-async function savePatient(event) {
-    event.preventDefault();
-
+// Delete the patient using the API
+async function deletePatient(patientId) {
     const token = getToken();
-
-    // Gather form data
-    const name = document.getElementById('name').value;
-    const phoneNumber = document.getElementById('phoneNumber').value;
-    const address = document.getElementById('address').value;
-    const sex = document.getElementById('sex').value === 'true';
-    const pregnant = document.getElementById('pregnant').value === 'true';
-    const numberOfBirths = parseInt(document.getElementById('numberOfBirths').value, 10);
-    const hospitalId = parseInt(document.getElementById('hospital').value, 10);
-
-    const patientData = {
-        id: 0,
-        name,
-        phoneNumber,
-        address,
-        sex,
-        pregnant: sex ? false : pregnant, // Set to false if male
-        numberOfBirth: numberOfBirths || 0,
-        hospitalId
-    };
-
     try {
-        const response = await fetch(patientApiUrl, {
+        const response = await fetch(`${deletePatientApiUrl}${patientId}`, {
             method: 'POST',
             headers: {
                 'Authorization': `Bearer ${token}`,
                 'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(patientData)
+            }
         });
 
         if (response.ok) {
-            alert('Patient added successfully!');
+            // If delete is successful, re-fetch patients and update the table
+            alert('Patient deleted successfully!');
             fetchPatients();
-            toggleAddPatientForm(); // Hide the form
         } else {
             const errorDetails = await response.json();
-            alert(`Failed to add patient: ${errorDetails.title}`);
+            alert(`Failed to delete patient: ${errorDetails.title}`);
         }
     } catch (error) {
         alert(`Request failed: ${error.message}`);
     }
 }
 
-// Toggle Add Patient Form
-function toggleAddPatientForm() {
-    const form = document.getElementById('addPatientForm');
-    form.style.display = form.style.display === 'none' ? 'block' : 'none';
-}
-
-// Show/hide pregnancy-related fields based on sex selection
-document.getElementById('sex').addEventListener('change', function () {
-    const sex = this.value;
-    const pregnantField = document.getElementById('pregnantField');
-    const numberOfBirthsField = document.getElementById('numberOfBirthsField');
-
-    if (sex === 'false') {
-        pregnantField.style.display = 'block';
-        numberOfBirthsField.style.display = 'block';
-    } else {
-        pregnantField.style.display = 'none';
-        numberOfBirthsField.style.display = 'none';
-    }
-});
-
 // Initialize
-async function init() {
-    await fetchHospitals();
-    await fetchPatients();
-    document.getElementById('patientForm').addEventListener('submit', savePatient);
-}
-init();
+fetchPatients();

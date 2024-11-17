@@ -1,0 +1,92 @@
+/* General Table Styling */
+.bio-table {
+    width: 80%; /* Reduced width for a smaller table */
+    border-collapse: collapse;
+    margin-top: 20px;
+    background-color: #fff;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    margin-left: auto;
+    margin-right: auto; /* Centering the table horizontally */
+}
+
+.bio-table th, .bio-table td {
+    border: 1px solid #ddd;
+    padding: 15px; /* Increased padding for better spacing */
+    text-align: center; /* Center the text horizontally */
+    font-size: 20px; /* Increased font size for better readability */
+    font-weight: bold; /* Make the font bold */
+}
+
+/* Header Style */
+.bio-table th {
+    background-color: #007BFF;
+    color: white;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* Row Styling */
+.bio-table td {
+    background-color: #fafafa;
+    color: #333;
+    border-bottom: 1px solid #ddd;
+}
+
+.bio-table td:last-child {
+    border-right: 0;
+}
+
+/* Hover Effect on Rows */
+.bio-table tr:hover {
+    background-color: #f2f8ff;
+}
+
+/* Hover Effect on Individual Cells */
+.bio-table td:hover {
+    background-color: #e6f7ff;
+}
+h1
+{
+    text-align: center;
+}
+
+/* Delete Button Styling */
+.delete-button {
+    background-color: #e74c3c;
+    color: #fff;
+    border: none;
+    padding: 8px 14px; /* Slightly bigger padding for the delete button */
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 18px; /* Increased font size for delete button */
+    font-weight: bold; /* Bold text for delete button */
+    transition: background-color 0.3s ease;
+    display: inline-block;
+    text-align: center;
+}
+
+/* Delete Button Hover Effect */
+.delete-button:hover {
+    background-color: #c0392b;
+}
+
+/* Responsive Design for Smaller Screens */
+@media (max-width: 768px) {
+    .bio-table {
+        width: 95%; /* Adjusted table width for smaller screens */
+    }
+
+    .bio-table th, .bio-table td {
+        padding: 12px; /* Adjusted padding for smaller screens */
+    }
+
+    .bio-table th {
+        font-size: 18px; /* Adjusted font size for smaller screens */
+    }
+
+    .bio-table td {
+        font-size: 18px; /* Adjusted font size for smaller screens */
+    }
+}

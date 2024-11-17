@@ -4,36 +4,49 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Add Bio</title>
-<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="css/addBio.css">
 </head>
 <body>
     <h2>Add Biological Indicators</h2>
     <form id="bioForm">
         <input type="hidden" id="patientId" />
+
+        <!-- Health Condition -->
         <div>
             <label for="healthCondition">Health Condition:</label>
-            <input type="text" id="healthCondition" value="string" readonly required />
+            <input type="text" id="healthCondition" value="string" placeholder="Enter health condition" readonly required />
         </div>
+
+        <!-- Sugar Percentage -->
         <div>
             <label for="sugarPercentage">Sugar Percentage:</label>
-            <input type="number" id="sugarPercentage" value="0" required />
+            <input type="number" id="sugarPercentage" value="0" placeholder="Enter sugar percentage" required />
         </div>
+
+        <!-- Blood Pressure -->
         <div>
             <label for="bloodPressure">Blood Pressure:</label>
-            <input type="number" id="bloodPressure" value="0" required />
+            <input type="number" id="bloodPressure" value="0" placeholder="Enter blood pressure" required />
         </div>
+
+        <!-- Average Temperature -->
         <div>
             <label for="averageTemperature">Average Temperature:</label>
-            <input type="number" id="averageTemperature" value="0" required />
+            <input type="number" id="averageTemperature" value="0" placeholder="Enter average temperature" required />
         </div>
+
+        <!-- Date -->
         <div>
             <label for="date">Date:</label>
             <input type="date" id="date" value="2024-11-16" required />
         </div>
+
+        <!-- Time -->
         <div>
             <label for="time">Time:</label>
-            <input type="text" id="time" value="string" required />
+            <input type="text" id="time" value="12:00" required />
         </div>
+
         <button type="submit">Submit</button>
     </form>
 
