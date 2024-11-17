@@ -71,6 +71,23 @@ h1
 .delete-button:hover {
     background-color: #c0392b;
 }
+button {
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    padding: 12px 25px;
+    border-radius: 5px;
+    cursor: pointer;
+    /* margin-top: 20px; */
+    transition: background-color 0.3s ease;
+    font-size: 16px;
+    justify-content: center;
+    align-items: center;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
 
 /* Responsive Design for Smaller Screens */
 @media (max-width: 768px) {
