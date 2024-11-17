@@ -3,23 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Patient Information</title>
+    <title>Update Patient Information</title>
     <link rel="stylesheet" href="css/patient.css">
 </head>
 <body>
     <div class="patient-container">
-        <h2>Patient Information</h2>
+        <h2>Update Patient Information</h2>
 
-        <!-- Patient List Section -->
-        <div id="patientList" class="patient-list"></div>
-
-        <!-- Button to Toggle Add Patient Form -->
-        <button id="togglePatientFormButton" onclick="toggleAddPatientForm()">Add Patient</button>
-
-        <!-- New Patient Form -->
-        <div id="addPatientForm" class="add-patient-form" style="display: none;">
-            <h3>Add a New Patient</h3>
-            <form id="patientForm">
+        <!-- Update Patient Form -->
+        <div id="updatePatientForm" class="add-patient-form">
+            <h3>Update Patient</h3>
+            <form id="updatePatientFormFields">
                 <label for="name">Name:</label>
                 <input type="text" id="name" name="name" required>
 
@@ -56,24 +50,15 @@
                     <!-- Hospitals will be populated here -->
                 </select>
 
-                <button type="submit">Save Patient</button>
+                <button type="submit">Update Patient</button>
             </form>
         </div>
-
-        <div id="patientList">
-    <!-- Patient list will be dynamically inserted here -->
-</div>
-
-<!-- Add Patient Form -->
-<div id="addPatientForm" style="display:none;">
-    <!-- Form fields for adding a new patient -->
-</div>
 
         <p id="responseMessage"></p>
 
         <button onclick="navigateTo('dashboard')">Back to Dashboard</button>
     </div>
 
-    <script src="js/patient.js"></script>
+    <script src="js/updatePatient.js"></script>
 </body>
 </html>

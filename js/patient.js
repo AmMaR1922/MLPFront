@@ -63,6 +63,7 @@ function renderPatients(patients) {
                             <button onclick="window.location.href='addBio.html?patientId=${patient.id}'">Add Bio</button>
                             <button onclick="window.location.href='viewBio.html?patientName=${patient.name}'">View Bio</button>
                             <button onclick="deletePatient('${patient.id}')">Delete</button>
+                            <button onclick="window.location.href='updatePatient.html?patientId=${patient.id}'">Update</button>
                         </td>
                     </tr>
                 `).join('')}
