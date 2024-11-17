@@ -1,4 +1,3 @@
-/* General reset and styles */
 * {
     margin: 0;
     padding: 0;
@@ -6,184 +5,84 @@
     font-family: Arial, sans-serif;
 }
 
-body, html {
-    height: 100%;* {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-    }
-    
-    body, html {
-        height: 100%;
-        font-family: Arial, sans-serif;
-        background-color: #ffffff;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
-    
-    .dashboard-container {
-        max-width: 500px;
-        padding: 30px;
-        background-color: #ffffff;
-        border-radius: 8px;
-        box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
-        text-align: center;
-    }
-    
-    h2 {
-        color: #336699;
-        margin-bottom: 20px;
-    }
-    
-    button {
-        width: 100%;
-        padding: 12px;
-        margin: 10px 0;
-        background-color: #336699;
-        color: white;
-        border: none;
-        border-radius: 5px;
-        cursor: pointer;
-        font-size: 16px;
-    }
-    
-    button:hover {
-        background-color: #254d7b;
-    }
-    
-    .options {
-        margin-top: 20px;
-    }
-    
+body {
+    background-color: #f4f7f6;
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: #f1f8e9;
+    height: 100vh;
 }
 
 .dashboard-container {
-    max-width: 400px;
-    width: 100%;
-    padding: 30px;
-    background-color: #ffffff;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    text-align: center;
-}
-
-h2 {
-    color: #336699;
-    margin-bottom: 20px;
-}
-
-button {
-    width: 100%;
-    padding: 15px;
-    margin: 10px 0;/* Basic styles for the dashboard */
-    .dashboard-container {
-        text-align: center;
-        padding: 20px;
-    }
-    
-    .options {
-        display: flex;
-        justify-content: center;
-        gap: 20px;
-    }
-    
-    button {
-        padding: 10px 20px;
-        font-size: 16px;
-        cursor: pointer;
-        background-color: #336699;
-        color: white;
-        border: none;
-        border-radius: 5px;
-    }
-    
-    button:hover {
-        background-color: #254d7b;
-    }
-    
-    background-color: #336699;
-    color: #ffffff;
-    font-size: 16px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-}
-
-button:hover {
-    background-color: #254d7b;
-}
-body, html {
-    font-family: Arial, sans-serif;
-    background-color: #f4f4f9;
-    margin: 0;
-    padding: 0;
-}
-
-.dashboard-container {
-    padding: 20px;
-    max-width: 800px;
-    margin: 20px auto;
     background-color: #fff;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 50px;  /* Increase padding for more space inside */
+    border-radius: 10px;
+    width: 80%;     /* Increase width to 95% of the viewport */
+    height: 50%;
+    max-width: 1400px; /* Increase the maximum width */
 }
 
-h2 {
+
+header h2 {
     text-align: center;
-    color: #336699;
+    margin-bottom: 20px;
+    font-size: 32px;
+    color: #333;
 }
 
-#patientSection {
-    margin-top: 20px;
+.options-container {
+    display: flex;
+    justify-content: center;  /* Center buttons horizontally */
+    align-items: center;      /* Center buttons vertically */
+    gap: 50px;
+    flex-wrap: wrap;          /* Allow wrapping on smaller screens */
 }
 
-button {
-    padding: 10px 20px;
-    background-color: #336699;
+.option-card {
+    background-color: #007bff;
     color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-button:hover {
-    background-color: #254d7b;
-}
-
-.patient-item {
-    background-color: #fafafa;
-    padding: 15px;
-    margin-bottom: 10px;
-    border-radius: 5px;
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
-}
-
-.patient-item p {
-    margin: 5px 0;
-}
-
-hr {
-    margin-top: 10px;
-    border: 0;
-    border-top: 1px solid #ccc;
-}
-.dashboard-container {
-    max-width: 600px;
-    margin: 0 auto;
-    text-align: center;
+    width: 250px;
     padding: 20px;
-    border: 1px solid #ccc;
+    margin-top: 50px;
     border-radius: 8px;
+    text-align: center;
+    transition: transform 0.3s, background-color 0.3s;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
 }
 
-.options button {
-    margin: 10px;
-    padding: 10px 20px;
-    font-size: 16px;
+.option-card i {
+    font-size: 40px;
+    margin-bottom: 10px;
+}
+
+.option-card h3 {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.option-card:hover {
+    transform: translateY(-5px);
+    background-color: #0056b3;
+}
+
+.option-card:active {
+    transform: translateY(2px);
+}
+
+@media (max-width: 768px) {
+    header h2 {
+        font-size: 28px;
+    }
+    .option-card h3 {
+        font-size: 18px;
+    }
+    .option-card {
+        width: 200px;  /* Reduce width on smaller screens */
+    }
 }

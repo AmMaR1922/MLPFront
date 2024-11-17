@@ -1,4 +1,4 @@
- /* Basic reset */
+/* Basic reset */
 * {
     margin: 0;
     padding: 0;
@@ -10,9 +10,15 @@ body {
     background-color: #f4f4f4;
     color: #333;
     padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
 }
 
 .container {
+    width: 100%;
     max-width: 900px;
     margin: 0 auto;
     background-color: #fff;
@@ -26,8 +32,29 @@ h1 {
     margin-bottom: 20px;
 }
 
+/* Success Message Styling */
+.alert {
+    background-color: #5cee60;
+    color: white;
+    padding: 10px;
+    margin-bottom: 15px;
+    border-radius: 5px;
+    text-align: center;
+    font-size: 16px;
+    
+    /* Positioning the alert at the top */
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    
+    /* Optional: Add z-index to ensure it appears above other elements */
+    z-index: 9999;
+}
+
+/* Button Styling */
 button.btn {
-    background-color: #4CAF50;
+    background-color: #15a01a;
     color: white;
     padding: 10px 15px;
     border: none;
@@ -38,7 +65,7 @@ button.btn {
 }
 
 button.btn:hover {
-    background-color: #45a049;
+    background-color: #07de12;
 }
 
 /* Table styling */
@@ -62,7 +89,7 @@ tbody tr:hover {
     background-color: #f1f1f1;
 }
 
-/* Add hospital form styling */
+/* Form container styling */
 .form-container {
     display: none;
     margin-top: 20px;
@@ -70,6 +97,9 @@ tbody tr:hover {
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    max-width: 500px;
+    width: 100%;
+    margin: 0 auto;
 }
 
 .form-container input {
@@ -82,4 +112,28 @@ tbody tr:hover {
 
 .form-container button {
     width: 100%;
+}
+
+/* Action buttons */
+button.btn-action {
+    background-color: #fc4335;  /* Red for Delete */
+    color: white;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 20px;
+    margin-right: 5px;
+}
+
+button.btn-action:hover {
+    background-color: #f10602;
+}
+
+button.btn-update {
+    background-color: #1590f5;  /* Blue for Update */
+}
+
+button.btn-update:hover {
+    background-color: #1976D2;
 }

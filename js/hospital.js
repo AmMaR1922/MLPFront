@@ -15,7 +15,7 @@ function fetchHospitals() {
     fetch('https://anteshnatsh.tryasp.net/api/Hospital/GetHospitals', {
         method: 'GET',
         headers: {
-            'Authorization': `Bearer ${token}`,
+            'Authorization': `Bearer ${token}`,  // Fixed template literal
             'Content-Type': 'application/json',
         }
     })
@@ -29,22 +29,33 @@ function displayHospitals(hospitals) {
     const hospitalListDiv = document.getElementById('hospitalList');
 
     if (hospitals.length === 0) {
-        hospitalListDiv.innerHTML = '<tr><td colspan="4">No hospitals found.</td></tr>';
+        hospitalListDiv.innerHTML = '<tr><td colspan="5">No hospitals found.</td></tr>';
     } else {
-        hospitalListDiv.innerHTML = hospitals.map(hospital => `
-            <tr>
+        hospitalListDiv.innerHTML = hospitals.map(hospital => 
+            `<tr id="hospital-${hospital.id}">
                 <td>${hospital.name}</td>
                 <td>${hospital.address}</td>
                 <td>${hospital.city}</td>
                 <td>${hospital.country}</td>
-            </tr>
-        `).join('');
+                <td>
+                    <button class="btn-action btn-update" onclick="updateHospital(${hospital.id})">Update</button>
+                    <button class="btn-action btn-delete" onclick="deleteHospital(${hospital.id})">Delete</button>
+                </td>
+            </tr>`
+        ).join('');
     }
 }
+
+
+
+
+
 
 // Show the form to add a new hospital
 document.getElementById('addHospitalBtn').addEventListener('click', function() {
     document.getElementById('addHospitalForm').style.display = 'block';
+    document.getElementById('addHospitalBtn').style.display = 'none';
+
     document.getElementById('hospitalTable').style.display = 'none';
 });
 
@@ -85,7 +96,7 @@ document.getElementById('hospitalForm').addEventListener('submit', function(even
     fetch('https://anteshnatsh.tryasp.net/api/Hospital/AddHospital', {
         method: 'POST',
         headers: {
-            'Authorization': `Bearer ${token}`,
+            'Authorization': `Bearer ${token}`,  // Fixed template literal
             'Content-Type': 'application/json',
         },
         body: JSON.stringify(hospitalData),
@@ -107,6 +118,7 @@ document.getElementById('hospitalForm').addEventListener('submit', function(even
 
         // Hide the form and show the hospital list
         document.getElementById('addHospitalForm').style.display = 'none';
+        document.getElementById('addHospitalBtn').style.display = 'none';
         document.getElementById('hospitalTable').style.display = 'block';
 
         // Refresh the hospital list
@@ -123,7 +135,194 @@ document.getElementById('hospitalForm').addEventListener('submit', function(even
     });
 });
 
-// Fetch and display hospitals when the page loads
+
+
+
+
+
+
+
+
+
+//Delete a hospital
+function deleteHospital(id) {
+    const token = getAuthToken();
+
+    if (!token) {
+        document.getElementById('responseMessage').textContent = 'No token found. Please log in.';
+        return;
+    }
+
+    fetch(`https://anteshnatsh.tryasp.net/api/Hospital/DeleteHospital/${id}`, {  // Fixed template literal
+        method: 'POST',  
+        headers: {
+            'Authorization': `Bearer ${token}`,  // Fixed template literal
+            'Content-Type': 'application/json',
+        },
+    })
+    .then(response => {
+        if (!response.ok) {
+            return response.json().then(errorData => {
+                throw new Error(`Failed to delete hospital. Status: ${response.status}, Error: ${JSON.stringify(errorData)}`);
+            });
+        }
+        return response.json();
+    })
+    .then(data => {
+        // Show success message
+        document.getElementById('responseMessage').textContent = 'Hospital deleted successfully!';
+
+
+        // Remove the row from the table directly
+        const row = deleteButton.closest('tr');
+        row.remove();
+
+        // Refresh the hospital list immediately after deletion
+        //fetchHospitals();
+        
+        location.reload();
+
+        // Clear the success message after 2 seconds
+        setTimeout(() => {
+            document.getElementById('responseMessage').textContent = '';  
+        }, 2000);
+        // setTimeout(() => {
+        //     location.reload(true);  // Reload the page after 2 seconds
+        // }, 2000);
+    })
+    .catch(error => {
+        console.error('Error deleting hospital:', error);
+        document.getElementById('responseMessage').textContent = `Failed to delete hospital: ${error.message}`;
+    });
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// Update a hospital
+// Update a hospital using id and updated data (Dt object)
+// Update a hospital using id and updated data (Dt object)
+function updateHospital(id) {
+    // Fetch the hospital details from the list or via API call to pre-fill the form
+    const hospitalRow = document.getElementById(`hospital-${id}`);
+    const hospitalData = {
+        id : id,
+        name: hospitalRow.cells[0].textContent,
+        address: hospitalRow.cells[1].textContent,
+        city: hospitalRow.cells[2].textContent,
+        country: hospitalRow.cells[3].textContent
+    };
+
+    // Pre-fill the form with the hospital data
+    document.getElementById('updateName').value = hospitalData.name;
+    document.getElementById('updateAddress').value = hospitalData.address;
+    document.getElementById('updateCity').value = hospitalData.city;
+    document.getElementById('updateCountry').value = hospitalData.country;
+
+    // Show the update form and hide the hospital table
+    document.getElementById('updateHospitalForm').style.display = 'block';
+    document.getElementById('addHospitalBtn').style.display = 'none';
+    document.getElementById('hospitalTable').style.display = 'none';
+
+    // Handle the form submission for updating
+    document.getElementById('updateHospitalFormDetails').onsubmit = function(event) {
+        event.preventDefault();
+
+        // Get updated data from the form
+        const updatedData = {
+            id : id,
+            name: document.getElementById('updateName').value.trim(),
+            address: document.getElementById('updateAddress').value.trim(),
+            city: document.getElementById('updateCity').value.trim(),
+            country: document.getElementById('updateCountry').value.trim()
+        };
+
+        // Call the update hospital function
+        sendUpdateRequest(id, updatedData);
+    };
+}
+
+// Function to send the PUT request to update the hospital
+function sendUpdateRequest(id, updatedData) {
+    const token = getAuthToken();
+
+    if (!token) {
+        document.getElementById('responseMessage').textContent = 'No token found. Please log in.';
+        return;
+    }
+
+    // Validate the updated data
+    if (!updatedData.name || !updatedData.address || !updatedData.city || !updatedData.country) {
+        document.getElementById('responseMessage').textContent = 'Please fill in all required fields: Name, Address, City, and Country.';
+        return;
+    }
+
+    // Send PUT request to update the hospital with provided data
+    fetch(`https://anteshnatsh.tryasp.net/api/Hospital/UpdateHospital/${id}`, {
+        method: 'POST', // Using PUT instead of POST for updating
+        headers: {
+            'Authorization': `Bearer ${token}`,
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(updatedData),
+    })
+    .then(response => {
+        if (!response.ok) {
+            return response.json().then(errorData => {
+                throw new Error(`Failed to update hospital. Status: ${response.status}, Error: ${JSON.stringify(errorData)}`);
+            });
+        }
+        return response.json();
+    })
+    .then(data => {
+        // Show success message
+        document.getElementById('responseMessage').textContent = 'Hospital updated successfully!';
+
+        // Hide the update form and show the hospital list
+        document.getElementById('updateHospitalForm').style.display = 'none';
+        document.getElementById('hospitalTable').style.display = 'block';
+
+        // Refresh the hospital list
+        fetchHospitals();
+
+        // Clear the success message after 2 seconds
+        setTimeout(() => {
+            document.getElementById('responseMessage').textContent = '';  
+        }, 2000);
+    })
+    .catch(error => {
+        console.error('Error updating hospital:', error);
+        document.getElementById('responseMessage').textContent = `Failed to update hospital: ${error.message}`;
+    });
+}
+
+
+
+// Fetch hospitals on page load
 window.onload = function() {
     fetchHospitals();
 };

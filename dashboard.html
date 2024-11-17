@@ -8,12 +8,23 @@
 </head>
 <body>
     <div class="dashboard-container">
-        <h2>Welcome to the Dashboard</h2>
-        <div class="options">
-            <button onclick="navigateTo('patient')">Add/View Patients</button>
-            <button onclick="navigateTo('hospital')">Add/View Hospitals</button>
+        <header>
+            <h2>Welcome to Your Dashboard</h2>
+        </header>
+        
+        <div class="options-container">
+            <div class="option-card" onclick="navigateTo('patient')">
+                <i class="fas fa-user-injured"></i>
+                <h3>Add/View Patients</h3>
+            </div>
+            <div class="option-card" onclick="navigateTo('hospital')">
+                <i class="fas fa-hospital-alt"></i>
+                <h3>Add/View Hospitals</h3>
+            </div>
         </div>
     </div>
+
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
     <script src="js/dashboard.js"></script>
 </body>
 </html>
