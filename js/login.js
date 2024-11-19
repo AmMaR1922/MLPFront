@@ -8,7 +8,7 @@ document.getElementById('loginForm').addEventListener('submit', async (e) => {
         const response = await fetch('https://anteshnatsh.tryasp.net/api/Account/Login', {
             method: 'POST',
             headers: {
-                'Content-Type': 'application/json',
+                'Content-Type':  'application/json',
             },
             body: JSON.stringify({ email: username, password }) // Assuming `username` is used as email
         });
