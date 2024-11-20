@@ -2,149 +2,126 @@
 body {
     font-family: 'Arial', sans-serif;
     margin: 0;
-    padding: 20px;
-    background-color: #f4f4f9;
+    padding: 0;
+    background: linear-gradient(135deg, #e6f7f5 0%, #e6f0ff 100%);
+    color: #1a1a1a;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
 }
 
-h2, h3 {
-    text-align: center;
-    color: #333;
-}
-
-/* Container for Patient Information Form */
+/* Container for Patient Page */
 .patient-container {
-     max-width: 1000px;
-    margin: auto;
-    margin-top: 100px;
-    padding: 20px;
-    background-color: white;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background: white;
+    border-radius: 1.5rem;
+    padding: 2.5rem;
+    width: 100%;
+    max-width: 960px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+    transform: translateY(0);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.patient-container:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.12);
+}
+
+.patient-container h2 {
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: #1a1a1a;
+    margin-bottom: 1.5rem;
+    text-align: center;
 }
 
 /* Patient Table */
 .patient-table {
     width: 100%;
     border-collapse: collapse;
-    margin-top: 20px;
-    background-color: #fff;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    border-radius: 12px;
+    margin-top: 1.5rem;
+    background-color: white;
+    border-radius: 1rem;
     overflow: hidden;
-}
-
-.patient-table th, .patient-table td {
-    padding: 15px 20px;
-    text-align: left;
-    border-bottom: 1px solid #ddd;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
 .patient-table th {
-    background-color: #007BFF;
-    color: white;
-    font-size: 18px;
+    background: #ddd;
+    color: black;
+    text-align: left;
+    padding: 1rem;
     text-transform: uppercase;
-    letter-spacing: 0.5px;
-}
-
-.patient-table tr:hover {
-    background-color: #f1f1f1;
+    font-size: 0.9rem;
 }
 
 .patient-table td {
-    font-size: 16px;
+    padding: 0.75rem 1rem;
+    font-size: 0.95rem;
     color: #333;
+    border-bottom: 1px solid #f1f5f9;
 }
 
-.patient-table .actions button {
-    background-color: #28a745;
-    color: white;
-    padding: 8px 12px;
-    font-size: 14px;
-    border-radius: 5px;
-    cursor: pointer;
-    margin-right: 10px;
-    border: none;
-    transition: background-color 0.3s ease;
+.patient-table tr:hover {
+    background-color: #e6f7f5;
 }
 
-.patient-table .actions button:hover {
-    background-color: #218838;
-}
-
-.patient-table .actions button.delete {
-    background-color: #dc3545;
-}
-
-.patient-table .actions button.delete:hover {
-    background-color: #c82333;
-}
-
-/* Form Row to display data horizontally */
-.form-row {
+.patient-table td:last-child {
     display: flex;
-    flex-wrap: wrap;
-    gap: 15px;
+    gap: 0.5rem;
 }
 
-.form-group {
-    flex: 1;
-    min-width: 200px;
-    margin-bottom: 20px;
-}
-
-label {
-    display: block;
-    margin-bottom: 5px;
-    color: #333;
-}
-
-input, select {
-    width: 100%;
-    padding: 10px;
-    font-size: 16px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    box-sizing: border-box;
-}
-
-/* Button Styles */
-button {
-    background-color: #007BFF;
-    color: white;
+/* Buttons in Table */
+.patient-table button {
     border: none;
-    padding: 12px 25px;
-    border-radius: 5px;
+    padding: 0.5rem 1rem;
+    font-size: 0.85rem;
+    border-radius: 0.5rem;
     cursor: pointer;
-    margin-top: 20px;
     transition: background-color 0.3s ease;
-    font-size: 16px;
+    color: white;
+}
+
+#update {
+    background: #0f766e;
+}
+
+#update:hover {
+    background: #0f766e;
+}
+
+#delete {
+    background:#db524b;
+}
+
+#delete:hover {
+    background:#de605a;
+}
+
+button {
+    background: #0f766e;;
+    color: white;
+    padding: 0.75rem 1.5rem;
+    border-radius: 0.75rem;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
 }
 
 button:hover {
-    background-color: #0056b3;
+    background: linear-gradient(135deg, #0f766e 0%, #0e7490 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(13, 148, 136, 0.2);
 }
 
-/* Back Button */
 button[type="button"] {
-    background-color: #6c757d;
+    background: #6c757d;
+    color: white;
 }
 
 button[type="button"]:hover {
-    background-color: #5a6268;
-}
-
-#update{
-    background-color: #52c202;
-}
-#delete{
-    background-color: #dc3545;
-}
-
-#update:hover{
-    background-color: #15db0b;
-}
-
-#delete:hover{
-    background-color: #d6091d;
+    background: #5a6268;
 }
