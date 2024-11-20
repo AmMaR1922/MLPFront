@@ -5,7 +5,7 @@ function getPatientIdFromUrl() {
 }
 
 const patientId = getPatientIdFromUrl(); // Get patient ID from URL
-const token = localStorage.getItem('authToken'); // Get auth token from localStorage
+const token = localStorage.getItem('auth_token'); // Get auth token from localStorage
 const addBioApiUrl = 'https://anteshnatsh.tryasp.net/api/Patient/AddBio/';
 
 // Set patient ID in hidden input

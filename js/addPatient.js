@@ -2,7 +2,7 @@ const hospitalsApiUrl = 'https://anteshnatsh.tryasp.net/api/Hospital/GetHospital
 const patientApiUrl = 'https://anteshnatsh.tryasp.net/api/Patient/CreatePatient';
 
 function getToken() {
-    return localStorage.getItem('authToken');
+    return localStorage.getItem('auth_token');
 }
 
 let hospitals = [];

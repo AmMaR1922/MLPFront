@@ -4,7 +4,7 @@ const getPatientApiUrl = 'https://anteshnatsh.tryasp.net/api/Patient/GetUserInfo
 
 // Function to get the token from localStorage
 function getToken() {
-    return localStorage.getItem('authToken');
+    return localStorage.getItem('auth_token');
 }
 
 // Fetch patient details to populate the form

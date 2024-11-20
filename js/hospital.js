@@ -1,6 +1,6 @@
 // Function to retrieve the token (assuming it's stored in localStorage)
 function getAuthToken() {
-    return localStorage.getItem('authToken');  // Get token from localStorage
+    return localStorage.getItem('auth_token');  // Get token from localStorage
 }
 
 // Fetch hospitals from the API

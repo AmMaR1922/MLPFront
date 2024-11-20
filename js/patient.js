@@ -5,7 +5,7 @@ let hospitals = [];
 
 // Get the token from localStorage
 function getToken() {
-    return localStorage.getItem('authToken');
+    return localStorage.getItem('auth_token');
 }
 
 // Fetch hospitals and store them globally
