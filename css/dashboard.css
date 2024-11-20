@@ -1,4 +1,6 @@
-/* Reset and base styles */
+
+
+
 * {
     margin: 0;
     padding: 0;
@@ -65,7 +67,7 @@ body {
     color: #666;
 }
 
-.logout-btn {
+/* .logout-btn {
     display: flex;
     align-items: center;
     gap: 0.5rem;
@@ -82,8 +84,28 @@ body {
 .logout-btn:hover {
     background: #f3f4f6;
     color: #1a1a1a;
+} */
+
+
+.logout-btn {
+    font-size: 15px; /* Increase the font size */
+    padding: 12px 15px; /* Adjust the padding to make it larger */
+    border-radius: 8px; /* Optional: round the corners of the button */
+    background-color: #f0f0f0; /* Optional: background color */
+    border: none; /* Remove border */
+    cursor: pointer;
+    display: inline-flex; /* Make it an inline flex container */
+    align-items: center; /* Vertically center the icon and text */
+    gap: 10px; /* Space between icon and text */
 }
 
+.logout-btn i {
+    font-size: 24px; /* Increase the size of the icon */
+}
+
+.logout-btn:hover {
+    background-color: #dcdcdc; /* Optional: hover effect */
+}
 /* Main content styles */
 .main-content {
     flex: 1;

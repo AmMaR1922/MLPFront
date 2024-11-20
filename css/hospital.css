@@ -1,3 +1,6 @@
+
+
+
 /* Basic reset */
 * {
     margin: 0;
@@ -54,7 +57,7 @@ h1 {
 
 /* Button Styling */
 button.btn {
-    background-color: #15a01a;
+    background-color: #11837a;
     color: white;
     padding: 10px 15px;
     border: none;
@@ -65,7 +68,7 @@ button.btn {
 }
 
 button.btn:hover {
-    background-color: #07de12;
+    background-color: #0f766e;
 }
 
 /* Table styling */
@@ -116,7 +119,7 @@ tbody tr:hover {
 
 /* Action buttons */
 button.btn-action {
-    background-color: #fc4335;  /* Red for Delete */
+    background-color: #db524b;  /* Red for Delete */
     color: white;
     padding: 5px 10px;
     border: none;
@@ -127,13 +130,132 @@ button.btn-action {
 }
 
 button.btn-action:hover {
-    background-color: #f10602;
+    background-color: #c84943;
 }
 
 button.btn-update {
-    background-color: #1590f5;  /* Blue for Update */
+    background-color: #11837a;  /* Blue for Update */
 }
 
 button.btn-update:hover {
-    background-color: #1976D2;
+    background-color: #0d645c;
 }
+
+/* Image */
+
+/* Wrapper for the custom file upload */
+.custom-file-upload {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    padding: 2rem 1rem;
+    border: 2px dashed #cbd5e1;
+    border-radius: 1rem;
+    background: #f9fafb;
+    transition: border-color 0.3s ease, background-color 0.3s ease;
+    cursor: pointer;
+    text-align: center;
+}
+
+/* File label styles */
+.file-upload-label {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    color: #4b5563;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    text-align: center;
+    gap: 0.5rem;
+}
+
+/* Icon inside the label */
+.file-upload-label .file-icon {
+    font-size: 2rem;
+    color: #0d9488;
+    transition: color 0.2s ease;
+}
+
+/* Text inside the label */
+.file-upload-label .file-text {
+    font-size: 1rem;
+    color: #6b7280;
+    font-weight: 400;
+}
+
+/* Hidden input file */
+input[type="file"] {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0; /* Hide actual file input */
+    cursor: pointer;
+}
+
+/* Hover effect for wrapper */
+.custom-file-upload:hover {
+    border-color: #0d9488;
+    background: #e6f7f5;
+}
+
+.custom-file-upload:hover .file-icon {
+    color: #0f766e;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.table-container {
+    max-height: 400px; /* Limit the height of the table container */
+    overflow-y: auto; /* Enable vertical scrolling */
+    /* border: 1px solid #ddd; */
+    /* border-radius: 0.5rem; */
+    /* margin-top: 1rem; */
+    background: white;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+}
+
+thead {
+    position: sticky; /* Keep the header row visible */
+    top: 0;
+    background: #f3f4f6;
+    z-index: 2;
+}
+
+th, td {
+    /* padding: 0.75rem; */
+    border-bottom: 1px solid #e5e7eb;
+}
+
+tr:hover {
+    background: #f0fdfa; /* Highlight row on hover */
+}
+
+.table-container::-webkit-scrollbar {
+    display: none;
+}
+

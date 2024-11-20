@@ -13,11 +13,14 @@
 
 <div class="container">
     <h1>Hospitals</h1>
-    
+
+    <div class="table-container">
+
     <!-- Table to display the hospitals -->
     <table id="hospitalTable">
         <thead>
             <tr>
+                <th>Picture</th>
                 <th>Name</th>
                 <th>Address</th>
                 <th>City</th>
@@ -25,13 +28,17 @@
                 <th>Actions</th>
             </tr>
         </thead>
+
         <tbody id="hospitalList"></tbody>
+
     </table>
+</div>
 
     <!-- Add Hospital Button (Moved below the table and inside the form) -->
     <button class="btn" id="addHospitalBtn" style="margin-top: 20px;">Add New Hospital</button>
 
     <!-- Add Hospital Form -->
+
     <div id="addHospitalForm" class="form-container">
         <form id="hospitalForm">
             <h2>Add New Hospital</h2>
@@ -39,6 +46,18 @@
             <input type="text" id="address" placeholder="Address" required />
             <input type="text" id="city" placeholder="City" required />
             <input type="text" id="country" placeholder="Country" required />
+            
+            <!-- image -->
+
+            <div class="custom-file-upload">
+                <label for="fileUpload" class="file-upload-label">
+                    <span class="file-icon"><i class="fa fa-cloud-upload-alt"></i></span>
+                    <span class="file-text">Drag & drop or click to upload</span>
+                </label>
+                <input type="file" id="fileUpload" accept="image/*" />
+            </div>
+            
+            
             <button class="btn" type="submit">Add Hospital</button>
         </form>
         <button class="btn" id="closeFormBtn">Cancel</button>
@@ -52,6 +71,15 @@
             <input type="text" id="updateAddress" placeholder="Address" required />
             <input type="text" id="updateCity" placeholder="City" required />
             <input type="text" id="updateCountry" placeholder="Country" required />
+
+            <div class="custom-file-upload">
+                <label for="UpdateFileUpload" class="file-upload-label">
+                    <span class="file-icon"><i class="fa fa-cloud-upload-alt"></i></span>
+                    <span class="file-text">Drag & drop or click to upload</span>
+                </label>
+                <input type="file" id="UpdateFileUpload" accept="image/*" />
+            </div>
+
             <button class="btn" type="submit">Update Hospital</button>
         </form>
         <button class="btn" id="closeUpdateFormBtn">Cancel</button>

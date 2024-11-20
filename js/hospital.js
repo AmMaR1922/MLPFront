@@ -32,7 +32,20 @@ function displayHospitals(hospitals) {
         hospitalListDiv.innerHTML = '<tr><td colspan="5">No hospitals found.</td></tr>';
     } else {
         hospitalListDiv.innerHTML = hospitals.map(hospital => 
+            // <td>${hospital.ImageURL}</td>
             `<tr id="hospital-${hospital.id}">
+            <td>
+                <img id="currentImagePreview" src="https://www.w3schools.com/howto/img_avatar.png" alt="Hospital Image" style =  
+                "    
+                    max-width: 60px; 
+                    max-height: 60px;
+                    border-radius: 50%;
+                    object-fit: cover; 
+                    vertical-align: middle;
+                    margin-right: 10px;
+                    " 
+                >
+                </td>
                 <td>${hospital.name}</td>
                 <td>${hospital.address}</td>
                 <td>${hospital.city}</td>
@@ -73,7 +86,8 @@ document.getElementById('hospitalForm').addEventListener('submit', function(even
         name: document.getElementById('name').value.trim(),
         address: document.getElementById('address').value.trim(),
         city: document.getElementById('city').value.trim(),
-        country: document.getElementById('country').value.trim()
+        country: document.getElementById('country').value.trim(),
+        ImageURL: document.getElementById('fileUpload').value.trim()
     };
 
     // Log hospital data for debugging
@@ -128,6 +142,9 @@ document.getElementById('hospitalForm').addEventListener('submit', function(even
         setTimeout(() => {
             document.getElementById('responseMessage').textContent = '';  
         }, 2000);
+
+        location.reload(true);
+
     })
     .catch(error => {
         console.error('Error adding hospital:', error);
@@ -166,6 +183,8 @@ function deleteHospital(id) {
                 throw new Error(`Failed to delete hospital. Status: ${response.status}, Error: ${JSON.stringify(errorData)}`);
             });
         }
+        location.reload(true);
+
         return response.json();
     })
     .then(data => {
@@ -180,8 +199,6 @@ function deleteHospital(id) {
         // Refresh the hospital list immediately after deletion
         //fetchHospitals();
         
-        location.reload();
-
         // Clear the success message after 2 seconds
         setTimeout(() => {
             document.getElementById('responseMessage').textContent = '';  
@@ -189,6 +206,7 @@ function deleteHospital(id) {
         // setTimeout(() => {
         //     location.reload(true);  // Reload the page after 2 seconds
         // }, 2000);
+
     })
     .catch(error => {
         console.error('Error deleting hospital:', error);
@@ -230,11 +248,14 @@ function updateHospital(id) {
     // Fetch the hospital details from the list or via API call to pre-fill the form
     const hospitalRow = document.getElementById(`hospital-${id}`);
     const hospitalData = {
+        
+        ImageURL: hospitalRow.cells[0].textContent,
+
         id : id,
-        name: hospitalRow.cells[0].textContent,
-        address: hospitalRow.cells[1].textContent,
-        city: hospitalRow.cells[2].textContent,
-        country: hospitalRow.cells[3].textContent
+        name: hospitalRow.cells[1].textContent,
+        address: hospitalRow.cells[2].textContent,
+        city: hospitalRow.cells[3].textContent,
+        country: hospitalRow.cells[4].textContent,
     };
 
     // Pre-fill the form with the hospital data
@@ -242,6 +263,8 @@ function updateHospital(id) {
     document.getElementById('updateAddress').value = hospitalData.address;
     document.getElementById('updateCity').value = hospitalData.city;
     document.getElementById('updateCountry').value = hospitalData.country;
+    document.getElementById('currentImagePreview').value = "";
+    
 
     // Show the update form and hide the hospital table
     document.getElementById('updateHospitalForm').style.display = 'block';
@@ -258,9 +281,11 @@ function updateHospital(id) {
             name: document.getElementById('updateName').value.trim(),
             address: document.getElementById('updateAddress').value.trim(),
             city: document.getElementById('updateCity').value.trim(),
-            country: document.getElementById('updateCountry').value.trim()
+            country: document.getElementById('updateCountry').value.trim(),
+            ImageURL: document.getElementById('UpdateFileUpload').value.trim()
         };
 
+        
         // Call the update hospital function
         sendUpdateRequest(id, updatedData);
     };
@@ -306,6 +331,7 @@ function sendUpdateRequest(id, updatedData) {
         document.getElementById('updateHospitalForm').style.display = 'none';
         document.getElementById('hospitalTable').style.display = 'block';
 
+        location.reload(true);
         // Refresh the hospital list
         fetchHospitals();
 
@@ -326,3 +352,61 @@ function sendUpdateRequest(id, updatedData) {
 window.onload = function() {
     fetchHospitals();
 };
+
+
+
+
+
+
+// function updateHospital(id) {
+//     const hospitalRow = document.getElementById(`hospital-${id}`);
+//     const hospitalData = {
+//         id: id,
+//         name: hospitalRow.cells[1].textContent,
+//         address: hospitalRow.cells[2].textContent,
+//         city: hospitalRow.cells[3].textContent,
+//         country: hospitalRow.cells[4].textContent,
+//         imageURL: hospitalRow.cells[0].textContent, // Assuming Image URL is in cell 0
+//     };
+
+//     // Pre-fill the form with hospital data
+//     document.getElementById('updateName').value = hospitalData.name;
+//     document.getElementById('updateAddress').value = hospitalData.address;
+//     document.getElementById('updateCity').value = hospitalData.city;
+//     document.getElementById('updateCountry').value = hospitalData.country;
+//     document.getElementById('currentImagePreview').src = hospitalData.imageURL;
+
+//     // Show the update form
+//     document.getElementById('updateHospitalForm').style.display = 'block';
+//     document.getElementById('hospitalTable').style.display = 'none';
+
+//     // Handle form submission for update
+//     document.getElementById('updateHospitalFormDetails').onsubmit = function(event) {
+//         event.preventDefault();
+
+//         // Get updated form data
+//         const updatedData = {
+//             id: id,
+//             name: document.getElementById('updateName').value.trim(),
+//             address: document.getElementById('updateAddress').value.trim(),
+//             city: document.getElementById('updateCity').value.trim(),
+//             country: document.getElementById('updateCountry').value.trim(),
+//         };
+
+//         // If an image is uploaded, get the file
+//         const imageFile = document.getElementById('updateImage').files[0];
+//         if (imageFile) {
+//             // Handle image file upload (e.g., convert to Base64 or upload to the server)
+//             uploadImage(imageFile)
+//                 .then(imageURL => {
+//                     updatedData.imageURL = imageURL;
+//                     sendUpdateRequest(id, updatedData);
+//                 })
+//                 .catch(error => console.error('Image upload failed:', error));
+//         } else {
+//             // No new image, use the existing one
+//             updatedData.imageURL = hospitalData.imageURL;
+//             sendUpdateRequest(id, updatedData);
+//         }
+//     };
+// }
