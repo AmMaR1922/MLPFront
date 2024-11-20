@@ -1,32 +1,69 @@
-document.getElementById('loginForm').addEventListener('submit', async (e) => {
-    e.preventDefault();
+document.addEventListener('DOMContentLoaded', () => {
+    const loginForm = document.getElementById('loginForm');
+    const errorMessage = document.getElementById('error-message');
+    const togglePassword = document.querySelector('.toggle-password');
+    const passwordInput = document.getElementById('password');
 
-    const username = document.getElementById('email').value;
-    const password = document.getElementById('password').value;
+    // Toggle password visibility
+    togglePassword.addEventListener('click', () => {
+        const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+        passwordInput.setAttribute('type', type);
+        
+        const icon = togglePassword.querySelector('i');
+        icon.classList.toggle('lucide-eye');
+        icon.classList.toggle('lucide-eye-off');
+    });
 
-    try {
-        const response = await fetch('https://anteshnatsh.tryasp.net/api/Account/Login', {
-            method: 'POST',
-            headers: {
-                'Content-Type':  'application/json',
-            },
-            body: JSON.stringify({ email: username, password }) // Assuming `username` is used as email
-        });
+    // Handle form submission
+    loginForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        
+        const email = document.getElementById('email').value;
+        const password = document.getElementById('password').value;
+        const rememberMe = document.getElementById('remember').checked;
+        
+        try {
+            // Show loading state
+            const submitButton = loginForm.querySelector('button[type="submit"]');
+            const originalText = submitButton.innerHTML;
+            submitButton.innerHTML = '<i class="lucide-loader-2"></i> Signing in...';
+            submitButton.disabled = true;
 
-        if (!response.ok) {
-            const errorData = await response.json();
-            throw new Error(errorData.message || 'Invalid credentials');
+            const credentials = { email, password };
+            const response = await loginUser(credentials);
+
+            // Store remember me preference
+            if (rememberMe) {
+                localStorage.setItem('rememberMe', 'true');
+            } else {
+                localStorage.removeItem('rememberMe');
+            }
+
+            window.location.href = './DashBoard.html';
+        } catch (error) {
+            errorMessage.textContent = error.message || 'Login failed. Please try again.';
+            errorMessage.style.display = 'block';
+            
+            // Reset button state
+            submitButton.innerHTML = originalText;
+            submitButton.disabled = false;
         }
+    });
 
-        const data = await response.json();
-
-        // Save the token to localStorage
-        localStorage.setItem('authToken', data.token);
-        console.log("Deleting Patient ID:", data.token);
-
-        // Redirect to the dashboard after successful login
-        window.location.href = 'dashboard.html';
-    } catch (error) {
-        document.getElementById('error-message').innerText = error.message;
+    // Restore remember me preference
+    const remembered = localStorage.getItem('rememberMe');
+    if (remembered) {
+        document.getElementById('remember').checked = true;
     }
+
+    // Add input animations
+    const inputs = document.querySelectorAll('input');
+    inputs.forEach(input => {
+        input.addEventListener('focus', () => {
+            input.parentElement.classList.add('input-focused');
+        });
+        input.addEventListener('blur', () => {
+            input.parentElement.classList.remove('input-focused');
+        });
+    });
 });
