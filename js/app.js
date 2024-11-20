@@ -6,7 +6,7 @@ function updateUserInfo() {
         document.getElementById('username').textContent = username;
         document.getElementById('hospitalName').textContent = hospitalName;
     } else {
-        window.location.href = '/login.html';
+        window.location.href = 'login.html';
     }
 }
 

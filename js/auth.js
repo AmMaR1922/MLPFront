@@ -27,5 +27,5 @@ async function loginUser(credentials) {
 
 function handleLogout() {
     localStorage.clear();
-    window.location.href = '/index.html';
+    window.location.href = 'index.html';
 }
