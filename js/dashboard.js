@@ -12,3 +12,5 @@ function navigateTo(page) {
     //     window.location.href = 'biological.html';
     // }
 }
+ 
+ 

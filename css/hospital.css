@@ -1,134 +1,139 @@
+/* Basic reset */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
-body, html {
-    height: 100%;
+body {
     font-family: Arial, sans-serif;
-    background-color: #f0f4f8;
+    background-color: #f4f4f4;
+    color: #333;
+    padding: 20px;
     display: flex;
     justify-content: center;
     align-items: center;
+    height: 100vh;
+    margin: 0;
 }
 
-.hospital-container {
-    max-width: 400px;
-    padding: 30px;
-    background-color: #ffffff;
+.container {
+    width: 100%;
+    max-width: 900px;
+    margin: 0 auto;
+    background-color: #fff;
+    padding: 20px;
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    text-align: center;
 }
 
-h2 {
-    color: #336699;
+h1 {
+    text-align: center;
     margin-bottom: 20px;
 }
 
-label {
-    display: block;
-    text-align: left;
-    margin: 10px 0 5px;
-    color: #333;
-}
-
-input, button {
-    width: 100%;
+/* Success Message Styling */
+.alert {
+    background-color: #5cee60;
+    color: white;
     padding: 10px;
     margin-bottom: 15px;
-    border: 1px solid #ccc;
     border-radius: 5px;
+    text-align: center;
     font-size: 16px;
+    
+    /* Positioning the alert at the top */
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    
+    /* Optional: Add z-index to ensure it appears above other elements */
+    z-index: 9999;
 }
 
-button {
-    background-color: #336699;
+/* Button Styling */
+button.btn {
+    background-color: #15a01a;
     color: white;
-    cursor: pointer;
+    padding: 10px 15px;
     border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    margin: 10px 0;
 }
 
-button:hover {
-    background-color: #254d7b;
+button.btn:hover {
+    background-color: #07de12;
 }
 
-#responseMessage {
-    margin-top: 10px;
-    color: #00796b;
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-/* Basic styles for the hospital container */
-.hospital-container {
-    padding: 20px;
-}
-
-.hospital-list {
-    margin-bottom: 20px;
-}
-
-.hospital-item {
-    border: 1px solid #ccc;
-    padding: 10px;
-    margin-bottom: 10px;
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
-    background-color: #f9f9f9;
-}
-
-.hospital-item p {
-    margin: 5px 0;
-}
-
-.add-hospital-form {
-    display: none;
+/* Table styling */
+table {
+    width: 100%;
     margin-top: 20px;
-    padding: 15px;
-    border: 1px solid #ccc;
+    border-collapse: collapse;
+    text-align: left;
+}
+
+th, td {
+    padding: 12px;
+    border-bottom: 1px solid #ddd;
+}
+
+th {
+    background-color: #f2f2f2;
+}
+
+tbody tr:hover {
     background-color: #f1f1f1;
 }
 
-.add-hospital-form label {
-    display: block;
-    margin-top: 10px;
-}
-
-.add-hospital-form input {
+/* Form container styling */
+.form-container {
+    display: none;
+    margin-top: 20px;
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    max-width: 500px;
     width: 100%;
-    padding: 8px;
-    margin-top: 5px;
-    margin-bottom: 10px;
+    margin: 0 auto;
 }
 
-button {
-    padding: 10px 20px;
-    background-color: #336699;
+.form-container input {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+.form-container button {
+    width: 100%;
+}
+
+/* Action buttons */
+button.btn-action {
+    background-color: #fc4335;  /* Red for Delete */
     color: white;
+    padding: 5px 10px;
     border: none;
     border-radius: 5px;
     cursor: pointer;
+    font-size: 20px;
+    margin-right: 5px;
 }
 
-button:hover {
-    background-color: #254d7b;
+button.btn-action:hover {
+    background-color: #f10602;
 }
 
-#responseMessage {
-    margin-top: 15px;
-    color: green;
-    font-weight: bold;
+button.btn-update {
+    background-color: #1590f5;  /* Blue for Update */
+}
+
+button.btn-update:hover {
+    background-color: #1976D2;
 }
