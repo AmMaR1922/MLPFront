@@ -35,7 +35,7 @@ function displayHospitals(hospitals) {
             // <td>${hospital.ImageURL}</td>
             `<tr id="hospital-${hospital.id}">
             <td>
-                <img id="currentImagePreview" src="https://www.w3schools.com/howto/img_avatar.png" alt="Hospital Image" style =  
+                <img id="currentImagePreview" src="${hospital.imageURL}" alt="Hospital Image" style =  
                 "    
                     max-width: 60px; 
                     max-height: 60px;
