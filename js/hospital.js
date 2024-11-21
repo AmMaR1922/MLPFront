@@ -52,9 +52,11 @@ function displayHospitals(hospitals) {
                 <td>${hospital.country}</td>
 
                 <td>
-                    <button class="btn-action btn-update" onclick="updateHospital(${hospital.id})">Update</button>    
+                    <button class="btn-action btn-update" onclick="updateHospital(${hospital.id})">Update</button>  
+                    <button class="btn-action btn-delete" onclick="deleteHospital(${hospital.id})">Delete</button>    
+
                     <!-- <button class="btn-action btn-delete" id="showModal" onclick="openModal(${hospital.id})">Delete</button> -->
-                    <button class="btn-action btn-delete showModal" data-hospital-id="69")">Delete</button>
+                    <!-- <button class="btn-action btn-delete showModal" data-hospital-id="69")">Delete</button> -->
 
                 </td>
             </tr>`
@@ -88,96 +90,18 @@ document.getElementById('closeFormBtn').addEventListener('click', function() {
     document.getElementById('hospitalTable').style.display = 'block';
 });
 
-// // Add a new hospital to the API
-// document.getElementById('hospitalForm').addEventListener('submit', function(event) {
-//     event.preventDefault();
-
-//     const hospitalData = {
-//         name: document.getElementById('name').value.trim(),
-//         address: document.getElementById('address').value.trim(),
-//         city: document.getElementById('city').value.trim(),
-//         country: document.getElementById('country').value.trim(),
-//         imageURL: document.getElementById('fileUpload').value.trim()
-//     };
-
-//     // Log hospital data for debugging
-//     console.log('Hospital Data:', hospitalData);
-
-
-//     imageUploadInput.addEventListener('change', function () {
-//         const file = this.files[0];
-//         if (file) {
-//             const reader = new FileReader();
-
-//             reader.onload = function (event) {
-//                 // Update the src of the image preview
-//                 imagePreview.src = event.target.result;
-//             };
-
-//             reader.readAsDataURL(file);
-//         }
-//     });
 
 
 
-//     // Validate the fields are not empty
-//     if (!hospitalData.name || !hospitalData.address || !hospitalData.city || !hospitalData.country) {
-//         document.getElementById('responseMessage').textContent = 'Please fill in all required fields: Name, Address, City, and Country.';
-//         return;
-//     }
 
-//     const token = getAuthToken();
 
-//     if (!token) {
-//         document.getElementById('responseMessage').textContent = 'No token found. Please log in.';
-//         return;
-//     }
 
-//     // Send POST request to add hospital
-//     fetch('https://anteshnatsh.tryasp.net/api/Hospital/AddHospital', {
-//         method: 'POST',
-//         headers: {
-//             'Authorization': `Bearer ${token}`,  // Fixed template literal
-//             'Content-Type': 'application/json',
-//         },
-//         body: JSON.stringify(hospitalData),
-//     })
-//     .then(response => {
-//         if (!response.ok) {
-//             return response.json().then(errorData => {
-//                 throw new Error(`Failed to save hospital. Status: ${response.status}, Error: ${JSON.stringify(errorData)}`);
-//             });
-//         }
-//         return response.json();
-//     })
-//     .then(data => {
-//         // Show success message
-//         document.getElementById('responseMessage').textContent = 'Hospital added successfully!';
-        
-//         // Reset the form
-//         document.getElementById('hospitalForm').reset();
 
-//         // Hide the form and show the hospital list
-//         document.getElementById('addHospitalForm').style.display = 'none';
-//         document.getElementById('addHospitalBtn').style.display = 'none';
-//         document.getElementById('hospitalTable').style.display = 'block';
 
-//         // Refresh the hospital list
-//         fetchHospitals();
 
-//         // Clear the success message after 2 seconds
-//         setTimeout(() => {
-//             document.getElementById('responseMessage').textContent = '';  
-//         }, 2000);
 
-//         location.reload(true);
 
-//     })
-//     .catch(error => {
-//         console.error('Error adding hospital:', error);
-//         document.getElementById('responseMessage').textContent = `Failed to add hospital: ${error.message}`;
-//     });
-// });
+//******************* ADD Hospital ************************
 
 document.getElementById('hospitalForm').addEventListener('submit', function(event) {
     event.preventDefault();
@@ -472,108 +396,6 @@ function deleteHospital(id) {
 
 // Update a hospital
 // Update a hospital using id and updated data (Dt object)
-// Update a hospital using id and updated data (Dt object)
-function updateHospital(id) {
-    // Fetch the hospital details from the list or via API call to pre-fill the form
-    const hospitalRow = document.getElementById(`hospital-${id}`);
-    const hospitalData = {
-        
-        ImageURL: hospitalRow.cells[0].textContent,
-
-        id : id,
-        name: hospitalRow.cells[1].textContent,
-        address: hospitalRow.cells[2].textContent,
-        city: hospitalRow.cells[3].textContent,
-        country: hospitalRow.cells[4].textContent,
-    };
-
-    // Pre-fill the form with the hospital data
-    document.getElementById('updateName').value = hospitalData.name;
-    document.getElementById('updateAddress').value = hospitalData.address;
-    document.getElementById('updateCity').value = hospitalData.city;
-    document.getElementById('updateCountry').value = hospitalData.country;
-    //document.getElementById('currentImagePreview').value = "";
-    
-
-    // Show the update form and hide the hospital table
-    document.getElementById('updateHospitalForm').style.display = 'block';
-    document.getElementById('addHospitalBtn').style.display = 'none';
-    document.getElementById('hospitalTable').style.display = 'none';
-
-    // Handle the form submission for updating
-    document.getElementById('updateHospitalFormDetails').onsubmit = function(event) {
-        event.preventDefault();
-
-        // Get updated data from the form
-        const updatedData = {
-            id : id,
-            name: document.getElementById('updateName').value.trim(),
-            address: document.getElementById('updateAddress').value.trim(),
-            city: document.getElementById('updateCity').value.trim(),
-            country: document.getElementById('updateCountry').value.trim(),
-            imageURL: document.getElementById('UpdateFileUpload').value.trim()
-        };
-
-        
-        // Call the update hospital function
-        sendUpdateRequest(id, updatedData);
-    };
-}
-
-// Function to send the PUT request to update the hospital
-function sendUpdateRequest(id, updatedData) {
-    const token = getAuthToken();
-
-    if (!token) {
-        document.getElementById('responseMessage').textContent = 'No token found. Please log in.';
-        return;
-    }
-
-    // Validate the updated data
-    if (!updatedData.name || !updatedData.address || !updatedData.city || !updatedData.country) {
-        document.getElementById('responseMessage').textContent = 'Please fill in all required fields: Name, Address, City, and Country.';
-        return;
-    }
-
-    // Send PUT request to update the hospital with provided data
-    fetch(`https://anteshnatsh.tryasp.net/api/Hospital/UpdateHospital/${id}`, {
-        method: 'POST', // Using PUT instead of POST for updating
-        headers: {
-            'Authorization': `Bearer ${token}`,
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(updatedData),
-    })
-    .then(response => {
-        if (!response.ok) {
-            return response.json().then(errorData => {
-                throw new Error(`Failed to update hospital. Status: ${response.status}, Error: ${JSON.stringify(errorData)}`);
-            });
-        }
-        return response.json();
-    })
-    .then(data => {
-        // Show success message
-        document.getElementById('responseMessage').textContent = 'Hospital updated successfully!';
-
-        // Hide the update form and show the hospital list
-        document.getElementById('updateHospitalForm').style.display = 'none';
-        document.getElementById('hospitalTable').style.display = 'block';
-
-        location.reload(true);
-        // Refresh the hospital list
-        fetchHospitals();
-
-        // Clear the success message after 2 seconds
-        setTimeout(() => {
-            document.getElementById('responseMessage').textContent = '';  
-        }, 2000);
-    })
-    .catch(error => {
-        console.error('Error updating hospital:', error);
-        document.getElementById('responseMessage').textContent = `Failed to update hospital: ${error.message}`;
-    });
-}
 
 
 
@@ -581,11 +403,6 @@ function sendUpdateRequest(id, updatedData) {
 window.onload = function() {
     fetchHospitals();
 };
-
-
-
-
-
 
 // function updateHospital(id) {
 //     const hospitalRow = document.getElementById(`hospital-${id}`);
@@ -623,7 +440,7 @@ window.onload = function() {
 //         };
 
 //         // If an image is uploaded, get the file
-//         const imageFile = document.getElementById('updateImage').files[0];
+//         const imageFile = document.getElementById('UpdateFileUpload').files[0];
 //         if (imageFile) {
 //             // Handle image file upload (e.g., convert to Base64 or upload to the server)
 //             uploadImage(imageFile)
@@ -639,3 +456,162 @@ window.onload = function() {
 //         }
 //     };
 // }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+function updateHospital(id) {
+    const hospitalRow = document.getElementById(`hospital-${id}`);
+    const hospitalData = {
+        id: id,
+        name: hospitalRow.cells[1].textContent,
+        address: hospitalRow.cells[2].textContent,
+        city: hospitalRow.cells[3].textContent,
+        country: hospitalRow.cells[4].textContent,
+        imageURL: hospitalRow.cells[0].textContent, // Assuming Image URL is in cell 0
+    };
+
+    // Pre-fill the form with hospital data
+    document.getElementById('updateName').value = hospitalData.name;
+    document.getElementById('updateAddress').value = hospitalData.address;
+    document.getElementById('updateCity').value = hospitalData.city;
+    document.getElementById('updateCountry').value = hospitalData.country;
+    document.getElementById('currentImagePreview').src = hospitalData.imageURL;
+
+    // Show the update form and hide the hospital table
+    document.getElementById('updateHospitalForm').style.display = 'block';
+    document.getElementById('hospitalTable').style.display = 'none';
+
+    // Handle form submission for update
+    document.getElementById('updateHospitalFormDetails').addEventListener('submit', function(event) {
+        event.preventDefault();
+
+        // Get updated form data
+        const updatedData = {
+            id: id,
+            name: document.getElementById('updateName').value.trim(),
+            address: document.getElementById('updateAddress').value.trim(),
+            city: document.getElementById('updateCity').value.trim(),
+            country: document.getElementById('updateCountry').value.trim(),
+        };
+
+        // Validate the required fields
+        if (!updatedData.name || !updatedData.address || !updatedData.city || !updatedData.country) {
+            document.getElementById('responseMessage').textContent = 'Please fill in all required fields.';
+            return;
+        }
+
+        // If an image is uploaded, get the file
+        const imageFile = document.getElementById('UpdateFileUpload').files[0];
+        if (imageFile) {
+            // Handle image file upload (e.g., using FormData)
+            const formData = new FormData();
+            formData.append('name', updatedData.name);
+            formData.append('address', updatedData.address);
+            formData.append('city', updatedData.city);
+            formData.append('country', updatedData.country);
+            formData.append('hospitalImage', imageFile); // Append the file
+
+            // Get the authentication token
+            const token = getAuthToken();
+
+            if (!token) {
+                document.getElementById('responseMessage').textContent = 'No token found. Please log in.';
+                return;
+            }
+
+            // Send PUT request to update hospital
+            fetch(`https://anteshnatsh.tryasp.net/api/Hospital/UpdateHospital/${id}`, {
+                method: 'POST', // You might need to change this to PUT based on your API
+                headers: {
+                    'Authorization': `Bearer ${token}`,  // Add Authorization header
+                },
+                body: formData, // Send FormData which includes both text fields and image
+            })
+            .then(response => response.json())
+            .then(data => {
+                // Show success message
+                document.getElementById('responseMessage').textContent = 'Hospital updated successfully!';
+
+                // Hide the update form and show the hospital list
+                document.getElementById('updateHospitalForm').style.display = 'none';
+                document.getElementById('hospitalTable').style.display = 'block';
+
+                // Optionally refresh the hospital list
+                fetchHospitals();
+
+                // Clear the success message after 2 seconds
+                setTimeout(() => {
+                    document.getElementById('responseMessage').textContent = '';
+                }, 2000);
+
+                // Optionally reload the page to reflect changes
+                location.reload(true);
+            })
+            .catch(error => {
+                console.error('Error updating hospital:', error);
+                document.getElementById('responseMessage').textContent = `Failed to update hospital: ${error.message}`;
+            });
+
+        } else {
+            // No new image, use the existing one
+            updatedData.imageURL = hospitalData.imageURL;
+
+            // Send data without file upload (if image is unchanged)
+            sendUpdateRequest(id, updatedData);
+        }
+    });
+}
+
+// Helper function to send data without file upload (if image is unchanged)
+function sendUpdateRequest(id, updatedData) {
+    const token = getAuthToken();
+
+    if (!token) {
+        document.getElementById('responseMessage').textContent = 'No token found. Please log in.';
+        return;
+    }
+
+    // Send PUT request to update the hospital data
+    fetch(`https://anteshnatsh.tryasp.net/api/Hospital/UpdateHospital/${id}`, {
+        method: 'POST',  // You might need to change this to PUT based on your API
+        headers: {
+            'Authorization': `Bearer ${token}`,
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(updatedData),  // Send JSON data without file
+    })
+    .then(response => response.json())
+    .then(data => {
+        document.getElementById('responseMessage').textContent = 'Hospital updated successfully!';
+        
+        // Hide the form and show the hospital table
+        document.getElementById('updateHospitalForm').style.display = 'none';
+        document.getElementById('hospitalTable').style.display = 'block';
+
+        // Refresh the hospital list
+        fetchHospitals();
+
+        // Clear success message after 2 seconds
+        setTimeout(() => {
+            document.getElementById('responseMessage').textContent = '';
+        }, 2000);
+
+       // location.reload(true);  // Optionally reload to reflect changes
+    })
+    .catch(error => {
+        console.error('Error updating hospital:', error);
+        document.getElementById('responseMessage').textContent = `Failed to update hospital: ${error.message}`;
+    });
+}
