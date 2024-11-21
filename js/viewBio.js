@@ -5,7 +5,7 @@ function getPatientNameFromUrl() {
 }
 
 const patientName = getPatientNameFromUrl(); // Get patient name from URL
-const token = localStorage.getItem('authToken'); // Get auth token from localStorage
+const token = localStorage.getItem('auth_token'); // Get auth token from localStorage
 const getBioApiUrl = `https://anteshnatsh.tryasp.net/api/Patient/${patientName}`; // API endpoint
 const deleteBioApiUrl = 'https://anteshnatsh.tryasp.net/api/Patient/DeleteBio/'; // Delete Bio endpoint
 
@@ -24,10 +24,15 @@ async function fetchAndDisplayBioData() {
             const errorDetails = await response.json();
             console.error('Error:', errorDetails);
             alert(`Failed to fetch bio data: ${errorDetails.title}`);
+            console.log(token);
+            console.error(`Error: ${response.status} ${response.statusText}`);
+            alert(`Failed to fetch bio data: ${response.statusText}`);
             return;
         }
 
         const bioDataList = await response.json();
+        console.log("Bio Data List:", bioDataList);
+
         renderBioData(bioDataList);
 
     } catch (error) {
