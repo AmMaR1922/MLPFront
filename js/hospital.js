@@ -62,12 +62,12 @@ function displayHospitals(hospitals) {
     }
 }
 
-document.querySelectorAll('.showModal').forEach(button => {
-    button.addEventListener('click', function() {
-        const hospitalId = this.getAttribute('data-hospital-id');
-        openModal(hospitalId);
-    });
-});
+// document.querySelectorAll('.showModal').forEach(button => {
+//     button.addEventListener('click', function() {
+//         const hospitalId = this.getAttribute('data-hospital-id');
+//         openModal(hospitalId);
+//     });
+// });
 
 
 
@@ -88,27 +88,122 @@ document.getElementById('closeFormBtn').addEventListener('click', function() {
     document.getElementById('hospitalTable').style.display = 'block';
 });
 
-// Add a new hospital to the API
+// // Add a new hospital to the API
+// document.getElementById('hospitalForm').addEventListener('submit', function(event) {
+//     event.preventDefault();
+
+//     const hospitalData = {
+//         name: document.getElementById('name').value.trim(),
+//         address: document.getElementById('address').value.trim(),
+//         city: document.getElementById('city').value.trim(),
+//         country: document.getElementById('country').value.trim(),
+//         imageURL: document.getElementById('fileUpload').value.trim()
+//     };
+
+//     // Log hospital data for debugging
+//     console.log('Hospital Data:', hospitalData);
+
+
+//     imageUploadInput.addEventListener('change', function () {
+//         const file = this.files[0];
+//         if (file) {
+//             const reader = new FileReader();
+
+//             reader.onload = function (event) {
+//                 // Update the src of the image preview
+//                 imagePreview.src = event.target.result;
+//             };
+
+//             reader.readAsDataURL(file);
+//         }
+//     });
+
+
+
+//     // Validate the fields are not empty
+//     if (!hospitalData.name || !hospitalData.address || !hospitalData.city || !hospitalData.country) {
+//         document.getElementById('responseMessage').textContent = 'Please fill in all required fields: Name, Address, City, and Country.';
+//         return;
+//     }
+
+//     const token = getAuthToken();
+
+//     if (!token) {
+//         document.getElementById('responseMessage').textContent = 'No token found. Please log in.';
+//         return;
+//     }
+
+//     // Send POST request to add hospital
+//     fetch('https://anteshnatsh.tryasp.net/api/Hospital/AddHospital', {
+//         method: 'POST',
+//         headers: {
+//             'Authorization': `Bearer ${token}`,  // Fixed template literal
+//             'Content-Type': 'application/json',
+//         },
+//         body: JSON.stringify(hospitalData),
+//     })
+//     .then(response => {
+//         if (!response.ok) {
+//             return response.json().then(errorData => {
+//                 throw new Error(`Failed to save hospital. Status: ${response.status}, Error: ${JSON.stringify(errorData)}`);
+//             });
+//         }
+//         return response.json();
+//     })
+//     .then(data => {
+//         // Show success message
+//         document.getElementById('responseMessage').textContent = 'Hospital added successfully!';
+        
+//         // Reset the form
+//         document.getElementById('hospitalForm').reset();
+
+//         // Hide the form and show the hospital list
+//         document.getElementById('addHospitalForm').style.display = 'none';
+//         document.getElementById('addHospitalBtn').style.display = 'none';
+//         document.getElementById('hospitalTable').style.display = 'block';
+
+//         // Refresh the hospital list
+//         fetchHospitals();
+
+//         // Clear the success message after 2 seconds
+//         setTimeout(() => {
+//             document.getElementById('responseMessage').textContent = '';  
+//         }, 2000);
+
+//         location.reload(true);
+
+//     })
+//     .catch(error => {
+//         console.error('Error adding hospital:', error);
+//         document.getElementById('responseMessage').textContent = `Failed to add hospital: ${error.message}`;
+//     });
+// });
+
 document.getElementById('hospitalForm').addEventListener('submit', function(event) {
     event.preventDefault();
 
-    const hospitalData = {
-        name: document.getElementById('name').value.trim(),
-        address: document.getElementById('address').value.trim(),
-        city: document.getElementById('city').value.trim(),
-        country: document.getElementById('country').value.trim(),
-        imageURL: document.getElementById('fileUpload').value.trim()
-    };
+    // Retrieve form elements
+    const name = document.getElementById('name').value.trim();
+    const address = document.getElementById('address').value.trim();
+    const city = document.getElementById('city').value.trim();
+    const country = document.getElementById('country').value.trim();
+    const imageFile = document.getElementById('fileUpload').files[0]; // File from input
 
-    // Log hospital data for debugging
-    console.log('Hospital Data:', hospitalData);
-
-    // Validate the fields are not empty
-    if (!hospitalData.name || !hospitalData.address || !hospitalData.city || !hospitalData.country) {
-        document.getElementById('responseMessage').textContent = 'Please fill in all required fields: Name, Address, City, and Country.';
+    // Validate fields are not empty
+    if (!name || !address || !city || !country || !imageFile) {
+        document.getElementById('responseMessage').textContent = 'Please fill in all required fields, including the image.';
         return;
     }
 
+    // Create FormData object to include the image and text fields
+    const formData = new FormData();
+    formData.append('name', name);
+    formData.append('address', address);
+    formData.append('city', city);
+    formData.append('country', country);
+    formData.append('hospitalImage', imageFile); // Append the file
+
+    // Get authentication token
     const token = getAuthToken();
 
     if (!token) {
@@ -120,10 +215,9 @@ document.getElementById('hospitalForm').addEventListener('submit', function(even
     fetch('https://anteshnatsh.tryasp.net/api/Hospital/AddHospital', {
         method: 'POST',
         headers: {
-            'Authorization': `Bearer ${token}`,  // Fixed template literal
-            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`,  // Authorization header
         },
-        body: JSON.stringify(hospitalData),
+        body: formData, // FormData object
     })
     .then(response => {
         if (!response.ok) {
@@ -142,7 +236,6 @@ document.getElementById('hospitalForm').addEventListener('submit', function(even
 
         // Hide the form and show the hospital list
         document.getElementById('addHospitalForm').style.display = 'none';
-        document.getElementById('addHospitalBtn').style.display = 'none';
         document.getElementById('hospitalTable').style.display = 'block';
 
         // Refresh the hospital list
@@ -154,13 +247,13 @@ document.getElementById('hospitalForm').addEventListener('submit', function(even
         }, 2000);
 
         location.reload(true);
-
     })
     .catch(error => {
         console.error('Error adding hospital:', error);
         document.getElementById('responseMessage').textContent = `Failed to add hospital: ${error.message}`;
     });
 });
+
 
 
 
