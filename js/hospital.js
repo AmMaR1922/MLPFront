@@ -52,10 +52,8 @@ function displayHospitals(hospitals) {
                 <td>${hospital.country}</td>
 
                 <td>
-
                     <button class="btn-action btn-update" onclick="updateHospital(${hospital.id})">Update</button>    
                     <button class="btn-action btn-delete" onclick="deleteHospital(${hospital.id})">Delete</button>
-
                 </td>
             </tr>`
         ).join('');
