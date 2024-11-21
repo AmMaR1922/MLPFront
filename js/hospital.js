@@ -97,7 +97,7 @@ document.getElementById('hospitalForm').addEventListener('submit', function(even
         address: document.getElementById('address').value.trim(),
         city: document.getElementById('city').value.trim(),
         country: document.getElementById('country').value.trim(),
-        ImageURL: document.getElementById('fileUpload').value.trim()
+        imageURL: document.getElementById('fileUpload').value.trim()
     };
 
     // Log hospital data for debugging
@@ -399,7 +399,7 @@ function updateHospital(id) {
     document.getElementById('updateAddress').value = hospitalData.address;
     document.getElementById('updateCity').value = hospitalData.city;
     document.getElementById('updateCountry').value = hospitalData.country;
-    document.getElementById('currentImagePreview').value = "";
+    //document.getElementById('currentImagePreview').value = "";
     
 
     // Show the update form and hide the hospital table
@@ -418,7 +418,7 @@ function updateHospital(id) {
             address: document.getElementById('updateAddress').value.trim(),
             city: document.getElementById('updateCity').value.trim(),
             country: document.getElementById('updateCountry').value.trim(),
-            ImageURL: document.getElementById('UpdateFileUpload').value.trim()
+            imageURL: document.getElementById('UpdateFileUpload').value.trim()
         };
 
         
