@@ -488,6 +488,7 @@ function updateHospital(id) {
     // Show the update form and hide the hospital table
     document.getElementById('updateHospitalForm').style.display = 'block';
     document.getElementById('hospitalTable').style.display = 'none';
+    document.getElementById('addHospitalBtn').style.display = 'none';
 
     // Handle form submission for update
     document.getElementById('updateHospitalFormDetails').addEventListener('submit', function(event) {
