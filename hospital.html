@@ -28,11 +28,33 @@
                 <th>Actions</th>
             </tr>
         </thead>
+        
+        <!-- ********Modal******** -->
+
+        <div class="modal" id="modal">
+            <div class="modal-body">
+                <div class="modal-header">
+                    <h1 class="modal-title">Delete Hospital</h1>
+                </div>
+                <p>Are you sure you want to delete this hospital?</p>
+                <div class="line"></div>
+                <div class="buttons">
+                    <button id="cancel" class="cancel">Cancel</button>
+                    <!-- <button class="btn-action btn-delete" id="show_modal">ShowModal</button> -->
+                    <button id="confirmDelete" class="btn btn-danger">Delete</button>
+                </div>
+            </div>
+        </div>
+
+        
+            
+            
 
         <tbody id="hospitalList"></tbody>
-
     </table>
 </div>
+
+
 
     <!-- Add Hospital Button (Moved below the table and inside the form) -->
     <button class="btn" id="addHospitalBtn" style="margin-top: 20px;">Add New Hospital</button>
@@ -84,7 +106,6 @@
         </form>
         <button class="btn" id="closeUpdateFormBtn">Cancel</button>
     </div>
-
 </div>
 
 <script src="js/hospital.js"></script>

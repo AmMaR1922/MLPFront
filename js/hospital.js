@@ -50,14 +50,24 @@ function displayHospitals(hospitals) {
                 <td>${hospital.address}</td>
                 <td>${hospital.city}</td>
                 <td>${hospital.country}</td>
+
                 <td>
-                    <button class="btn-action btn-update" onclick="updateHospital(${hospital.id})">Update</button>
-                    <button class="btn-action btn-delete" onclick="deleteHospital(${hospital.id})">Delete</button>
+                    <button class="btn-action btn-update" onclick="updateHospital(${hospital.id})">Update</button>    
+                    <!-- <button class="btn-action btn-delete" id="showModal" onclick="openModal(${hospital.id})">Delete</button> -->
+                    <button class="btn-action btn-delete showModal" data-hospital-id="69")">Delete</button>
+
                 </td>
             </tr>`
         ).join('');
     }
 }
+
+document.querySelectorAll('.showModal').forEach(button => {
+    button.addEventListener('click', function() {
+        const hospitalId = this.getAttribute('data-hospital-id');
+        openModal(hospitalId);
+    });
+});
 
 
 
@@ -161,7 +171,133 @@ document.getElementById('hospitalForm').addEventListener('submit', function(even
 
 
 
-//Delete a hospital
+//Delete a hospital 
+
+//Modal 
+
+
+// cancel.addEventListener("click", ()=>{
+//     modal.classList.remove("active");
+// })
+
+// showModal.addEventListener("click", ()=>{
+//     modal.classList.add("active");
+// })
+
+// confirmDelete.addEventListener("click", () => {
+//     if (hospitalIdToDelete !== null) {
+//         deleteHospital(hospitalIdToDelete);
+//         modal.classList.remove("active");
+//     }
+// });
+//  function openModal(hospitalId) {
+//      hospitalIdToDelete = hospitalId; // Store the ID for deletion
+//      modal.classList.add("active");
+// }
+
+
+
+
+// document.addEventListener("DOMContentLoaded", function () {
+//     // Ensure all the DOM elements exist before proceeding
+//     const modal = document.getElementById("modal");
+//     const cancel = document.getElementById("cancel");
+//     const confirmDelete = document.getElementById("confirmDelete");
+
+//     if (!modal || !cancel || !confirmDelete) {
+//         console.error("Some DOM elements are missing. Ensure modal, cancel, and confirmDelete are present in the HTML.");
+//         return;
+//     }
+
+//     let hospitalIdToDelete = null;
+
+//     // Event listener for the cancel button (to close the modal)
+//     cancel.addEventListener("click", () => {
+//         modal.classList.remove("active");
+//         hospitalIdToDelete = null; // Reset the hospital ID when cancelling
+//     });
+
+//     // Event listener for the confirm delete button
+//     confirmDelete.addEventListener("click", () => {
+//         if (hospitalIdToDelete !== null) {
+//             try {
+//                 deleteHospital(hospitalIdToDelete);  // Call the delete function with the stored ID
+//                 modal.classList.remove("active"); // Close the modal after deletion
+//             } catch (error) {
+//                 console.error("Error deleting the hospital: ", error);
+//             }
+//         } else {
+//             console.warn("No hospital ID selected for deletion.");
+//         }
+//     });
+
+
+//     // Event listener for all delete buttons
+//     document.querySelectorAll('.showModal').forEach((button) => {
+//         button.addEventListener("click", function() {
+//             const hospitalId = this.getAttribute('onclick').match(/\d+/)[0]; // Extract hospital ID from the onclick attribute
+//             openModal(hospitalId);
+//         });
+//     });
+
+//     function openModal(hospitalId) {
+//         if (!hospitalId) {
+//             console.error("Invalid hospital ID passed to openModal");
+//             return;
+//         }
+//         hospitalIdToDelete = hospitalId; // Store the ID for deletion
+//         modal.classList.add("active");
+//     }
+// });
+
+// Define the openModal function first
+function openModal(hospitalId) {
+    const modal = document.getElementById("modal");
+    if (!modal) {
+        console.error("Modal element not found.");
+        return;
+    }
+
+    // Store the hospitalId to be deleted later
+    let hospitalIdToDelete = hospitalId;
+
+    // Open the modal when the delete button is clicked
+    modal.classList.add("active");
+
+    // Event listener for the cancel button (to close the modal)
+    document.getElementById("cancel").addEventListener("click", () => {
+        modal.classList.remove("active");
+        hospitalIdToDelete = null; // Reset hospitalId when cancel is clicked
+    });
+
+    // Event listener for the confirm delete button
+    document.getElementById("confirmDelete").addEventListener("click", () => {
+        if (hospitalIdToDelete !== null) {
+            deleteHospital(hospitalIdToDelete);
+            modal.classList.remove("active"); // Close modal after deletion
+        } else {
+            console.warn("No hospital ID selected for deletion.");
+        }
+    });
+}
+
+// Attach the event listeners to the delete buttons
+document.addEventListener("DOMContentLoaded", function () {
+    document.querySelectorAll('.showModal').forEach(button => {
+        button.addEventListener('click', function () {
+            const hospitalId = this.getAttribute('data-hospital-id');
+            openModal(hospitalId);
+        });
+    });
+});
+
+
+
+
+
+
+
+
 function deleteHospital(id) {
     const token = getAuthToken();
 
