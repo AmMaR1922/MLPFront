@@ -52,16 +52,9 @@ function displayHospitals(hospitals) {
                 <td>${hospital.country}</td>
 
                 <td>
-<<<<<<< HEAD
+
                     <button class="btn-action btn-update" onclick="updateHospital(${hospital.id})">Update</button>    
                     <button class="btn-action btn-delete" onclick="deleteHospital(${hospital.id})">Delete</button>
-=======
-                    <button class="btn-action btn-update" onclick="updateHospital(${hospital.id})">Update</button>  
-                    <button class="btn-action btn-delete" onclick="deleteHospital(${hospital.id})">Delete</button>    
-
-                    <!-- <button class="btn-action btn-delete" id="showModal" onclick="openModal(${hospital.id})">Delete</button> -->
-                    <!-- <button class="btn-action btn-delete showModal" data-hospital-id="69")">Delete</button> -->
->>>>>>> dd50f7fc1b1107a35f15312406436946b5ced20e
 
                 </td>
             </tr>`
