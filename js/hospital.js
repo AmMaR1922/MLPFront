@@ -55,9 +55,6 @@ function displayHospitals(hospitals) {
                     <button class="btn-action btn-update" onclick="updateHospital(${hospital.id})">Update</button>  
                     <button class="btn-action btn-delete" onclick="deleteHospital(${hospital.id})">Delete</button>    
 
-                    <!-- <button class="btn-action btn-delete" id="showModal" onclick="openModal(${hospital.id})">Delete</button> -->
-                    <!-- <button class="btn-action btn-delete showModal" data-hospital-id="69")">Delete</button> -->
-
                 </td>
             </tr>`
         ).join('');
