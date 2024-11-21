@@ -46,7 +46,7 @@ function renderPatients(patients) {
                 ${patients.map(patient => `
                     <tr>
                         <td>${patient.name}</td>
-                        <td>${patient.state}</td>
+                        <td>${patient.lastBiologicalIndicator.healthCondition}</td>
                         <td>${getHospitalName(patient.hospitalId)}</td>
                         <td>
                             <button id=AddBio  onclick="window.location.href='addBio.html?patientId=${patient.id}'">Add Bio</button>
