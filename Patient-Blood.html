@@ -5,6 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Patient Information</title>
     <link rel="stylesheet" href="css/patient.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.0/css/all.min.css" integrity="sha512-9xKTRVabjVeZmc+GUW8GgSmcREDunMM+Dt/GrzchfN8tkwHizc5RP4Ok/MXFFy5rIjJjzhndFScTceq5e6GvVQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> <!-- Load Chart.js first -->
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns"></script> <!-- Then load the adapter -->
+
+
 </head>
 <body>
 
@@ -22,12 +27,36 @@
                         <p id="hospitalNameHeader">Loading...</p>
                     </div>
                 </div>
-                <button class="logout-btn" onclick="handleLogout()">
+                <button class="logout-btn" onclick="handleLogout()" style="color: #000000;">
                     <i class="fa-solid fa-arrow-right-from-bracket" style="color: #000000;"></i>
                     Logout
                 </button>
             </div>
         </header>
+
+
+
+
+
+
+<!-- chart -->
+
+
+<div class="chart-container">
+    <canvas id="bloodPressureChart" width="400" height="200"></canvas>
+</div>
+
+<style>
+    #bloodPressureChart {
+      width: 100% !important;  /* Make the chart take up full width of its container */
+      height: 500px !important;  /* Set a specific height (adjust as needed) */
+    }
+  </style>
+  
+
+
+
+
 
 
     <div class="patient-container">
@@ -46,5 +75,7 @@
     </div>
 
     <script src="js/patient-blood.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/app.js"></script>
 </body>
 </html>
