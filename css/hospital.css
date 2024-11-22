@@ -111,7 +111,7 @@ h1 {
     max-height: 400px; /* Limit the height of the table */
     overflow-y: auto; /* Enable vertical scrolling */
     background: white;
-    border-radius: 8px;
+    /* border-radius: 8px; */
 }
 
 table {
