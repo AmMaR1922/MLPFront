@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hospital List</title>
+    <link rel="stylesheet" href="css/add-hospital.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.0/css/all.min.css" integrity="sha512-9xKTRVabjVeZmc+GUW8GgSmcREDunMM+Dt/GrzchfN8tkwHizc5RP4Ok/MXFFy5rIjJjzhndFScTceq5e6GvVQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+
+
+    <!-- Header -->
+    <header class="header">
+        <div class="header-content">
+            <div class="header-left">
+                <div class="logo">
+                    <div class="login-logo">
+                        <i class="fa-regular fa-hospital" style="color: #ffffff;"></i>
+                    </div>
+                </div>
+                <div class="user-info">
+                    <h1>Welcome, <span id="username">Loading...</span></h1>
+                    <p id="hospitalName">Loading...</p>
+                </div>
+            </div>
+            <button class="logout-btn" onclick="handleLogout()">
+                <i class="fa-solid fa-arrow-right-from-bracket" style="color: #000000;"></i>
+                Logout
+            </button>
+        </div>
+    </header>
+
+
+<div class="container">
+    <!-- <nav class="navbar">
+        <div class="nav-content">
+            <h1>Hospital Management</h1>
+            <button class="btn" id="addHospitalBtn">Add New Hospital</button>
+        </div>
+    </nav> -->
+
+    <main class="main-content">
+        <div id="addHospitalForm" class="form-container">
+            <form id="hospitalForm">
+                <div class="form-header">
+                    <h2>Add New Hospital</h2>
+                    <p class="form-subtitle">Enter the hospital details below</p>
+                </div>
+
+                <div class="form-body">
+                    <div class="form-section">
+                        <div class="input-group">
+                            <label for="name">Hospital Name</label>
+                            <input type="text" id="name" placeholder="Enter hospital name" required />
+                        </div>
+
+                        <div class="input-group">
+                            <label for="address">Address</label>
+                            <input type="text" id="address" placeholder="Enter full address" required />
+                        </div>
+
+                        <div class="form-row">
+                            <div class="input-group">
+                                <label for="city">City</label>
+                                <input type="text" id="city" placeholder="Enter city" required />
+                            </div>
+
+                            <div class="input-group">
+                                <label for="country">Country</label>
+                                <input type="text" id="country" placeholder="Enter country" required />
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-section">
+                        <div class="custom-file-upload">
+                            <label for="fileUpload" class="file-upload-label">
+                                <div class="upload-icon"></div>
+                                <div class="upload-content">
+                                    <span class="file-text">Drag & drop your files here</span>
+                                    <span class="file-info">or click to browse</span>
+                                </div>
+                            </label>
+                            <input type="file" id="fileUpload" accept="image/*" />
+                        </div>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-primary">Add Hospital</button>
+                        <button type="button" class="btn btn-secondary" id="closeFormBtn">Cancel</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </main>
+</div>
+
+<script src="js/add-hospital.js"></script>
+<script src="js/auth.js"></script>
+<script src="js/app.js"></script>
+
+</body>
+</html>
