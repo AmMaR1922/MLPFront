@@ -16,7 +16,6 @@ body {
     margin: 0;
 }
 
-
 .header {
     background: white;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
@@ -138,7 +137,7 @@ th {
 }
 
 tbody tr:hover {
-    background-color: #f0fdfa; /* Highlight row on hover */
+    background-color: #f2f2f2; /* Highlight row on hover */
 }
 
 .table-container::-webkit-scrollbar {
@@ -195,4 +194,55 @@ td img {
     h1 {
         font-size: 1.5rem;
     }
+}
+
+:root {
+    --primary: #2563eb;
+    --primary-dark: #1d4ed8;
+    --primary-light: #3b82f6;
+    --success: #10b981;
+    --danger: #ef4444;
+    --gray-50: #f9fafb;
+    --gray-100: #f3f4f6;
+    --gray-200: #e5e7eb;
+    --gray-300: #d1d5db;
+    --gray-400: #9ca3af;
+    --gray-500: #6b7280;
+    --gray-600: #4b5563;
+    --gray-700: #374151;
+    --gray-800: #1f2937;
+    --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+    --shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+    --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+    --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+}
+
+a.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none; /* Remove underline */
+    padding: 0.75rem 1.5rem; /* Add some padding */
+    border-radius: 0.5rem; /* Rounded corners */
+    font-weight: 500;
+    font-size: 1rem; /* Slightly larger text */
+    line-height: 1.25rem;
+    color: white; /* Text color */
+    background-color: #0f766e; /* Primary color */
+    box-shadow: var(--shadow-md); /* Add some shadow */
+    transition: all 0.2s ease; /* Smooth transitions */
+    margin-top: 20px; /* Space above the button */
+    cursor: pointer;
+}
+
+a.btn:hover {
+    background-color: #0d615a; /* Darker shade on hover */
+    transform: translateY(-1px); /* Subtle lift effect */
+    box-shadow: var(--shadow-lg); /* Stronger shadow on hover */
+}
+
+a.btn:active {
+    background-color: #118278; /* Lighter shade on active click */
+    transform: translateY(0); /* Reset lift effect */
+    box-shadow: var(--shadow-sm); /* Subtle shadow on active click */
 }
