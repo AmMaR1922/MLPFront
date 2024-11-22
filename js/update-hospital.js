@@ -20,7 +20,7 @@ function fetchHospitalDetails(hospitalId) {
         return;
     }
 
-    fetch(`https://anteshnatsh.tryasp.net/api/Hospital/${hospitalId}`, {
+    fetch(`https://anteshnatsh.tryasp.net/api/Hospital/GetHospitalById/${hospitalId}`, {
         method: 'GET',
         headers: {
             'Authorization': `Bearer ${token}`,
@@ -57,17 +57,16 @@ function updateHospital(event) {
     const hospitalCity = document.getElementById('hospitalCity').value;
     const hospitalCountry = document.getElementById('hospitalCountry').value;
     const imageURL = document.getElementById('imageURL').value;
-    const hospitalImage = document.getElementById('hospitalImage').files[0]; // Fetch image file
+    const hospitalImage = document.getElementById('hospitalImage').files[0]; // File input
 
-    const token = getAuthToken(); // Fetch token
+    const token = getAuthToken();
 
     if (!token) {
         alert('No token found. Please log in.');
         return;
     }
 
-    const formData = new FormData(); // Initialize FormData object
-    formData.append('id', hospitalId);
+    const formData = new FormData();
     formData.append('name', hospitalName);
     formData.append('address', hospitalAddress);
     formData.append('city', hospitalCity);
@@ -75,46 +74,28 @@ function updateHospital(event) {
     formData.append('imageURL', imageURL);
 
     if (hospitalImage) {
-        formData.append('hospitalImage', hospitalImage); // Append image file if selected
+        formData.append('hospitalImage', hospitalImage); // Append the hospital image if available
     }
-    else
-    {
-       
-            console.error('No hospital image selected');
-        
-    }
-
-    // Log FormData to verify its contents
-    formData.forEach((value, key) => {
-        if (value instanceof File) {
-            console.log(`${key}: ${value.name} (File)`); // Log file name if it's a file
-        } else {
-            console.log(`${key}: ${value}`); // Log other form fields
-        }
-    });
 
     fetch(`https://anteshnatsh.tryasp.net/api/Hospital/UpdateHospital/${hospitalId}`, {
-        method: 'POST',  // Use POST as per your API design
+        method: 'PUT',
         headers: {
-            'Authorization': `Bearer ${token}`,  // Set Authorization header
-            // Do not set Content-Type for FormData (browser handles it)
+            'Authorization': `Bearer ${token}`,
         },
-        body: formData,  // Attach FormData as the request body
+        body: formData,
     })
-    .then(response => response.text().then(text => {
-        if (!response.ok) {
-            console.error('Failed to update hospital:', text); // Log response text for troubleshooting
-            throw new Error(`Failed to update hospital. Status: ${response.status} - ${text}`);
-        }
-        alert('Hospital updated successfully.');
-        window.location.href = 'hospital.html';  // Redirect after successful update
-    }))
-    .catch(error => {
-        console.error('Error updating hospital:', error);  // Log errors
-        alert('Failed to update hospital.');
-    });
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`Failed to update hospital. Status: ${response.status}`);
+            }
+            alert('Hospital updated successfully.');
+            window.location.href = '/'; // Redirect to the main page or hospital list
+        })
+        .catch(error => {
+            console.error('Error updating hospital:', error);
+            alert('Failed to update hospital.');
+        });
 }
-
 
 // Fetch the hospital details and prefill the form on page load
 window.onload = function () {

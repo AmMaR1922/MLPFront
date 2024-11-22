@@ -56,7 +56,7 @@ function displayHospitals(hospitals) {
                 <td>${hospital.city}</td>
                 <td>${hospital.country}</td>
                 <td>
-                    <button class="btn-update" onclick="updateHospital(${index}, '${hospital.id}')">Update</button>
+                    <button class="btn-update" onclick="updateHospital('${hospital.id}')">Update</button>
                     <button class="btn-action" onclick="deleteHospital('${hospital.id}')">Delete</button>
                 </td>
             </tr>
@@ -65,7 +65,7 @@ function displayHospitals(hospitals) {
 }
 
 // Function to handle updating a hospital
-function updateHospital(index, hospitalId) {
+function updateHospital(hospitalId) {
     // Redirect to the update page with the hospitalId as a query parameter
     window.location.href = `update-hospital.html?hospitalId=${hospitalId}`;
 }
