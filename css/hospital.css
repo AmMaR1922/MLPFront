@@ -1,6 +1,3 @@
-
-
-
 /* Basic reset */
 * {
     margin: 0;
@@ -12,7 +9,6 @@ body {
     font-family: Arial, sans-serif;
     background-color: #f4f4f4;
     color: #333;
-    padding: 20px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -35,202 +31,12 @@ h1 {
     margin-bottom: 20px;
 }
 
-/* Success Message Styling */
-.alert {
-    background-color: #5cee60;
-    color: white;
-    padding: 10px;
-    margin-bottom: 15px;
-    border-radius: 5px;
-    text-align: center;
-    font-size: 16px;
-    
-    /* Positioning the alert at the top */
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    
-    /* Optional: Add z-index to ensure it appears above other elements */
-    z-index: 9999;
-}
-
-/* Button Styling */
-button.btn {
-    background-color: #11837a;
-    color: white;
-    padding: 10px 15px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 16px;
-    margin: 10px 0;
-}
-
-button.btn:hover {
-    background-color: #0f766e;
-}
-
-/* Table styling */
-table {
-    width: 100%;
-    margin-top: 20px;
-    border-collapse: collapse;
-    text-align: left;
-}
-
-th, td {
-    padding: 12px;
-    border-bottom: 1px solid #ddd;
-}
-
-th {
-    background-color: #f2f2f2;
-}
-
-tbody tr:hover {
-    background-color: #f1f1f1;
-}
-
-/* Form container styling */
-.form-container {
-    display: none;
-    margin-top: 20px;
-    background-color: #f9f9f9;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    max-width: 500px;
-    width: 100%;
-    margin: 0 auto;
-}
-
-.form-container input {
-    width: 100%;
-    padding: 10px;
-    margin: 10px 0;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-}
-
-.form-container button {
-    width: 100%;
-}
-
-/* Action buttons */
-button.btn-action {
-    background-color: #db524b;  /* Red for Delete */
-    color: white;
-    padding: 5px 10px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 20px;
-    margin-right: 5px;
-}
-
-button.btn-action:hover {
-    background-color: #c84943;
-}
-
-button.btn-update {
-    background-color: #11837a;  /* Blue for Update */
-}
-
-button.btn-update:hover {
-    background-color: #0d645c;
-}
-
-/* Image */
-
-/* Wrapper for the custom file upload */
-.custom-file-upload {
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    padding: 2rem 1rem;
-    border: 2px dashed #cbd5e1;
-    border-radius: 1rem;
-    background: #f9fafb;
-    transition: border-color 0.3s ease, background-color 0.3s ease;
-    cursor: pointer;
-    text-align: center;
-}
-
-/* File label styles */
-.file-upload-label {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    color: #4b5563;
-    font-size: 1rem;
-    font-weight: 500;
-    cursor: pointer;
-    text-align: center;
-    gap: 0.5rem;
-}
-
-/* Icon inside the label */
-.file-upload-label .file-icon {
-    font-size: 2rem;
-    color: #0d9488;
-    transition: color 0.2s ease;
-}
-
-/* Text inside the label */
-.file-upload-label .file-text {
-    font-size: 1rem;
-    color: #6b7280;
-    font-weight: 400;
-}
-
-/* Hidden input file */
-input[type="file"] {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    opacity: 0; /* Hide actual file input */
-    cursor: pointer;
-}
-
-/* Hover effect for wrapper */
-.custom-file-upload:hover {
-    border-color: #0d9488;
-    background: #e6f7f5;
-}
-
-.custom-file-upload:hover .file-icon {
-    color: #0f766e;
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+/* Table container */
 .table-container {
-    max-height: 400px; /* Limit the height of the table container */
+    max-height: 400px; /* Limit the height of the table */
     overflow-y: auto; /* Enable vertical scrolling */
-    /* border: 1px solid #ddd; */
-    /* border-radius: 0.5rem; */
-    /* margin-top: 1rem; */
     background: white;
+    border-radius: 8px;
 }
 
 table {
@@ -240,190 +46,78 @@ table {
 }
 
 thead {
-    position: sticky; /* Keep the header row visible */
+    position: sticky; /* Keep the header row visible when scrolling */
     top: 0;
     background: #f3f4f6;
     z-index: 2;
 }
 
 th, td {
-    /* padding: 0.75rem; */
+    padding: 12px;
     border-bottom: 1px solid #e5e7eb;
 }
 
-tr:hover {
-    background: #f0fdfa; /* Highlight row on hover */
+th {
+    background-color: #f2f2f2;
+    font-weight: bold;
+}
+
+tbody tr:hover {
+    background-color: #f0fdfa; /* Highlight row on hover */
 }
 
 .table-container::-webkit-scrollbar {
-    display: none;
+    display: none; /* Hide scrollbar */
 }
 
-
-
-/* Modal */
-
-/* 
-.modal{
-    width: 451px;
-    background: #232323;
-    border-radius: 12px;
-}
-
-.modal_body{
-    padding:20px;
-    color:#e6f7f5;
-}
-
-.modal_header{
-    font-size:18px;
-    font-weight: 500;
-    margin-bottom: 10px;
-}
-
-p{
-    color:#e6f7f5;
-
-    font-size: 12px;
-    font-weight: 400;
-    
-}
-
-.line{
-    margin:20px 0;
-    border: 1px solid #303030;
-}
-
-.buttons{
-    display: flex;
-    justify-content: flex-end;
-}
-
-.cancel{
-    padding: 8px 14px;
-    background: #6f6ff1;
-    cursor: pointer;
+/* Actions button (optional) */
+button.btn-action {
+    background-color: #db524b; /* Red for delete */
+    color: white;
+    padding: 5px 10px;
     border: none;
-    outline: none;
-    border-radius: 8px;
-    font-size: 18px;
-}
-
-#confirmDelete{
-    padding: 8px 14px;
-    background: #f04438;
-    margin-left: 8px;
+    border-radius: 5px;
     cursor: pointer;
-    border: none;
-    outline: none;
-    border-radius: 8px;
-    font-size: 18px;
-}
-
-.modal .active{
-    display: block;
-}
-
- */
-
-
- /* Modal container */
-.modal {
-    width: 450px;
-    background: #2c2c2c;
-    border-radius: 12px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
-    padding: 20px;
-    transition: all 0.3s ease-in-out;
-    transform: scale(0.9);
-    opacity: 0;
-    display: none;
-    animation: fadeIn 0.3s forwards;
-}
-
-/* Modal body */
-.modal_body {
-    padding: 20px;
-    color: #e6f7f5;
-}
-
-/* Modal header */
-.modal_header {
-    font-size: 20px;
-    font-weight: 600;
-    margin-bottom: 15px;
-    color: #f7f7f7;
-}
-
-/* Paragraph text */
-p {
-    color: #b8b8b8;
     font-size: 14px;
-    font-weight: 400;
+    margin-right: 5px;
 }
 
-/* Line separator */
-.line {
-    margin: 20px 0;
-    border: 1px solid #444;
+button.btn-action:hover {
+    background-color: #c84943;
 }
 
-/* Buttons container */
-.buttons {
-    display: flex;
-    justify-content: flex-end;
-}
-
-/* Cancel button */
-.cancel {
-    padding: 10px 18px;
-    background: #6f6ff1;
-    cursor: pointer;
-    border: none;
-    outline: none;
-    border-radius: 8px;
-    font-size: 18px;
+button.btn-update {
+    background-color: #11837a; /* Green for update */
     color: white;
-    transition: background 0.3s;
-}
-
-.cancel:hover {
-    background: #5a5be6;
-}
-
-/* Confirm button */
-#confirmDelete {
-    padding: 10px 18px;
-    background: #f04438;
-    margin-left: 12px;
-    cursor: pointer;
+    padding: 5px 10px;
     border: none;
-    outline: none;
-    border-radius: 8px;
-    font-size: 18px;
-    color: white;
-    transition: background 0.3s;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
 }
 
-#confirmDelete:hover {
-    background: #d43f2d;
+button.btn-update:hover {
+    background-color: #0f766e;
 }
 
-/* Modal active state */
-.modal .active {
-    display: block;
-    opacity: 1;
-    transform: scale(1);
+/* Optional: Add padding to image cells if necessary */
+td img {
+    max-width: 60px;
+    max-height: 60px;
+    border-radius: 4px;
 }
 
-/* Fade-in animation */
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-        transform: scale(0.9);
+/* Add responsive design */
+@media (max-width: 768px) {
+    .container {
+        padding: 10px;
     }
-    to {
-        opacity: 1;
-        transform: scale(1);
+
+    th, td {
+        padding: 10px;
+    }
+
+    h1 {
+        font-size: 1.5rem;
     }
 }

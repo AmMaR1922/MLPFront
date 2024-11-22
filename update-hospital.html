@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update Hospital</title>
+    <link rel="stylesheet" href="css/hospital.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Update Hospital</h1>
+        <form id="updateHospitalForm">
+            <input type="hidden" id="hospitalId">
+            
+            <div class="form-group">
+                <label for="hospitalName">Name</label>
+                <input type="text" id="hospitalName" placeholder="Enter hospital name" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="hospitalAddress">Address</label>
+                <input type="text" id="hospitalAddress" placeholder="Enter hospital address" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="hospitalCity">City</label>
+                <input type="text" id="hospitalCity" placeholder="Enter hospital city" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="hospitalCountry">Country</label>
+                <input type="text" id="hospitalCountry" placeholder="Enter hospital country" required>
+            </div>
+            
+            <div class="form-group" hidden>
+                <label for="imageURL">Image URL</label>
+                <input type="text" id="imageURL" placeholder="Enter image URL" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="hospitalImage">Hospital Image</label>
+                <input type="file" id="hospitalImage" accept="image/*">
+            </div>
+
+            <button type="submit">Update Hospital</button>
+        </form>
+    </div>
+
+    <script src="js/update-hospital.js"></script>
+</body>
+</html>

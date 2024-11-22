@@ -3,122 +3,32 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hospitals</title>
     <link rel="stylesheet" href="css/hospital.css">
+    <title>Hospital List</title>
 </head>
 <body>
+    <div class="container">
+        <h1>Hospital List</h1>
 
-<!-- Success Message -->
-<div id="responseMessage" class="alert" style="display:none;"></div>
-
-<div class="container">
-    <h1>Hospitals</h1>
-
-    <div class="table-container">
-
-    <!-- Table to display the hospitals -->
-    <table id="hospitalTable">
-        <thead>
-            <tr>
-                <th>Picture</th>
-                <th>Name</th>
-                <th>Address</th>
-                <th>City</th>
-                <th>Country</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        
-        <!-- ********Modal******** -->
-
-        <!-- <div class="modal" id="modal">
-            <div class="modal-body">
-                <div class="modal-header">
-                    <h1 class="modal-title">Delete Hospital</h1>
-                </div>
-                <p>Are you sure you want to delete this hospital?</p>
-                <div class="line"></div>
-                <div class="buttons">
-                    <button id="cancel" class="cancel">Cancel</button>
-                    <button id="confirmDelete" class="btn btn-danger">Delete</button>
-                </div>
-            </div>
-        </div> -->
-
-        
-            
-            
-
-        <tbody id="hospitalList"></tbody>
-    </table>
-</div>
-
-
-
-    <!-- Add Hospital Button (Moved below the table and inside the form) -->
-    <button class="btn" id="addHospitalBtn" style="margin-top: 20px;">Add New Hospital</button>
-
-    <!-- Add Hospital Form -->
-
-    <div id="addHospitalForm" class="form-container">
-        <form id="hospitalForm">
-            <h2>Add New Hospital</h2>
-            <input type="text" id="name" placeholder="Hospital Name" required />
-            <input type="text" id="address" placeholder="Address" required />
-            <input type="text" id="city" placeholder="City" required />
-            <input type="text" id="country" placeholder="Country" required />
-            
-            <!-- image -->
-
-            <div class="custom-file-upload">
-                <label for="fileUpload" class="file-upload-label">
-                    <span class="file-icon"><i class="fa fa-cloud-upload-alt"></i></span>
-                    <span class="file-text">Drag & drop or click to upload</span>
-                </label>
-                <input type="file" id="fileUpload" accept="image/*" />
-            </div>
-
-
-            <!-- <div class="form-group custom-file-upload">
-                <label for="fileUpload" class="file-upload-label">
-                    <span class="file-icon"><i class="fa fa-cloud-upload-alt"></i></span>
-                    <span class="file-text">Choose a new image</span>
-                </label>
-                <input type="file" id="fileUpload" accept="image/*" required />
-            </div> -->
-            <!-- <input type="hidden" id="hospitalId" value="12345" /> -->
-
-
-
-            
-            <button class="btn" type="submit">Add Hospital</button>
-        </form>
-        <button class="btn" id="closeFormBtn">Cancel</button>
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Image</th>
+                        <th>Name</th>
+                        <th>Address</th>
+                        <th>City</th>
+                        <th>Country</th>
+                        <th>Actions</th> <!-- Optional if actions are included -->
+                    </tr>
+                </thead>
+                <tbody id="hospitalList">
+                    <!-- Hospital rows will be dynamically added -->
+                </tbody>
+            </table>
+        </div>
     </div>
 
-    <!-- Update Hospital Form (Hidden initially) -->
-    <div id="updateHospitalForm" class="form-container" style="display:none;">
-        <form id="updateHospitalFormDetails">
-            <h2>Update Hospital</h2>
-            <input type="text" id="updateName" placeholder="Hospital Name" required />
-            <input type="text" id="updateAddress" placeholder="Address" required />
-            <input type="text" id="updateCity" placeholder="City" required />
-            <input type="text" id="updateCountry" placeholder="Country" required />
-
-            <div class="custom-file-upload">
-                <label for="UpdateFileUpload" class="file-upload-label">
-                    <span class="file-icon"><i class="fa fa-cloud-upload-alt"></i></span>
-                    <span class="file-text">Drag & drop or click to upload</span>
-                </label>
-                <input type="file" id="UpdateFileUpload" accept="image/*" />
-            </div>
-
-            <button class="btn" type="submit">Update Hospital</button>
-        </form>
-        <button class="btn" id="closeUpdateFormBtn">Cancel</button>
-    </div>
-</div>
-
-<script src="js/hospital.js"></script>
+    <script src="/js/hospital.js"></script>
 </body>
 </html>
