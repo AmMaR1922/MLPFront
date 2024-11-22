@@ -4,7 +4,7 @@ function updateUserInfo() {
     if (userData) {
         const { username, hospitalName } = JSON.parse(userData);
         document.getElementById('username').textContent = username;
-        document.getElementById('hospitalName').textContent = hospitalName;
+        document.getElementById('hospitalNameHeader').textContent = hospitalName;
     } else {
         window.location.href = 'index.html';
     }
