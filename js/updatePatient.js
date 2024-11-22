@@ -88,6 +88,7 @@ async function handleUpdatePatient(event, patientName) {
 
         if (response.ok) {
             alert('Patient updated successfully!');
+            window.location.href = '/patient.html';  // Redirect after successful update
         } else {
             const errorDetails = await response.json();
             alert(`Failed to update patient: ${errorDetails.title}`);
