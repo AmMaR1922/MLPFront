@@ -7,6 +7,29 @@
     <link rel="stylesheet" href="css/patient.css">
 </head>
 <body>
+
+        <!-- Header -->
+        <header class="header">
+            <div class="header-content">
+                <div class="header-left">
+                    <div class="logo">
+                        <div class="login-logo">
+                            <i class="fa-regular fa-hospital" style="color: #ffffff;"></i>
+                        </div>
+                    </div>
+                    <div class="user-info">
+                        <h1>Welcome, <span id="username">Loading...</span></h1>
+                        <p id="hospitalNameHeader">Loading...</p>
+                    </div>
+                </div>
+                <button class="logout-btn" onclick="handleLogout()">
+                    <i class="fa-solid fa-arrow-right-from-bracket" style="color: #000000;"></i>
+                    Logout
+                </button>
+            </div>
+        </header>
+
+
     <div class="patient-container">
         <h2>Patients Sorted based on blood pressure</h2>
 

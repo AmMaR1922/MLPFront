@@ -30,7 +30,7 @@ async function fetchPatients() {
     patients.sort((a, b) => {
         const bpA = a.lastBiologicalIndicator?.bloodPressure ?? 0; // Handle missing data with `??`
         const bpB = b.lastBiologicalIndicator?.bloodPressure ?? 0;
-        return bpB - bpA; // Ascending order
+        return bpB - bpA; // Descending order
     });
 
     renderPatients(patients);
