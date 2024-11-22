@@ -39,7 +39,6 @@ function fetchHospitalDetails(hospitalId) {
             document.getElementById('hospitalAddress').value = hospital.address;
             document.getElementById('hospitalCity').value = hospital.city;
             document.getElementById('hospitalCountry').value = hospital.country;
-            document.getElementById('imageURL').value = hospital.imageURL;
         })
         .catch(error => {
             console.error('Error fetching hospital details:', error);
@@ -56,7 +55,6 @@ function updateHospital(event) {
     const hospitalAddress = document.getElementById('hospitalAddress').value;
     const hospitalCity = document.getElementById('hospitalCity').value;
     const hospitalCountry = document.getElementById('hospitalCountry').value;
-    const imageURL = document.getElementById('imageURL').value;
     const hospitalImage = document.getElementById('hospitalImage').files[0]; // File input
 
     const token = getAuthToken();
@@ -71,7 +69,6 @@ function updateHospital(event) {
     formData.append('address', hospitalAddress);
     formData.append('city', hospitalCity);
     formData.append('country', hospitalCountry);
-    formData.append('imageURL', imageURL);
 
     if (hospitalImage) {
         formData.append('hospitalImage', hospitalImage); // Append the hospital image if available
@@ -88,12 +85,14 @@ function updateHospital(event) {
             if (!response.ok) {
                 throw new Error(`Failed to update hospital. Status: ${response.status}`);
             }
-            alert('Hospital updated successfully.');
-            window.location.href = '/'; // Redirect to the main page or hospital list
+            document.getElementById('responseMessage').innerHTML = 'Hospital updated successfully!';
+            setTimeout(() => {
+                window.location.href = '/'; // Redirect to the main page after a short delay
+            }, 2000); // Redirect after 2 seconds
         })
         .catch(error => {
             console.error('Error updating hospital:', error);
-            alert('Failed to update hospital.');
+            document.getElementById('responseMessage').innerHTML = 'Failed to update hospital.';
         });
 }
 
@@ -109,5 +108,5 @@ window.onload = function () {
     }
 
     // Attach form submission handler
-    document.getElementById('updateHospitalForm').addEventListener('submit', updateHospital);
+    document.getElementById('hospitalForm').addEventListener('submit', updateHospital);
 };
