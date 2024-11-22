@@ -9,6 +9,7 @@
     left: 0;
     width: 100%; /* Ensure it spans the full width of the page */
     z-index: 999; /* Ensure*/
+    
 }
 
 .header-content {

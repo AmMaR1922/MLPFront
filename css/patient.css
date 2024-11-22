@@ -125,3 +125,7 @@ button[type="button"] {
 button[type="button"]:hover {
     background: #5a6268;
 }
+
+.healthState{
+    color: #db524b !important; 
+}
