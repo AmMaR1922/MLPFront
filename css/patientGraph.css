@@ -1,3 +1,4 @@
+/* General Styles */
 body {
     font-family: Arial, sans-serif;
     text-align: center;
@@ -6,6 +7,7 @@ body {
     padding: 0;
 }
 
+/* Header Styling */
 header {
     background-color: #007bff;
     color: white;
@@ -13,6 +15,7 @@ header {
     margin-bottom: 1em;
 }
 
+/* Button Container */
 .button-container {
     margin: 2em 0;
 }
@@ -24,23 +27,36 @@ button {
     border: none;
     border-radius: 5px;
     cursor: pointer;
+    color: white;
 }
 
 button:hover {
     background-color: #0056b3;
-    color: white;
+}
+
+/* Navigation Buttons */
+#backToDashboardBtn {
+    background-color: #dc3545;
+}
+
+#addViewPatientBtn {
+    background-color: #28a745;
 }
 
 .navigation-container {
     margin-top: 3em;
 }
 
-#backToDashboardBtn {
-    background-color: #dc3545;
-    color: white;
-}
+/* Canvas for Chart */
 
-#addViewPatientBtn {
-    background-color: #28a745;
-    color: white;
+
+
+canvas {
+    width: 80%; /* Medium width */
+    height:40%; /* Medium height */
+    margin-top: 10px;
+    margin-bottom:100px ;
+    margin-left:100px ;
+    margin-right:100px ; /* Center it with margin */
+    display: block; /* Ensures it stays aligned */
 }
