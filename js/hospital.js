@@ -80,7 +80,7 @@ function deleteHospital(hospitalId) {
         }
 
         fetch(`https://anteshnatsh.tryasp.net/api/Hospital/DeleteHospital/${hospitalId}`, {
-            method: 'DELETE',
+            method: 'POST',
             headers: {
                 'Authorization': `Bearer ${token}`,
                 'Content-Type': 'application/json',

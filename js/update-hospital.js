@@ -107,7 +107,7 @@ function updateHospital(event) {
             throw new Error(`Failed to update hospital. Status: ${response.status} - ${text}`);
         }
         alert('Hospital updated successfully.');
-        window.location.href = '/';  // Redirect after successful update
+        window.location.href = 'hospital.html';  // Redirect after successful update
     }))
     .catch(error => {
         console.error('Error updating hospital:', error);  // Log errors
