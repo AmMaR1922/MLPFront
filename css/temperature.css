@@ -1,0 +1,64 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f8f9fa;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+}
+
+header {
+    background-color: #007bff;
+    color: white;
+    padding: 1.5em 0;
+    margin-bottom: 1em;
+}
+
+#charts-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1.5em;
+    padding: 1em;
+}
+
+.chart-card {
+    background-color: white;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    width: 400px;
+    padding: 1em;
+    text-align: center;
+}
+
+canvas {
+    max-width: 100%;
+    height: auto;
+}
+
+footer {
+    margin-top: 2em;
+}
+
+button {
+    padding: 0.5em 1em;
+    margin: 0.5em;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#backBtn {
+    background-color: #dc3545;
+    color: white;
+}
+
+#refreshBtn {
+    background-color: #1b4525;
+    color: white;
+}
+
+button:hover {
+    opacity: 0.9;
+}
