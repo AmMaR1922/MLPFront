@@ -140,52 +140,138 @@ document.addEventListener('DOMContentLoaded', function () {
 
             // Create the Chart.js line chart with the dynamic data
             const bloodPressureChart = new Chart(ctx, {
-                type: 'line',  // Type of chart: Line chart for continuous data
+                type: 'line', // Line chart
                 data: {
-                    labels: timeLabels,  // Dynamic time (X-axis) labels (converted to timestamps)
+                    labels: timeLabels, // Dynamic time (X-axis) labels
                     datasets: [{
                         label: 'Blood Pressure (mmHg)',
-                        data: bloodPressureValues,  // Dynamic blood pressure values (Y-axis)
-                        borderColor: 'rgba(75, 192, 192, 1)',  // Line color
-                        fill: false,  // No fill under the line
-                        tension: 0.1,  // Smooth the line
+                        data: bloodPressureValues, // Blood pressure values (Y-axis)
+                        borderColor: 'rgba(75, 192, 192, 1)', // Line color
+                        backgroundColor: 'rgba(75, 192, 192, 0.2)', // Gradient fill under the line
+                        pointBackgroundColor: 'rgba(75, 192, 192, 1)', // Point color
+                        pointBorderColor: '#fff', // Point border color
+                        pointHoverBackgroundColor: '#fff', // Hover point color
+                        pointHoverBorderColor: 'rgba(75, 192, 192, 1)', // Hover point border color
                         borderWidth: 2,
+                        tension: 0.3, // Smooth curve
+                        fill: true, // Fill under the line
                     }]
                 },
                 options: {
+                    responsive: true, // Adjusts chart size for different screen sizes
+                    maintainAspectRatio: false, // Better for embedded charts
+                    plugins: {
+                        title: {
+                            display: true,
+                            text: 'Blood Pressure Trends Over Time', // Chart title
+                            color: '#333', // Title color
+                            font: {
+                                size: 20, // Font size
+                                weight: 'bold', // Font weight
+                                family: 'Arial' // Font family
+                            },
+                            padding: {
+                                top: 10,
+                                bottom: 30
+                            }
+                        },
+                        legend: {
+                            display: true, // Show legend
+                            labels: {
+                                color: '#555', // Legend text color
+                                font: {
+                                    size: 12, // Font size for legend
+                                    family: 'Arial'
+                                },
+                                padding: 10
+                            },
+                            position: 'top'
+                        },
+                        tooltip: {
+                            enabled: true, // Show tooltips
+                            backgroundColor: 'rgba(0, 0, 0, 0.8)', // Tooltip background
+                            titleColor: '#fff', // Tooltip title color
+                            bodyColor: '#fff', // Tooltip body text color
+                            padding: 10,
+                            callbacks: {
+                                title: function (tooltipItem) {
+                                    return 'Date: ' + tooltipItem[0].label; // Show the date as the tooltip title
+                                },
+                                label: function (context) {
+                                    let label = context.dataset.label || '';
+                                    if (label) {
+                                        label += ': ';
+                                    }
+                                    label += context.raw + ' mmHg'; // Tooltip data value
+                                    return label;
+                                }
+                            }
+                        }
+                    },
+                    layout: {
+                        padding: {
+                            left: 20,
+                            right: 20,
+                            top: 10,
+                            bottom: 10
+                        }
+                    },
                     scales: {
                         x: {
-                            type: 'time',  // The X-axis will be based on time (date/timestamp)
+                            type: 'time', // X-axis as a time scale
                             position: 'bottom',
                             title: {
                                 display: true,
-                                text: 'Date',  // Title for X-axis
+                                text: 'Date',
+                                color: '#333', // Axis title color
+                                font: {
+                                    size: 14,
+                                    family: 'Arial'
+                                }
                             },
                             time: {
-                                unit: 'day',  // Time unit for the X-axis (you can change to 'hour', 'minute', etc.)
-                                tooltipFormat: 'll',  // Tooltip format (long date format)
+                                unit: 'day', // Display dates as days
+                                tooltipFormat: 'MMM dd, yyyy', // Tooltip format for date
                                 displayFormats: {
-                                    day: 'MMM dd, yyyy',  // Label format on the X-axis
-                                },
+                                    day: 'MMM dd' // X-axis label format
+                                }
+                            },
+                            grid: {
+                                color: 'rgba(200, 200, 200, 0.2)' // Grid line color
                             },
                             ticks: {
-                                autoSkip: true,
-                                maxTicksLimit: 10,
+                                color: '#555', // X-axis tick color
+                                font: {
+                                    size: 12
+                                }
                             }
                         },
                         y: {
-                            beginAtZero: false,  // Do not force the Y-axis to start at zero
+                            beginAtZero: false, // Don't force Y-axis to start at zero
                             title: {
                                 display: true,
-                                text: 'Blood Pressure (mmHg)',  // Y-axis title
+                                text: 'Blood Pressure (mmHg)',
+                                color: '#333',
+                                font: {
+                                    size: 14,
+                                    family: 'Arial'
+                                }
                             },
                             ticks: {
-                                stepSize: 10,  // Spacing of tick marks on the Y-axis
+                                stepSize: 10,
+                                color: '#555', // Y-axis tick color
+                                font: {
+                                    size: 12
+                                }
+                            },
+                            grid: {
+                                color: 'rgba(200, 200, 200, 0.2)' // Grid line color
                             }
                         }
                     }
                 }
             });
+            
         } else {
             console.error('Invalid data format or empty data received from the API.');
         }
