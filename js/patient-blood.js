@@ -115,7 +115,7 @@ document.addEventListener('DOMContentLoaded', function () {
     // Replace with your actual token
 
     // Your API URL (GET request)
-    const apiUrl = 'https://anteshnatsh.tryasp.net/api/Patient/GetAllBiologicalIndicator'; // Replace with your actual API URL
+    const apiUrl = 'https://anteshnatsh.tryasp.net/api/Patient/GetAllCritical'; // Replace with your actual API URL
 
     // Create the GET request with headers
     fetch(apiUrl, {
@@ -131,21 +131,40 @@ document.addEventListener('DOMContentLoaded', function () {
         console.log(data);  // Log the data to see the structure
         
         if (Array.isArray(data) && data.length > 0) {
-            // Process the response to extract time (date) and blood pressure values
-            const sortedData = data.sort((a, b) => new Date(a.date) - new Date(b.date));
+            // Create an empty object to track date counts
+            const dateCounts = {};
+        
+            // Iterate over the data
+            data.forEach(item => {
+                const date = item.date;  // Access the date
+                const patients = item.patients;  // Access the patients array
+        
+                // Filter patients with blood pressure > 120
+                const highBPCount = patients.filter(patient => patient.lastBiologicalIndicator.bloodPressure > 120).length;
+        
+                if (highBPCount > 0) {
+                    dateCounts[date] = highBPCount;  // Store the count of patients for the given date
+                }
+            });
+        
+            // Convert dateCounts to an array of [date, count] pairs
+            const sortedDateCounts = Object.entries(dateCounts)
+                .sort((a, b) => new Date(a[0]) - new Date(b[0]));  // Sort by date
+        
+            // Prepare sorted timeLabels and Count arrays
+            const timeLabels = sortedDateCounts.map(item => item[0]);  // Extract the sorted dates
+            const Count = sortedDateCounts.map(item => item[1]);  
 
-            // Process the sorted data to extract time and blood pressure values
-            const timeLabels = sortedData.map(item => item.date);  // Extract date from the sorted data
-            const bloodPressureValues = sortedData.map(item => item.bloodPressure);  
 
+// Extract blood pressure values
             // Create the Chart.js line chart with the dynamic data
             const bloodPressureChart = new Chart(ctx, {
                 type: 'line', // Line chart
                 data: {
                     labels: timeLabels, // Dynamic time (X-axis) labels
                     datasets: [{
-                        label: 'Blood Pressure (mmHg)',
-                        data: bloodPressureValues, // Blood pressure values (Y-axis)
+                        label: 'Count',
+                        data: Count, // Blood pressure values (Y-axis)
                         borderColor: 'rgba(75, 192, 192, 1)', // Line color
                         backgroundColor: 'rgba(75, 192, 192, 0.2)', // Gradient fill under the line
                         pointBackgroundColor: 'rgba(75, 192, 192, 1)', // Point color
