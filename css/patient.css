@@ -1,4 +1,9 @@
-/* General Styles */
+
+
+
+
+
+
 body {
     font-family: 'Arial', sans-serif;
     margin: 0;
@@ -14,6 +19,7 @@ body {
 
 /* Container for Patient Page */
 .patient-container {
+    margin-top: 100px;
     background: white;
     border-radius: 1.5rem;
     padding: 2.5rem;
@@ -125,3 +131,82 @@ button[type="button"] {
 button[type="button"]:hover {
     background: #5a6268;
 }
+
+
+/* General Styles */
+
+
+.header {
+    background: white;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    padding: 1rem;
+    display: block;
+    position: fixed; /* Keep the header at the top */
+    top: 0; /* Align it to the top of the page */
+    left: 0;
+    width: 100%; /* Ensure it spans the full width of the page */
+    z-index: 999; /* Ensure*/
+    
+}
+
+.header-content {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.header-left {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.logo {
+    background-color: #0d9488;
+    padding: 0.5rem;
+    border-radius: 0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.logo i {
+    color: white;
+    font-size: 1.5rem;
+}
+
+.user-info h1 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: #1a1a1a;
+}
+
+.user-info p {
+    font-size: 0.875rem;
+    color: #666;
+}
+
+.logout-btn {
+    font-size: 15px; /* Increase the font size */
+    padding: 12px 15px; /* Adjust the padding to make it larger */
+    border-radius: 8px; /* Optional: round the corners of the button */
+    background-color: #f0f0f0 !important; /* Optional: background color */
+    border: none; /* Remove border */
+    cursor: pointer;
+    color:#1a1a1a;
+    display: inline-flex; /* Make it an inline flex container */
+    align-items: center; /* Vertically center the icon and text */
+    gap: 10px; /* Space between icon and text */
+}
+
+.logout-btn i {
+    font-size: 24px; /* Increase the size of the icon */
+}
+
+.logout-btn:hover {
+    background-color: #dcdcdc !important; /* Optional: hover effect */
+}
+
