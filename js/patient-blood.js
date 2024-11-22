@@ -138,7 +138,7 @@ document.addEventListener('DOMContentLoaded', function () {
             data.forEach(item => {
                 const date = item.date;  // Access the date
                 const patients = item.patients;  // Access the patients array
-        
+                
                 // Filter patients with blood pressure > 120
                 const highBPCount = patients.filter(patient => patient.lastBiologicalIndicator.bloodPressure > 120).length;
         
@@ -155,7 +155,7 @@ document.addEventListener('DOMContentLoaded', function () {
             const timeLabels = sortedDateCounts.map(item => item[0]);  // Extract the sorted dates
             const Count = sortedDateCounts.map(item => item[1]);  
 
-
+            
 // Extract blood pressure values
             // Create the Chart.js line chart with the dynamic data
             const bloodPressureChart = new Chart(ctx, {
@@ -221,7 +221,7 @@ document.addEventListener('DOMContentLoaded', function () {
                                     if (label) {
                                         label += ': ';
                                     }
-                                    label += context.raw + ' mmHg'; // Tooltip data value
+                                    label += context.raw + ' Patients'; // Tooltip data value
                                     return label;
                                 }
                             }
@@ -269,7 +269,7 @@ document.addEventListener('DOMContentLoaded', function () {
                             beginAtZero: false, // Don't force Y-axis to start at zero
                             title: {
                                 display: true,
-                                text: 'Blood Pressure (mmHg)',
+                                text: 'Count of Patients',
                                 color: '#333',
                                 font: {
                                     size: 14,
