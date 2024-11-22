@@ -1,0 +1,46 @@
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    background-color: #f8f9fa;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    background-color: #007bff;
+    color: white;
+    padding: 1em 0;
+    margin-bottom: 1em;
+}
+
+.button-container {
+    margin: 2em 0;
+}
+
+button {
+    padding: 1em 2em;
+    margin: 1em;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #0056b3;
+    color: white;
+}
+
+.navigation-container {
+    margin-top: 3em;
+}
+
+#backToDashboardBtn {
+    background-color: #dc3545;
+    color: white;
+}
+
+#addViewPatientBtn {
+    background-color: #28a745;
+    color: white;
+}
