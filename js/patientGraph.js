@@ -68,6 +68,9 @@ let patientChart = new Chart(ctx, {
                 }
             },
             y: {
+                grid: {
+                    display: false // Disable grid lines on the y-axis
+                },
                 title: {
                     display: true,
                     text: "Count",

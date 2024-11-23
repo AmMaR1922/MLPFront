@@ -55,8 +55,8 @@ canvas {
     width: 80%; /* Medium width */
     height:40%; /* Medium height */
     margin-top: 10px;
-    margin-bottom:100px ;
-    margin-left:100px ;
-    margin-right:100px ; /* Center it with margin */
+    margin-bottom:150px ;
+    margin-left:150px ;
+    margin-right:150px ; /* Center it with margin */
     display: block; /* Ensures it stays aligned */
 }
