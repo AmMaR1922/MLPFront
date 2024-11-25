@@ -10,10 +10,10 @@ gradientFill.addColorStop(1, "rgba(89, 141, 143,0)");
 let patientChart = new Chart(ctx, {
     type: "line",
     data: {
-        labels: [],
+        labels: [], // X-axis labels (dates will be formatted here)
         datasets: [{
             label: "Patient Count",
-            data: [],
+            data: [], // Y-axis data (patient counts)
             borderColor: "rgb(89, 141, 143)",
             backgroundColor: gradientFill,
             borderWidth: 3,
@@ -35,7 +35,7 @@ let patientChart = new Chart(ctx, {
                 position: 'top',
                 labels: {
                     font: {
-                        size:12
+                        size: 12
                     }
                 }
             },
@@ -52,6 +52,9 @@ let patientChart = new Chart(ctx, {
         },
         scales: {
             x: {
+                grid: {
+                    display: false // Disable grid lines on the x-axis
+                },
                 title: {
                     display: true,
                     text: "Date",
@@ -62,15 +65,12 @@ let patientChart = new Chart(ctx, {
                 ticks: {
                     font: {
                         size: 10
-                    }
-                    ,maxRotation: 45, // Maximum rotation in degrees
-                    minRotation: 45 
+                    },
+                    maxRotation: 45, // Maximum rotation in degrees
+                    minRotation: 45 // Minimum rotation in degrees
                 }
             },
             y: {
-                grid: {
-                    display: false // Disable grid lines on the y-axis
-                },
                 title: {
                     display: true,
                     text: "Count",
@@ -87,8 +87,6 @@ let patientChart = new Chart(ctx, {
         }
     }
 });
-
-
 
 // Fetch Data and Update Chart
 async function fetchData() {
@@ -121,8 +119,14 @@ async function fetchData() {
 
 // Update the Chart with new data
 function updateGraph(dates, counts) {
-    patientChart.data.labels = dates;
-    patientChart.data.datasets[0].data = counts;
+    // Format dates to ensure proper parsing and display
+    const formattedDates = dates.map(dateString => {
+        const date = new Date(dateString); // Parse the date string into a Date object
+        return `${date.getDate()} ${date.toLocaleString('default', { month: 'short' })}`; // Format to "DD MMM"
+    });
+
+    patientChart.data.labels = formattedDates; // Pass formatted dates to labels
+    patientChart.data.datasets[0].data = counts; // Set patient counts
     patientChart.update();
 }
 
