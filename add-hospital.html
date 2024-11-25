@@ -22,10 +22,24 @@
                     <p id="hospitalNameHeader">Loading...</p>
                 </div>
             </div>
-            <button class="logout-btn" onclick="handleLogout()">
-                <i class="fa-solid fa-arrow-right-from-bracket" style="color: #000000;"></i>
-                Logout
-            </button>
+
+            <div class="header-buttons">
+                <!-- Patient Button -->
+                <button class="header-btn" onclick="navigateTo('Patient')">
+                    <i class="lucide-users"></i>
+                    Add/View Patients
+                </button>
+                <!-- Hospital Button -->
+                <button class="header-btn" onclick="navigateTo('Hospital')">
+                    <i class="lucide-hospital"></i>
+                    Add/View Hospitals
+                </button>
+                <!-- Logout Button -->
+                <button class="logout-btn" onclick="handleLogout()">
+                    <i class="fa-solid fa-arrow-right-from-bracket" style="color: #000000;"></i>
+                    Logout
+                </button>
+            </div>
         </div>
     </header>
 

@@ -7,8 +7,7 @@
     <link rel="stylesheet" href="css/dashboard.css">
     <!-- <link href="https://unpkg.com/lucide-static/font/lucide.css" rel="stylesheet">  -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.0/css/all.min.css" integrity="sha512-9xKTRVabjVeZmc+GUW8GgSmcREDunMM+Dt/GrzchfN8tkwHizc5RP4Ok/MXFFy5rIjJjzhndFScTceq5e6GvVQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-
-</head>
+</head>   
 <body>
     <div class="app-container">
         <!-- Header -->
@@ -25,10 +24,24 @@
                         <p id="hospitalNameHeader">Loading...</p>
                     </div>
                 </div>
-                <button class="logout-btn" onclick="handleLogout()">
-                    <i class="fa-solid fa-arrow-right-from-bracket" style="color: #000000;"></i>
-                    Logout
-                </button>
+
+                <div class="header-buttons">
+                    <!-- Patient Button -->
+                    <button class="header-btn" onclick="navigateTo('Patient')">
+                        <i class="lucide-users"></i>
+                        Add/View Patients
+                    </button>
+                    <!-- Hospital Button -->
+                    <button class="header-btn" onclick="navigateTo('Hospital')">
+                        <i class="lucide-hospital"></i>
+                        Add/View Hospitals
+                    </button>
+                    <!-- Logout Button -->
+                    <button class="logout-btn" onclick="handleLogout()">
+                        <i class="fa-solid fa-arrow-right-from-bracket" style="color: #000000;"></i>
+                        Logout
+                    </button>
+                </div>
             </div>
         </header>
 
