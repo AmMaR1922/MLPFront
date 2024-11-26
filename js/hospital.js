@@ -47,9 +47,11 @@ function displayHospitals(hospitals) {
                         max-width: 60px;
                         max-height: 60px;
                         border-radius: 50%;
+                        overflow: hidden; 
                         object-fit: cover;
                         vertical-align: middle;
-                        margin-right: 10px;">
+                        margin-right: 10px;
+                        ">
                 </td>
                 <td>${hospital.name}</td>
                 <td>${hospital.address}</td>
