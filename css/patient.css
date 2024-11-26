@@ -91,10 +91,10 @@ body {
 .yellow-sign {
     width: 10px;
     height: 10px;
-    border-radius: 50%;
     background-color: yellow;
-    margin-right: 5px;
+    border-radius: 50%;
     display: inline-block;
+    margin-right: 5px;
 }
 
 /* Container for Patient Page */

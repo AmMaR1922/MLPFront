@@ -31,12 +31,14 @@ async function fetchPatients() {
 
 // Render the patients in the table
 function renderPatients(patients) {
-    // Sort patients by healthCondition (At Risk > Unhealthy > Healthy > null)
-    const healthOrder = ['At Risk', 'Unhealthy', 'Healthy', null];
+    // Sort patients by healthCondition (At Risk > Unhealthy > Healthy > Unspecified)
+    const healthOrder = ['At Risk', 'Unhealthy', 'Healthy', 'Unspecified'];
     
     patients.sort((a, b) => {
-        const aConditionIndex = healthOrder.indexOf(a.lastBiologicalIndicator?.healthCondition || null);
-        const bConditionIndex = healthOrder.indexOf(b.lastBiologicalIndicator?.healthCondition || null);
+        const aCondition = a.lastBiologicalIndicator?.healthCondition || 'Unspecified';
+        const bCondition = b.lastBiologicalIndicator?.healthCondition || 'Unspecified';
+        const aConditionIndex = healthOrder.indexOf(aCondition);
+        const bConditionIndex = healthOrder.indexOf(bCondition);
         return aConditionIndex - bConditionIndex;
     });
 
@@ -53,10 +55,10 @@ function renderPatients(patients) {
             </thead>
             <tbody>
                 ${patients.map(patient => {
-                    const condition = patient.lastBiologicalIndicator?.healthCondition;
+                    const condition = patient.lastBiologicalIndicator?.healthCondition || 'Unspecified';
                     const isAtRisk = condition === 'At Risk';
                     const isHealthy = condition === 'Healthy';
-                    const isUnspecified = condition === null; // For null condition
+                    const isUnspecified = condition === 'Unspecified';
 
                     return `
                     <tr>
@@ -65,7 +67,7 @@ function renderPatients(patients) {
                             ${isAtRisk ? '<span class="red-sign"></span>' : ''}
                             ${isHealthy ? '<span class="green-sign"></span>' : ''}
                             ${isUnspecified ? '<span class="yellow-sign"></span>' : ''}
-                            ${condition ?? 'Unspecified'}
+                            ${condition}
                         </td>
                         <td>${getHospitalName(patient.hospitalId)}</td>
                         <td>
@@ -101,7 +103,7 @@ async function deletePatient(patientId) {
         });
 
         if (response.ok) {
-            // If delete is successful, re-fetch patients and update the table
+            
             alert('Patient deleted successfully!');
             fetchPatients();
         } else {
