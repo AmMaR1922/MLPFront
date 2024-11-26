@@ -31,12 +31,12 @@ async function fetchPatients() {
 
 // Render the patients in the table
 function renderPatients(patients) {
-    // Sort patients by healthCondition (At Risk > Unhealthy > Healthy)
-    const healthOrder = ['At Risk', 'Unhealthy', 'Healthy'];
+    // Sort patients by healthCondition (At Risk > Unhealthy > Healthy > null)
+    const healthOrder = ['At Risk', 'Unhealthy', 'Healthy', null];
     
     patients.sort((a, b) => {
-        const aConditionIndex = healthOrder.indexOf(a.lastBiologicalIndicator.healthCondition);
-        const bConditionIndex = healthOrder.indexOf(b.lastBiologicalIndicator.healthCondition);
+        const aConditionIndex = healthOrder.indexOf(a.lastBiologicalIndicator?.healthCondition || null);
+        const bConditionIndex = healthOrder.indexOf(b.lastBiologicalIndicator?.healthCondition || null);
         return aConditionIndex - bConditionIndex;
     });
 
@@ -53,17 +53,19 @@ function renderPatients(patients) {
             </thead>
             <tbody>
                 ${patients.map(patient => {
-                    // Add red sign if the patient is "At Risk"
-                    const isAtRisk = patient.lastBiologicalIndicator.healthCondition === 'At Risk';
-                    // Add green sign if the patient is "Healthy"
-                    const isHealthy = patient.lastBiologicalIndicator.healthCondition === 'Healthy';
+                    const condition = patient.lastBiologicalIndicator?.healthCondition;
+                    const isAtRisk = condition === 'At Risk';
+                    const isHealthy = condition === 'Healthy';
+                    const isUnspecified = condition === null; // For null condition
+
                     return `
                     <tr>
                         <td>${patient.name}</td>
                         <td>
                             ${isAtRisk ? '<span class="red-sign"></span>' : ''}
                             ${isHealthy ? '<span class="green-sign"></span>' : ''}
-                            ${patient.lastBiologicalIndicator.healthCondition}
+                            ${isUnspecified ? '<span class="yellow-sign"></span>' : ''}
+                            ${condition ?? 'Unspecified'}
                         </td>
                         <td>${getHospitalName(patient.hospitalId)}</td>
                         <td>
@@ -73,7 +75,8 @@ function renderPatients(patients) {
                             <button id="delete" onclick="deletePatient('${patient.id}')">Delete</button>
                         </td>
                     </tr>
-                `}).join('')}
+                `;
+                }).join('')}
             </tbody>
         </table>
     `;

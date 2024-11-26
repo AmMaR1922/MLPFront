@@ -88,6 +88,14 @@ body {
     justify-content: center;
     min-height: 100vh;
 }
+.yellow-sign {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: yellow;
+    margin-right: 5px;
+    display: inline-block;
+}
 
 /* Container for Patient Page */
 .patient-container {
