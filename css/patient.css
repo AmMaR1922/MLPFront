@@ -4,12 +4,17 @@
     background: white;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
     padding: 1rem;
-    width:100%;
-    margin-bottom: 20px;
+    display: block;
+    position: fixed; /* Keep the header at the top */
+    top: 0; /* Align it to the top of the page */
+    left: 0;
+    width: 100%; /* Ensure it spans the full width of the page */
+    z-index: 999; /* Ensure*/
 }
 
 .header-content {
     max-width: 1280px;
+    max-height: 50px;
     margin: 0 auto;
     padding: 0 1rem;
     display: flex;
@@ -48,6 +53,8 @@
     color: #666;
 }
 
+
+
 .logout-btn {
     font-size: 15px; /* Increase the font size */
     padding: 12px 15px; /* Adjust the padding to make it larger */
@@ -81,6 +88,14 @@ body {
     justify-content: center;
     min-height: 100vh;
 }
+.yellow-sign {
+    width: 10px;
+    height: 10px;
+    background-color: yellow;
+    border-radius: 50%;
+    display: inline-block;
+    margin-right: 5px;
+}
 
 /* Container for Patient Page */
 .patient-container {
@@ -88,6 +103,7 @@ body {
     border-radius: 1.5rem;
     padding: 2.5rem;
     width: 100%;
+    margin: 100px;
     max-width: 960px;
     box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
     transform: translateY(0);
@@ -152,6 +168,7 @@ body {
     cursor: pointer;
     transition: background-color 0.3s ease;
     color: white;
+    
 }
 
 #update {
@@ -179,6 +196,24 @@ button {
     font-weight: 500;
     cursor: pointer;
     transition: all 0.2s ease;
+}
+/* Add this CSS in your existing styles */
+.red-sign {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: red;
+    margin-right: 5px; /* Space between the dot and the text */
+    display: inline-block;
+}
+
+.green-sign {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: green;
+    margin-right: 5px; /* Space between the dot and the text */
+    display: inline-block;
 }
 
 button:hover {

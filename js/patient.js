@@ -31,6 +31,17 @@ async function fetchPatients() {
 
 // Render the patients in the table
 function renderPatients(patients) {
+    // Sort patients by healthCondition (At Risk > Unhealthy > Healthy > Unspecified)
+    const healthOrder = ['At Risk', 'Unhealthy', 'Healthy', 'Unspecified'];
+    
+    patients.sort((a, b) => {
+        const aCondition = a.lastBiologicalIndicator?.healthCondition || 'Unspecified';
+        const bCondition = b.lastBiologicalIndicator?.healthCondition || 'Unspecified';
+        const aConditionIndex = healthOrder.indexOf(aCondition);
+        const bConditionIndex = healthOrder.indexOf(bCondition);
+        return aConditionIndex - bConditionIndex;
+    });
+
     const patientList = document.getElementById('patientList');
     patientList.innerHTML = `
         <table class="patient-table">
@@ -43,20 +54,31 @@ function renderPatients(patients) {
                 </tr>
             </thead>
             <tbody>
-                ${patients.map(patient => `
+                ${patients.map(patient => {
+                    const condition = patient.lastBiologicalIndicator?.healthCondition || 'Unspecified';
+                    const isAtRisk = condition === 'At Risk';
+                    const isHealthy = condition === 'Healthy';
+                    const isUnspecified = condition === 'Unspecified';
+
+                    return `
                     <tr>
                         <td>${patient.name}</td>
-                        <td>${patient.lastBiologicalIndicator.healthCondition}</td>
+                        <td>
+                            ${isAtRisk ? '<span class="red-sign"></span>' : ''}
+                            ${isHealthy ? '<span class="green-sign"></span>' : ''}
+                            ${isUnspecified ? '<span class="yellow-sign"></span>' : ''}
+                            ${condition}
+                        </td>
                         <td>${getHospitalName(patient.hospitalId)}</td>
                         <td>
-                            <button id=AddBio  onclick="window.location.href='addBio.html?patientId=${patient.id}'">Add Bio</button>
-                            <button id=ViewBio onclick="window.location.href='viewBio.html?patientName=${patient.name}'">View Bio</button>
-                            <button id=update onclick="window.location.href='updatePatient.Html?patientId=${patient.id}'">Update</button>
-                            <button id=delete onclick="deletePatient('${patient.id}')">Delete</button>
-                            
+                            <button id="AddBio" onclick="window.location.href='addBio.html?patientId=${patient.id}'">Add Bio</button>
+                            <button id="ViewBio" onclick="window.location.href='viewBio.html?patientName=${patient.name}'">View Bio</button>
+                            <button id="update" onclick="window.location.href='updatePatient.Html?patientId=${patient.id}'">Update</button>
+                            <button id="delete" onclick="deletePatient('${patient.id}')">Delete</button>
                         </td>
                     </tr>
-                `).join('')}
+                `;
+                }).join('')}
             </tbody>
         </table>
     `;
@@ -81,7 +103,7 @@ async function deletePatient(patientId) {
         });
 
         if (response.ok) {
-            // If delete is successful, re-fetch patients and update the table
+            
             alert('Patient deleted successfully!');
             fetchPatients();
         } else {

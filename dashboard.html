@@ -26,16 +26,7 @@
                 </div>
 
                 <div class="header-buttons">
-                    <!-- Patient Button -->
-                    <button class="header-btn" id="header-btn" onclick="navigateTo('Patient')">
-                        <i class="lucide-users"></i>
-                        Add/View Patients
-                    </button>
-                    <!-- Hospital Button -->
-                    <button class="header-btn" id="header-btn" onclick="navigateTo('Hospital')">
-                        <i class="lucide-hospital"></i>
-                        Add/View Hospitals
-                    </button>
+                   
                     <!-- Logout Button -->
                     <button class="logout-btn" onclick="handleLogout()">
                         <i class="fa-solid fa-arrow-right-from-bracket" style="color: #000000;"></i>
@@ -49,15 +40,15 @@
         <main class="main-content">
             <div class="dashboard-grid">
                 <!-- Patients Count Card -->
-                <div class="dashboard-card">
-                    <div class="card-icon">
+                <div class="dashboard-card" onclick="navigateTo('Patient')">
+                    <div class="card-icon" >
                         <i class="fa-solid fa-users" style="color: #4CAF50;"></i>
                     </div>
-                    <h3>Total Patients</h3>
+                    <h3 >Total Patients</h3>
                     <p id="patientCount">Loading...</p>
                 </div>
                 <!-- Hospitals Count Card -->
-                <div class="dashboard-card">
+                <div class="dashboard-card" onclick="navigateTo('Hospital')">
                     <div class="card-icon">
                         <i class="fa-solid fa-hospital" style="color: #2196F3;"></i>
                     </div>
