@@ -31,6 +31,15 @@ async function fetchPatients() {
 
 // Render the patients in the table
 function renderPatients(patients) {
+    // Sort patients by healthCondition (At Risk > Unhealthy > Healthy)
+    const healthOrder = ['At Risk', 'Unhealthy', 'Healthy'];
+    
+    patients.sort((a, b) => {
+        const aConditionIndex = healthOrder.indexOf(a.lastBiologicalIndicator.healthCondition);
+        const bConditionIndex = healthOrder.indexOf(b.lastBiologicalIndicator.healthCondition);
+        return aConditionIndex - bConditionIndex;
+    });
+
     const patientList = document.getElementById('patientList');
     patientList.innerHTML = `
         <table class="patient-table">
@@ -43,20 +52,28 @@ function renderPatients(patients) {
                 </tr>
             </thead>
             <tbody>
-                ${patients.map(patient => `
+                ${patients.map(patient => {
+                    // Add red sign if the patient is "At Risk"
+                    const isAtRisk = patient.lastBiologicalIndicator.healthCondition === 'At Risk';
+                    // Add green sign if the patient is "Healthy"
+                    const isHealthy = patient.lastBiologicalIndicator.healthCondition === 'Healthy';
+                    return `
                     <tr>
                         <td>${patient.name}</td>
-                        <td>${patient.lastBiologicalIndicator.healthCondition}</td>
+                        <td>
+                            ${isAtRisk ? '<span class="red-sign"></span>' : ''}
+                            ${isHealthy ? '<span class="green-sign"></span>' : ''}
+                            ${patient.lastBiologicalIndicator.healthCondition}
+                        </td>
                         <td>${getHospitalName(patient.hospitalId)}</td>
                         <td>
-                            <button id=AddBio  onclick="window.location.href='addBio.html?patientId=${patient.id}'">Add Bio</button>
-                            <button id=ViewBio onclick="window.location.href='viewBio.html?patientName=${patient.name}'">View Bio</button>
-                            <button id=update onclick="window.location.href='updatePatient.Html?patientId=${patient.id}'">Update</button>
-                            <button id=delete onclick="deletePatient('${patient.id}')">Delete</button>
-                            
+                            <button id="AddBio" onclick="window.location.href='addBio.html?patientId=${patient.id}'">Add Bio</button>
+                            <button id="ViewBio" onclick="window.location.href='viewBio.html?patientName=${patient.name}'">View Bio</button>
+                            <button id="update" onclick="window.location.href='updatePatient.Html?patientId=${patient.id}'">Update</button>
+                            <button id="delete" onclick="deletePatient('${patient.id}')">Delete</button>
                         </td>
                     </tr>
-                `).join('')}
+                `}).join('')}
             </tbody>
         </table>
     `;
