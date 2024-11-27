@@ -54,8 +54,8 @@ button:hover {
 canvas {
     width: 80%; /* Medium width */
     height:40%; /* Medium height */
-    margin-top: 10px;
-    margin-bottom:150px ;
+    margin-top: 100px;
+    margin-bottom:50px ;
     margin-left:150px ;
     margin-right:150px ; /* Center it with margin */
     display: block; /* Ensures it stays aligned */

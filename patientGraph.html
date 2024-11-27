@@ -5,22 +5,59 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Patient Information</title>
     <link rel="stylesheet" href="css/patientGraph.css">
+    <link rel="stylesheet" href="css/patient.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
      <!-- Chart.js Library -->
     <script src="js/patientGraph.js" defer></script>
+    <!-- <script src="js/patient.js" defer></script> -->
+    <script src="js/app.js" defer></script>
+    
      <!-- JavaScript logic -->
 </head>
 <body>
-    <header>
-        <h1>Patient Information</h1>
+    <header class="header">
+        <div class="header-content">
+            <div class="header-left">
+                <div class="logo">
+                    <div class="login-logo">
+                        <i class="fa-regular fa-hospital" style="color: #ffffff;"></i>
+                    </div>
+                </div>
+                <div class="user-info">
+                    <h1>Welcome, <span id="username">Loading...</span></h1>
+                    <p id="hospitalNameHeader">Loading...</p>
+                </div>
+            </div>
+
+            <div class="header-buttons">
+                <!-- Patient Button -->
+                
+                <!-- Logout Button -->
+                <button class="logout-btn" onclick="handleLogout()">
+                    <i class="fa-solid fa-arrow-right-from-bracket" style="color: #000000;"></i>
+                    Logout
+                </button>
+            </div>
+        </div>
     </header>
     <main>
-        <div class="button-container">
-            <button id="bloodPressureBtn">Blood Pressure</button>
-            <button id="sugarPercentageBtn">Sugar Percentage</button>
-            <button id="temperatureBtn">Temperature</button>
+        
+        <canvas id="patientChart"></canvas>
+
+        <div class="patient-container">
+            <h2>Patient Information</h2>
+    
+            <!-- Patient List Section -->
+            <div id="patientList" class="patient-list">
+                <!-- Patient list will be dynamically inserted here -->
+            </div>
+    
+            <!-- Button to Navigate to Add Patient Form -->
+            <button onclick="window.location.href='addPatient.html'">Add Patient</button>
+            <button onclick="window.location.href='dashboard.html'">Back to Dashboardt</button>
+    
+           
         </div>
-        <canvas id="patientChart"></canvas> <!-- Graph Canvas -->
         <div class="navigation-container">
             <button id="backToDashboardBtn">Back to Dashboard</button>
             <button id="addViewPatientBtn">Add/View Patient</button>
