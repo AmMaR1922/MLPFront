@@ -136,7 +136,7 @@ let patientChart = new Chart(ctx, {
                 const index = activePoints[0].index;
                 const selectedDate = chartData[index].date;
                 const patientsOnSelectedDate = chartData[index].patients;
-                renderPatientTable(patientsOnSelectedDate);
+                renderPatientTable(patientsOnSelectedDate,selectedDate);
             }
         }
     }
@@ -198,7 +198,7 @@ async function fetchData() {
 
         // Render the patient table for the first date by default
         const firstDatePatients = sortedData[0].patients;
-        renderPatientTable(firstDatePatients);
+        renderPatientTable(firstDatePatients,sortedData[0].date);
 
     } catch (error) {
         console.error("Error fetching data:", error);
@@ -219,8 +219,9 @@ function updateGraph(dates, counts) {
 }
 
 // Render Patient List in Table
-function renderPatientTable(patients) {
+function renderPatientTable(patients,selectedDate) {
     const patientList = document.getElementById('patientList');
+    document.getElementById('DateOfCritical').textContent = selectedDate;
     patientList.innerHTML = `
         <table class="patient-table">
             <thead>
