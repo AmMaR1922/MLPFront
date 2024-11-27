@@ -5,6 +5,7 @@ const deletePatientApiUrl = 'https://anteshnatsh.tryasp.net/api/Patient/DeletePa
 const ctx = document.getElementById("patientChart").getContext("2d");
 let chartData = []; // This will store the entire response data
 
+
 // Create a gradient for the graph background
 const gradientFill = ctx.createLinearGradient(0, 0, 0, 400);
 gradientFill.addColorStop(0, "rgba(89, 141, 143,0.4)");
@@ -139,6 +140,34 @@ let patientChart = new Chart(ctx, {
             }
         }
     }
+
+
+    ,plugins: [
+        {
+            id: 'hoverLine',
+            afterDraw: (chart) => {
+                const { ctx, tooltip } = chart;
+                if (!tooltip || tooltip.opacity === 0) return;
+
+                const activePoint = tooltip.dataPoints[0];
+                if (!activePoint) return;
+
+                const x = activePoint.element.x;
+                const y = activePoint.element.y;
+                const chartArea = chart.chartArea;
+
+                // Draw the line from the hovered point to the x-axis
+                ctx.save();
+                ctx.beginPath();
+                ctx.moveTo(x, y);
+                ctx.lineTo(x, chartArea.bottom);
+                ctx.strokeStyle = 'rgba(89, 141, 143, 0.8)';
+                ctx.lineWidth = 2;
+                ctx.stroke();
+                ctx.restore();
+            }
+        }
+    ]
 });
 
 // Fetch Data and Update Chart
