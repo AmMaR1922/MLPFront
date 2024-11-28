@@ -1,109 +1,193 @@
-/* General Table Styling */
-.bio-table {
-    width: 80%; /* Reduced width for a smaller table */
-    border-collapse: collapse;
-    margin-top: 20px;
-    background-color: #fff;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-    border-radius: 8px;
-    margin-left: auto;
-    margin-right: auto; /* Centering the table horizontally */
+.header {
+    background: white;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    padding: 1rem;
+    display: block;
+    position: fixed; /* Keep the header at the top */
+    top: 0; /* Align it to the top of the page */
+    left: 0;
+    width: 100%; /* Ensure it spans the full width of the page */
+    z-index: 999; /* Ensure*/
+    margin-bottom: 50px;
 }
 
-.bio-table th, .bio-table td {
-    border: 1px solid #ddd;
-    padding: 15px; /* Increased padding for better spacing */
-    text-align: center; /* Center the text horizontally */
-    font-size: 20px; /* Increased font size for better readability */
-    font-weight: bold; /* Make the font bold */
-}
-
-/* Header Style */
-.bio-table th {
-    background-color: #007BFF;
-    color: white;
-    font-weight: bold;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-}
-
-/* Row Styling */
-.bio-table td {
-    background-color: #fafafa;
-    color: #333;
-    border-bottom: 1px solid #ddd;
-}
-
-.bio-table td:last-child {
-    border-right: 0;
-}
-
-/* Hover Effect on Rows */
-.bio-table tr:hover {
-    background-color: #f2f8ff;
-}
-
-/* Hover Effect on Individual Cells */
-.bio-table td:hover {
-    background-color: #e6f7ff;
-}
-h1
-{
-    text-align: center;
-}
-
-/* Delete Button Styling */
-.delete-button {
-    background-color: #e74c3c;
-    color: #fff;
-    border: none;
-    padding: 8px 14px; /* Slightly bigger padding for the delete button */
-    cursor: pointer;
-    border-radius: 5px;
-    font-size: 18px; /* Increased font size for delete button */
-    font-weight: bold; /* Bold text for delete button */
-    transition: background-color 0.3s ease;
-    display: inline-block;
-    text-align: center;
-}
-
-/* Delete Button Hover Effect */
-.delete-button:hover {
-    background-color: #c0392b;
-}
-button {
-    background-color: #007BFF;
-    color: white;
-    border: none;
-    padding: 12px 25px;
-    border-radius: 5px;
-    cursor: pointer;
-    /* margin-top: 20px; */
-    transition: background-color 0.3s ease;
-    font-size: 16px;
-    justify-content: center;
+.header-content {
+    max-width: 1280px;
+    max-height: 50px;
+    margin: 0 auto;
+    padding: 0 1rem;
+    display: flex;
+    justify-content: space-between;
     align-items: center;
 }
 
-button:hover {
-    background-color: #0056b3;
+.header-left {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
 }
 
-/* Responsive Design for Smaller Screens */
+.logo {
+    background-color: #0d9488;
+    padding: 0.5rem;
+    border-radius: 0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.logo i {
+    color: white;
+    font-size: 1.5rem;
+}
+
+.user-info h1 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: #1a1a1a;
+}
+
+.user-info p {
+    font-size: 0.875rem;
+    color: #666;
+}
+
+.logout-btn {
+    font-size: 15px; /* Increase the font size */
+    padding: 12px 15px; /* Adjust the padding to make it larger */
+    border-radius: 8px; /* Optional: round the corners of the button */
+    background-color: #f0f0f0; /* Optional: background color */
+    border: none; /* Remove border */
+    cursor: pointer;
+    display: inline-flex; /* Make it an inline flex container */
+    align-items: center; /* Vertically center the icon and text */
+    gap: 10px; /* Space between icon and text */
+}
+
+.logout-btn i {
+    font-size: 24px; /* Increase the size of the icon */
+}
+
+.logout-btn:hover {
+    background-color: #dcdcdc; /* Optional: hover effect */
+}
+
+
+body {
+    font-family: Arial, sans-serif;
+    margin-top: 50px;
+    
+    padding: 0;
+    background-color: #f9f9f9;
+    color: #333;
+}
+
+h1 {
+    
+    text-align: center;
+    color: #444;
+    margin-top: 100px;
+    font-size: 2rem;
+}
+
+button {
+    display: block;
+    margin: 20px auto;
+    padding: 10px 20px;
+    background-color: rgba(13, 148, 136,0.9); /* Green button */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+
+.bio-table {
+    width: 90%;
+    margin: 20px auto;
+    border-collapse: collapse;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    background-color: #ffffff;
+}
+
+.bio-table thead {
+    background-color: rgba(13, 148, 136,0.9);
+    color: white;
+}
+
+.bio-table th, .bio-table td {
+    padding: 15px;
+    text-align: center;
+    border: 1px solid #ddd;
+}
+
+.bio-table td
+{
+    height: 10%;
+    padding: 1px;
+    text-align: center;
+    border: 1px solid #ddd;
+    font-size: 1.15rem;
+    font-weight:600;
+    color: #555;
+}
+
+.bio-table th {
+    font-weight: bold;
+    font-size: 1rem;
+}
+
+.bio-table tbody tr:nth-child(even) {
+    background-color: #f2f2f2; /* Alternate row colors */
+}
+
+.bio-table tbody tr:hover {
+    background-color: #f5f5f5;
+    cursor: pointer;
+}
+
+.bio-table .actions button {
+    padding: 5px 10px;
+    margin: 0 5px;
+    font-size: 0.8rem;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.bio-table .actions button.delete {
+    background-color: #f44336; /* Red button for delete */
+    color: white;
+}
+
+.bio-table .actions button.delete:hover {
+    background-color: #d32f2f;
+}
+
+.bio-table .actions button.edit {
+    background-color: #2196F3; /* Blue button for edit */
+    color: white;
+}
+
+.bio-table .actions button.edit:hover {
+    background-color: #1976D2;
+}
+
+/* Responsive Design */
 @media (max-width: 768px) {
-    .bio-table {
-        width: 95%; /* Adjusted table width for smaller screens */
-    }
-
     .bio-table th, .bio-table td {
-        padding: 12px; /* Adjusted padding for smaller screens */
+        font-size: 0.8rem;
+        padding: 10px;
     }
 
-    .bio-table th {
-        font-size: 18px; /* Adjusted font size for smaller screens */
-    }
-
-    .bio-table td {
-        font-size: 18px; /* Adjusted font size for smaller screens */
+    button {
+        font-size: 0.9rem;
+        padding: 8px 16px;
     }
 }

@@ -9,6 +9,13 @@ const token = localStorage.getItem('auth_token'); // Get auth token from localSt
 const getBioApiUrl = `https://anteshnatsh.tryasp.net/api/Patient/${patientName}`; // API endpoint
 const deleteBioApiUrl = 'https://anteshnatsh.tryasp.net/api/Patient/DeleteBio/'; // Delete Bio endpoint
 
+document.getElementById('PatientDataName').textContent = patientName;
+//document.getElementById('PatientDataAge').textContent = ;
+
+
+
+
+
 // Function to fetch and display all bio entries for the patient
 async function fetchAndDisplayBioData() {
     try {
