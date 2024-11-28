@@ -8,7 +8,6 @@
     left: 0;
     width: 100%; /* Ensure it spans the full width of the page */
     z-index: 999; /* Ensure*/
-    margin-bottom: 50px;
 }
 
 .header-content {
@@ -72,7 +71,6 @@
     background-color: #dcdcdc; /* Optional: hover effect */
 }
 
-
 body {
     font-family: Arial, sans-serif;
     margin-top: 50px;
@@ -82,8 +80,7 @@ body {
     color: #333;
 }
 
-h1 {
-    
+.inbody{
     text-align: center;
     color: #444;
     margin-top: 100px;
