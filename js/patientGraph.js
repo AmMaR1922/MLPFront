@@ -8,8 +8,8 @@ let chartData = []; // This will store the entire response data
 
 // Create a gradient for the graph background
 const gradientFill = ctx.createLinearGradient(0, 0, 0, 400);
-gradientFill.addColorStop(0, "rgba(89, 141, 143,0.4)");
-gradientFill.addColorStop(1, "rgba(89, 141, 143,0)");
+gradientFill.addColorStop(0, "rgba(248, 104, 52,0.4)");
+gradientFill.addColorStop(1, "rgba(248, 104, 52,0)");
 
 let hospitals = [];
 
@@ -59,12 +59,12 @@ let patientChart = new Chart(ctx, {
         datasets: [{
             label: "Patient Count",
             data: [], // Y-axis data (patient counts)
-            borderColor: "rgb(89, 141, 143)",
+            borderColor: "rgba(248, 104, 52,0.8)",
             backgroundColor: gradientFill,
             borderWidth: 3,
             fill: true,
             tension: 0.4,
-            pointBackgroundColor: "rgb(89, 141, 143)",
+            pointBackgroundColor: "rgba(248, 104, 52,1)",
             pointBorderColor: "#fff",
             pointBorderWidth: 2,
             pointRadius: 5,
@@ -85,7 +85,7 @@ let patientChart = new Chart(ctx, {
                 }
             },
             tooltip: {
-                backgroundColor: "rgba(89, 141, 143, 0.8)",
+                backgroundColor: "rgba(248, 104, 52,1)",
                 titleFont: {
                     size: 20
                 },
@@ -161,7 +161,7 @@ let patientChart = new Chart(ctx, {
                 ctx.beginPath();
                 ctx.moveTo(x, y);
                 ctx.lineTo(x, chartArea.bottom);
-                ctx.strokeStyle = 'rgba(89, 141, 143, 0.8)';
+                ctx.strokeStyle = 'rgba(248, 104, 52,1)';
                 ctx.lineWidth = 2;
                 ctx.stroke();
                 ctx.restore();

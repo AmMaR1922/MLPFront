@@ -1,0 +1,142 @@
+/* General Form Styles */
+#updatePatientForm {
+    background: #ffffff;
+    border-radius: 15px;
+    padding: 2rem;
+    max-width: 600px;
+    margin: auto;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+#updatePatientForm:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+}
+
+#updatePatientForm h3 {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: #0f766e;
+    margin-bottom: 1.5rem;
+    text-align: center;
+}
+
+/* Input Field Styles */
+#updatePatientForm input,
+#updatePatientForm select {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    margin-bottom: 1.5rem;
+    font-size: 1rem;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    background: #f9fafb;
+    color: #333;
+    outline: none;
+    transition: border-color 0.2s;
+}
+
+#updatePatientForm input:focus,
+#updatePatientForm select:focus {
+    border-color: #0f766e;
+    box-shadow: 0 0 5px rgba(15, 118, 110, 0.3);
+}
+
+#updatePatientForm label {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #555;
+    margin-bottom: 0.5rem;
+    display: block;
+}
+
+/* Button Styles */
+#updatePatientForm button {
+    background: #0f766e;
+    color: white;
+    font-size: 1rem;
+    font-weight: 600;
+    padding: 0.75rem 1.5rem;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.3s, transform 0.2s;
+    display: block;
+    width: 100%;
+    text-align: center;
+}
+
+#updatePatientForm button:hover {
+    background: #0e7490;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(15, 118, 110, 0.2);
+}
+
+/* Pregnant and Number of Births Conditional Fields */
+#pregnantField,
+#numberOfBirthsField {
+    display: none; /* Controlled via JavaScript */
+}
+
+#pregnantField label,
+#numberOfBirthsField label {
+    color: #0f766e;
+    font-weight: 600;
+}
+
+/* Response Message */
+#responseMessage {
+    font-size: 1rem;
+    color: #333;
+    margin-top: 1.5rem;
+    text-align: center;
+}
+
+#responseMessage.success {
+    color: #0f766e;
+}
+
+#responseMessage.error {
+    color: #db524b;
+}
+
+/* Back to Dashboard Button */
+button[type="button"] {
+    background: #6c757d;
+    color: white;
+    font-size: 1rem;
+    font-weight: 500;
+    padding: 0.75rem 1.5rem;
+    border-radius: 8px;
+    margin-top: 2rem;
+    cursor: pointer;
+    display: inline-block;
+    transition: background 0.3s;
+}
+
+button[type="button"]:hover {
+    background: #5a6268;
+}
+
+/* Media Queries for Responsiveness */
+@media (max-width: 768px) {
+    #updatePatientForm {
+        padding: 1.5rem;
+    }
+
+    #updatePatientForm h3 {
+        font-size: 1.5rem;
+    }
+
+    #updatePatientForm input,
+    #updatePatientForm select {
+        font-size: 0.9rem;
+        padding: 0.65rem 0.9rem;
+    }
+
+    #updatePatientForm button {
+        font-size: 0.9rem;
+        padding: 0.65rem 1.2rem;
+    }
+}
