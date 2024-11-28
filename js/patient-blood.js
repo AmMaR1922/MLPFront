@@ -3,7 +3,6 @@ const allPatientsApiUrl = 'https://anteshnatsh.tryasp.net/api/Patient/AllNames';
 const deletePatientApiUrl = 'https://anteshnatsh.tryasp.net/api/Patient/DeletePatient/'; // API endpoint for deleting a patient
 let hospitals = [];
 
-
 const canvas = document.getElementById('bloodPressureChart'); // Replace with your canvas ID
 const ctx = canvas.getContext('2d');
 
@@ -11,7 +10,6 @@ const ctx = canvas.getContext('2d');
 const gradient = ctx.createLinearGradient(0, 0, 0, 400); // Vertical gradient
 gradient.addColorStop(0, 'rgba(248, 104, 52, 0.5)'); // Start color (transparent orange)
 gradient.addColorStop(1, 'rgba(248, 104, 52, 0)');   // End color (fully transparent)
-
 
 // Get the token from localStorage
 function getToken() {
@@ -66,13 +64,11 @@ function renderPatients(patients) {
                     const isHealthy = condition === 'Healthy';
                     const isUnspecified = condition === 'Unspecified';
                 return`
-                    
                     <tr>
                     <td>
                             ${isAtRisk ? '<span class="red-sign"></span>' : ''}
                             ${isHealthy ? '<span class="green-sign"></span>' : ''}
                             ${isUnspecified ? '<span class="yellow-sign"></span>' : ''}
-                            <!--${condition}-->
                         </td>
                         <td>${patient.name}</td>
                         <td>${getHospitalName(patient.hospitalId)}</td>
@@ -122,9 +118,6 @@ async function deletePatient(patientId) {
 
 // Initialize
 fetchPatients();
-
-
-
 
 //Graph
 document.addEventListener('DOMContentLoaded', function () {
@@ -176,7 +169,6 @@ document.addEventListener('DOMContentLoaded', function () {
             const Count = sortedDateCounts.map(item => item[1]);  
 
             
-// Extract blood pressure values
             // Create the Chart.js line chart with the dynamic data
             const bloodPressureChart = new Chart(ctx, {
                 type: 'line', // Line chart
@@ -215,108 +207,48 @@ document.addEventListener('DOMContentLoaded', function () {
                             }
                         },
                         legend: {
-                            display: true, // Show legend
-                            labels: {
-                                color: '#555', // Legend text color
-                                font: {
-                                    size: 12, // Font size for legend
-                                    family: 'Arial'
-                                },
-                                padding: 10
-                            },
-                            position: 'top'
-                        },
-                        tooltip: {
-                            enabled: true, // Show tooltips
-                            backgroundColor: 'rgba(0, 0, 0, 0.8)', // Tooltip background
-                            titleColor: '#fff', // Tooltip title color
-                            bodyColor: '#fff', // Tooltip body text color
-                            padding: 10,
-                            callbacks: {
-                                title: function (tooltipItem) {
-                                    return 'Date: ' + tooltipItem[0].label; // Show the date as the tooltip title
-                                },
-                                label: function (context) {
-                                    let label = context.dataset.label || '';
-                                    if (label) {
-                                        label += ': ';
-                                    }
-                                    label += context.raw + ' Patients'; // Tooltip data value
-                                    return label;
-                                }
-                            }
-                        }
-                    },
-                    layout: {
-                        padding: {
-                            left: 20,
-                            right: 20,
-                            top: 10,
-                            bottom: 10
+                            display: false, // Hide legend
                         }
                     },
                     scales: {
                         x: {
-                            type: 'time', // X-axis as a time scale
-                            position: 'bottom',
+                            grid: {
+                                display: false // Disable grid lines on the x-axis
+                            },
                             title: {
                                 display: true,
-                                text: 'Date',
-                                color: '#333', // Axis title color
+                                text: "Date",
                                 font: {
-                                    size: 14,
-                                    family: 'Arial'
+                                    size: 14
                                 }
-                            },
-                            time: {
-                                unit: 'day', // Display dates as days
-                                tooltipFormat: 'MMM dd, yyyy', // Tooltip format for date
-                                displayFormats: {
-                                    day: 'MMM dd' // X-axis label format
-                                }
-                            },
-                            grid: {
-                                color: 'rgba(200, 200, 200, 0.2)' // Grid line color
                             },
                             ticks: {
-                                color: '#555', // X-axis tick color
                                 font: {
-                                    size: 12
-                                }
+                                    size: 10
+                                },
+                                maxRotation: 45, // Maximum rotation in degrees
+                                minRotation: 45 // Minimum rotation in degrees
                             }
                         },
                         y: {
-                            beginAtZero: false, // Don't force Y-axis to start at zero
                             title: {
                                 display: true,
-                                text: 'Count of Patients',
-                                color: '#333',
+                                text: 'Count of Patients with High BP',
                                 font: {
-                                    size: 14,
-                                    family: 'Arial'
+                                    size: 16,
+                                    weight: 'bold'
                                 }
                             },
-                            ticks: {
-                                stepSize: 10,
-                                color: '#555', // Y-axis tick color
-                                font: {
-                                    size: 12
-                                }
-                            },
-                            grid: {
-                                color: 'rgba(200, 200, 200, 0.2)' // Grid line color
-                            }
+                            min: 0, // Start Y-axis from 0
                         }
                     }
                 }
             });
-            
         } else {
-            console.error('Invalid data format or empty data received from the API.');
+            alert('No critical patients data found.');
         }
     })
     .catch(error => {
-        console.error('Error fetching data:', error);
+        console.error('Error fetching data:', error);  // Log any error that occurs during the fetch request
     });
 });
-
