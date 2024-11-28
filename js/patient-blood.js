@@ -3,6 +3,16 @@ const allPatientsApiUrl = 'https://anteshnatsh.tryasp.net/api/Patient/AllNames';
 const deletePatientApiUrl = 'https://anteshnatsh.tryasp.net/api/Patient/DeletePatient/'; // API endpoint for deleting a patient
 let hospitals = [];
 
+
+const canvas = document.getElementById('bloodPressureChart'); // Replace with your canvas ID
+const ctx = canvas.getContext('2d');
+
+// Create a gradient for the background
+const gradient = ctx.createLinearGradient(0, 0, 0, 400); // Vertical gradient
+gradient.addColorStop(0, 'rgba(248, 104, 52, 0.5)'); // Start color (transparent orange)
+gradient.addColorStop(1, 'rgba(248, 104, 52, 0)');   // End color (fully transparent)
+
+
 // Get the token from localStorage
 function getToken() {
     return localStorage.getItem('auth_token');
@@ -43,27 +53,37 @@ function renderPatients(patients) {
         <table class="patient-table">
             <thead>
                 <tr>
+                    <th></th>
                     <th>Name</th>
-                    <th>State</th>
                     <th>Hospital</th>
                     <th>Actions</th>
                 </tr>
             </thead>
             <tbody>
-                ${patients.map(patient => `
+                ${patients.map(patient => {
+                    const condition = patient.lastBiologicalIndicator?.healthCondition || 'Unspecified';
+                    const isAtRisk = condition === 'At Risk';
+                    const isHealthy = condition === 'Healthy';
+                    const isUnspecified = condition === 'Unspecified';
+                return`
+                    
                     <tr>
+                    <td>
+                            ${isAtRisk ? '<span class="red-sign"></span>' : ''}
+                            ${isHealthy ? '<span class="green-sign"></span>' : ''}
+                            ${isUnspecified ? '<span class="yellow-sign"></span>' : ''}
+                            <!--${condition}-->
+                        </td>
                         <td>${patient.name}</td>
-                        <td>${patient.lastBiologicalIndicator.healthCondition}</td>
                         <td>${getHospitalName(patient.hospitalId)}</td>
                         <td>
                             <button id=AddBio  onclick="window.location.href='addBio.html?patientId=${patient.id}'">Add Bio</button>
                             <button id=ViewBio onclick="window.location.href='viewBio.html?patientName=${patient.name}'">View Bio</button>
                             <button id=update onclick="window.location.href='updatePatient.Html?patientId=${patient.id}'">Update</button>
-                            <button id=delete onclick="deletePatient('${patient.id}')">Delete</button>
-                            
+                            <button id=delete onclick="deletePatient('${patient.id}')">Delete</button> 
                         </td>
                     </tr>
-                `).join('')}
+                `}).join('')}
             </tbody>
         </table>
     `;
@@ -165,9 +185,9 @@ document.addEventListener('DOMContentLoaded', function () {
                     datasets: [{
                         label: 'Count',
                         data: Count, // Blood pressure values (Y-axis)
-                        borderColor: 'rgba(75, 192, 192, 1)', // Line color
-                        backgroundColor: 'rgba(75, 192, 192, 0.2)', // Gradient fill under the line
-                        pointBackgroundColor: 'rgba(75, 192, 192, 1)', // Point color
+                        borderColor: 'rgba(248, 104, 52, 0.5)', // Line color
+                        backgroundColor: gradient, // Gradient fill under the line
+                        pointBackgroundColor: 'rgba(248, 104, 52, 0.5)', // Point color
                         pointBorderColor: '#fff', // Point border color
                         pointHoverBackgroundColor: '#fff', // Hover point color
                         pointHoverBorderColor: 'rgba(75, 192, 192, 1)', // Hover point border color

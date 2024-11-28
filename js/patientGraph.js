@@ -226,8 +226,8 @@ function renderPatientTable(patients,selectedDate) {
         <table class="patient-table">
             <thead>
                 <tr>
+                    <th></th>
                     <th>Name</th>
-                    <th>State</th>
                     <th>Hospital</th>
                     <th>Actions</th>
                 </tr>
@@ -241,13 +241,13 @@ function renderPatientTable(patients,selectedDate) {
 
                     return `
                         <tr>
-                            <td>${patient.name}</td>
                             <td>
                                 ${isAtRisk ? '<span class="red-sign"></span>' : ''}
                                 ${isHealthy ? '<span class="green-sign"></span>' : ''}
                                 ${isUnspecified ? '<span class="yellow-sign"></span>' : ''}
-                                ${condition}
+                                <!-- ${condition} -->
                             </td>
+                            <td>${patient.name}</td>
                             <td>${getHospitalName(patient.hospitalId)} </td>
                             <td>
                                 <button id="AddBio" onclick="window.location.href='addBio.html?patientId=${patient.id}'">Add Bio</button>

@@ -28,23 +28,11 @@
                     </div>
                 </div>
 
-                <div class="header-buttons">
-                    <!-- Patient Button -->
-                    <button class="header-btn" onclick="navigateTo('Patient')">
-                        <i class="lucide-users"></i>
-                        Add/View Patients
-                    </button>
-                    <!-- Hospital Button -->
-                    <button class="header-btn" onclick="navigateTo('Hospital')">
-                        <i class="lucide-hospital"></i>
-                        Add/View Hospitals
-                    </button>
                     <!-- Logout Button -->
-                    <button class="logout-btn" onclick="handleLogout()">
+                    <button class="logout-btn" onclick="handleLogout()" style="color: #000000;">
                         <i class="fa-solid fa-arrow-right-from-bracket" style="color: #000000;"></i>
                         Logout
                     </button>
-                </div>
             </div>
         </header>
 
@@ -64,6 +52,7 @@
     #bloodPressureChart {
       width: 100% !important;  /* Make the chart take up full width of its container */
       height: 500px !important;  /* Set a specific height (adjust as needed) */
+      margin-top: 150px;
     }
   </style>
   

@@ -47,8 +47,8 @@ function renderPatients(patients) {
         <table class="patient-table">
             <thead>
                 <tr>
+
                     <th>Name</th>
-                    <th>State</th>
                     <th>Hospital</th>
                     <th>Actions</th>
                 </tr>
@@ -61,14 +61,13 @@ function renderPatients(patients) {
                     const isUnspecified = condition === 'Unspecified';
 
                     return `
-                    <tr>
+                    <tr style="${isAtRisk ? 'background-color: rgba(248,104,52,0.15);' : ''}
+                    
+                    ${isHealthy ? ' background-color: rgba(0, 252, 122, 0.1);' : ''}
+                    ">
+                       
                         <td>${patient.name}</td>
-                        <td>
-                            ${isAtRisk ? '<span class="red-sign"></span>' : ''}
-                            ${isHealthy ? '<span class="green-sign"></span>' : ''}
-                            ${isUnspecified ? '<span class="yellow-sign"></span>' : ''}
-                            ${condition}
-                        </td>
+
                         <td>${getHospitalName(patient.hospitalId)}</td>
                         <td>
                             <button id="AddBio" onclick="window.location.href='addBio.html?patientId=${patient.id}'">Add Bio</button>
