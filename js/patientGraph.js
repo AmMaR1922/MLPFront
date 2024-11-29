@@ -226,7 +226,6 @@ function renderPatientTable(patients,selectedDate) {
         <table class="patient-table">
             <thead>
                 <tr>
-                    <th></th>
                     <th>Name</th>
                     <th>Hospital</th>
                     <th>Actions</th>
@@ -240,13 +239,10 @@ function renderPatientTable(patients,selectedDate) {
                     const isUnspecified = condition === 'Unspecified';
 
                     return `
-                        <tr>
-                            <td>
-                                ${isAtRisk ? '<span class="red-sign"></span>' : ''}
-                                ${isHealthy ? '<span class="green-sign"></span>' : ''}
-                                ${isUnspecified ? '<span class="yellow-sign"></span>' : ''}
-                                <!-- ${condition} -->
-                            </td>
+                         <tr style="${isAtRisk ? 'background-color: rgba(248,104,52,0.15);' : ''}
+                    
+                    ${isHealthy ? ' background-color: rgba(0, 252, 122, 0.1);' : ''}
+                    ">
                             <td>${patient.name}</td>
                             <td>${getHospitalName(patient.hospitalId)} </td>
                             <td>

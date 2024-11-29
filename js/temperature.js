@@ -71,10 +71,10 @@ document.addEventListener('DOMContentLoaded', function () {
                             <td>${patient.name}</td>
                             <td>${getHospitalName(patient.hospitalId)}</td>
                             <td>
-                                <button class="addBio" data-patient-id="${patient.id}">Add Bio</button>
-                                <button class="viewBio" data-patient-name="${patient.name}">View Bio</button>
-                                <button class="update" data-patient-id="${patient.id}">Update</button>
-                                <button class="delete" data-patient-id="${patient.id}">Delete</button>
+                                <button id="AddBio" onclick="window.location.href='addBio.html?patientId=${patient.id}'">Add Bio</button>
+                                <button id="ViewBio" onclick="window.location.href='viewBio.html?patientName=${patient.name}&patientAge=${patient.age}'">View Bio</button>
+                                <button id="update" onclick="window.location.href='updatePatient.Html?patientId=${patient.id}'">Update</button>
+                                <button id="delete" onclick="deletePatient('${patient.id}')">Delete</button>
                             </td>
                         </tr>
                     `;
