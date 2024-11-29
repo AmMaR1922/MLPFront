@@ -11,6 +11,7 @@ function getPatientAgeFromUrl() {
 
 const patientName = getPatientNameFromUrl(); // Get patient name from URL
 const patientAge = getPatientAgeFromUrl();
+
 const token = localStorage.getItem('auth_token'); // Get auth token from localStorage
 const getBioApiUrl = `https://anteshnatsh.tryasp.net/api/Patient/${patientName}`; // API endpoint
 const deleteBioApiUrl = 'https://anteshnatsh.tryasp.net/api/Patient/DeleteBio/'; // Delete Bio endpoint
