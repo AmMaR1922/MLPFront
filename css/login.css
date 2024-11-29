@@ -278,3 +278,7 @@
         font-size: 1.75rem;
     }
 }
+
+body{
+    background: linear-gradient(135deg, #e6f7f5 0%, #e6f0ff 100%);
+}
