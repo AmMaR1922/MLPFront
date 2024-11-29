@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', function () {
-    const ctx = document.getElementById('AverageTempratureChart').getContext('2d');
+    const ctx = document.getElementById('SugarPercentageChart').getContext('2d');
 
     // Get the token from localStorage
     function getToken() {
@@ -12,9 +12,8 @@ document.addEventListener('DOMContentLoaded', function () {
     const allPatientsApiUrl = 'https://anteshnatsh.tryasp.net/api/Patient/AllNames';
     const deletePatientApiUrl = 'https://anteshnatsh.tryasp.net/api/Patient/DeletePatient/'; // API endpoint for deleting a patient
     let hospitals = [];
-const gradient = ctx.createLinearGradient(0, 0, 0, 400);
-gradient.addColorStop(0, 'rgba(248, 104, 52, 0.5)');
-gradient.addColorStop(1, 'rgba(248, 104, 52, 0)');
+
+
 
     // Fetch hospitals and store them globally
     async function fetchHospitals() {
@@ -34,27 +33,29 @@ gradient.addColorStop(1, 'rgba(248, 104, 52, 0)');
     // Fetch and display patients after hospitals data is loaded
     async function fetchPatients() {
         await fetchHospitals(); // Ensure hospitals are fetched first
-
+    
         try {
             const response = await fetch(allPatientsApiUrl, {
                 headers: { 'Authorization': `Bearer ${token}` }
             });
-
+    
             if (!response.ok) throw new Error(`Error fetching patients: ${response.status}`);
             const patients = await response.json();
-            console.log("Fetched Patients:", patients);
-
+    
+            // Sort patients by sugar percentage in descending order
             patients.sort((a, b) => {
-                const bpA = a.lastBiologicalIndicator?.averageTemprature ?? 0;
-                const bpB = b.lastBiologicalIndicator?.averageTemprature ?? 0;
-                return bpB - bpA;
+                const spA = a.lastBiologicalIndicator?.sugarPercentage ?? 0;
+                const spB = b.lastBiologicalIndicator?.sugarPercentage ?? 0;
+                return spB - spA; // Higher sugar first
             });
-
+    
+            // Render the sorted patients
             renderPatients(patients);
         } catch (error) {
             console.error('Error fetching patients:', error);
         }
     }
+    
 
     // Render the patients in the table
     function renderPatients(patients) {
@@ -64,7 +65,7 @@ gradient.addColorStop(1, 'rgba(248, 104, 52, 0)');
                 <thead>
                     <tr>
                         <th>Name</th>
-                        <th>State</th>
+                        <th>Sugar Condition</th>
                         <th>Hospital</th>
                         <th>Actions</th>
                     </tr>
@@ -73,7 +74,7 @@ gradient.addColorStop(1, 'rgba(248, 104, 52, 0)');
                     ${patients.map(patient => `
                         <tr>
                             <td>${patient.name}</td>
-                            <td>${patient.lastBiologicalIndicator?.healthCondition || 'Unknown'}</td>
+                            <td>${getSugarCondition(patient.lastBiologicalIndicator?.sugarPercentage)}</td>
                             <td>${getHospitalName(patient.hospitalId)}</td>
                             <td>
                                 <button id="AddBio" onclick="window.location.href='addBio.html?patientId=${patient.id}'">Add Bio</button>
@@ -86,6 +87,13 @@ gradient.addColorStop(1, 'rgba(248, 104, 52, 0)');
                 </tbody>
             </table>
         `;
+    }
+
+    // Categorize sugar percentage
+    function getSugarCondition(sugarPercentage) {
+        if (sugarPercentage < 100) return "Healthy";
+        if (sugarPercentage >= 100 && sugarPercentage <= 125) return "Moderate";
+        return "At Risk";
     }
 
     // Get the hospital name based on hospitalId
@@ -146,9 +154,9 @@ gradient.addColorStop(1, 'rgba(248, 104, 52, 0)');
         data.forEach(record => {
             console.log("Processing Record:", record);
 
-            const { date, averageTemprature } = record;
+            const { date, sugarPercentage } = record;
 
-            if (date && averageTemprature && averageTemprature > 37.1) {
+            if (date && sugarPercentage && sugarPercentage > 125) {
                 if (!dateCounts[date]) {
                     dateCounts[date] = 0;
                 }
@@ -178,19 +186,22 @@ gradient.addColorStop(1, 'rgba(248, 104, 52, 0)');
             console.error("No data available to display in the graph.");
             return;
         }
+        const gradientFill = ctx.createLinearGradient(0, 0, 0, 400);
+        gradientFill.addColorStop(0, "rgba(248, 104, 52,0.4)");
+        gradientFill.addColorStop(1, "rgba(248, 104, 52,0)");
 
         new Chart(ctx, {
             type: 'line',
             data: {
                 labels: timeLabels,
                 datasets: [{
-                    label: 'Count of Patients with Avg Temp > 37.1',
+                    label: 'Patients with Sugar % > 125',
                     data: counts,
-                    borderColor: 'rgba(248, 104, 52, 0.8)',
-                    backgroundColor: gradient,
-                    borderWidth: 2,
-                    tension: 0.3,
+                    borderColor: "rgba(248, 104, 52,0.8)",
+                    backgroundColor: gradientFill,
+                    borderWidth: 3,
                     fill: true,
+                    tension: 0.4,
                     pointBackgroundColor: "rgba(248, 104, 52,1)",
                     pointBorderColor: "#fff",
                     pointBorderWidth: 2,
@@ -203,7 +214,7 @@ gradient.addColorStop(1, 'rgba(248, 104, 52, 0)');
                 plugins: {
                     title: {
                         display: true,
-                        text: 'Patients with Avg Temperature > 37.1 by Date',
+                        text: 'Patients with Sugar Percentage > 125 by Date',
                         font: { size: 18 }
                     }
                 },
