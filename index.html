@@ -76,10 +76,84 @@
         </div>
     </div>
 
-    <!-- Include JavaScript modules -->
-    <script type="module" src="js/langSwitcher.js"></script>
+    <!-- JavaScript for language switching -->
+    <script>
+        // Language data for English and Arabic
+        const langData = {
+            en: {
+                login: {
+                    title: "Welcome to Health Dashboard",
+                    subtitle: "Enter your credentials to access your account",
+                    emailLabel: "Email address",
+                    passwordLabel: "Password",
+                    forgotPassword: "Forgot password?",
+                    rememberMe: "Remember me",
+                    signInText: "Sign in to account"
+                },
+                langButtonText: "English"
+            },
+            ar: {
+                login: {
+                    title: "مرحبًا بك في لوحة تحكم الصحة",
+                    subtitle: "أدخل بيانات اعتمادك للوصول إلى حسابك",
+                    emailLabel: "عنوان البريد الإلكتروني",
+                    passwordLabel: "كلمة المرور",
+                    forgotPassword: "هل نسيت كلمة المرور؟",
+                    rememberMe: "تذكرني",
+                    signInText: "تسجيل الدخول إلى الحساب"
+                },
+                langButtonText: "العربية"
+            }
+        };
+
+        // Default language set to English
+        let currentLang = 'en';
+
+        // Function to change the language dynamically
+        function changeLanguage(lang) {
+            const data = langData[lang]; // Get the language data for the selected language
+
+            // Update the login page text
+            document.getElementById('login-title').innerText = data.login.title;
+            document.getElementById('login-subtitle').innerText = data.login.subtitle;
+            document.getElementById('email-label').innerText = data.login.emailLabel;
+            document.getElementById('password-label').innerText = data.login.passwordLabel;
+            document.getElementById('forgot-password-link').innerText = data.login.forgotPassword;
+            document.getElementById('remember-text').innerText = data.login.rememberMe;
+            document.getElementById('sign-in-text').innerText = data.login.signInText;
+
+            // Update the language toggle button
+            document.getElementById('lang-toggle-btn').innerText = data.langButtonText;
+
+            // Switch to Arabic (RTL) if needed
+            if (lang === 'ar') {
+                document.documentElement.lang = 'ar';  // Set the HTML lang attribute to Arabic
+                document.body.classList.add('rtl');    // Apply RTL class to body
+            } else {
+                document.documentElement.lang = 'en';  // Set the HTML lang attribute to English
+                document.body.classList.remove('rtl'); // Remove RTL class for LTR
+            }
+
+            // Save selected language in localStorage for persistence
+            localStorage.setItem('selectedLang', lang);
+        }
+
+        // Event listener for language toggle button
+        document.getElementById('lang-toggle-btn').addEventListener('click', function () {
+            // Toggle between English and Arabic
+            currentLang = currentLang === 'en' ? 'ar' : 'en'; 
+            changeLanguage(currentLang); // Apply the new language
+        });
+
+        // Load the language from localStorage or default to English on page load
+        document.addEventListener('DOMContentLoaded', () => {
+            const savedLang = localStorage.getItem('selectedLang') || 'en'; // Get saved language or default to English
+            changeLanguage(savedLang); // Apply the saved or default language
+            currentLang = savedLang;   // Set currentLang to the saved language
+        });
+    </script>
     <script  src="js/auth.js"></script>
-    <script src="js/login.js"></script>
+    <script src="js/login.js"></script> 
 
 </body>
 </html>
