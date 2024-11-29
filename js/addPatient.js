@@ -75,6 +75,35 @@ async function savePatient(event) {
     }
 }
 
+
+
+document.addEventListener("DOMContentLoaded", function () {
+    const sexSelect = document.getElementById("sex");
+    const pregnantField = document.getElementById("pregnantField");
+    const pregnantSelect = document.getElementById("pregnant");
+    const numberOfBirthsField = document.getElementById("numberOfBirthsField");
+
+    // Handle visibility of Pregnant field based on selected sex
+    sexSelect.addEventListener("change", function () {
+        if (sexSelect.value === "false") { // Female
+            pregnantField.style.display = "block";
+        } else {
+            pregnantField.style.display = "none";
+            numberOfBirthsField.style.display = "none"; // Hide Number of Births if switching back
+        }
+    });
+
+    // Handle visibility of Number of Births field based on Pregnant field selection
+    pregnantSelect.addEventListener("change", function () {
+        if (pregnantSelect.value === "true") { // Yes
+            numberOfBirthsField.style.display = "block";
+        } else {
+            numberOfBirthsField.style.display = "none";
+        }
+    });
+});
+
+
 // Initialize
 async function init() {
     await fetchHospitals();
