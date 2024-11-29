@@ -134,3 +134,179 @@ function renderBioData(bioDataList) {
 
 // Initialize the page
 fetchAndDisplayBioData();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+document.addEventListener('DOMContentLoaded', function () {
+    const token = localStorage.getItem('auth_token');
+    const patientName = new URLSearchParams(window.location.search).get('patientName');
+    const patientAge = new URLSearchParams(window.location.search).get('patientAge');
+    const getBioApiUrl = `https://anteshnatsh.tryasp.net/api/Patient/${patientName}`;
+
+    document.getElementById('PatientDataName').textContent = patientName;
+    document.getElementById('PatientDataAge').textContent = patientAge;
+
+    const ctx = document.getElementById('SpecificPatientChart').getContext('2d'); // Ensure the canvas exists
+
+    if (!ctx) {
+        console.error('Canvas not found or unable to get context.');
+        return;
+    }
+
+    fetch(getBioApiUrl, {
+        method: 'GET',
+        headers: {
+            'Authorization': `Bearer ${token}`,
+            'Content-Type': 'application/json'
+        }
+    })
+    .then(response => {
+        if (!response.ok) {
+            console.error('Failed to fetch data:', response.statusText);
+            alert(`Failed to fetch bio data: ${response.statusText}`);
+            return;
+        }
+        return response.json();
+    })
+    .then(data => {
+        console.log('Fetched data:', data); // Check structure of data
+
+        // Prepare data for the chart
+        if (Array.isArray(data) && data.length > 0) {
+            const bioIds = data.map(item => item.bioId); // Use bioId for data points
+            const dates = data.map(item => item.date); // Assuming the data contains a 'date' field
+            const sugarPercentageData = data.map(item => item.sugarPercentage);
+            const bloodPressureData = data.map(item => item.bloodPressure);
+            const temperatureData = data.map(item => item.averageTemprature || null); // Fallback if no temperature data
+
+            // Check if we have all necessary data for the chart
+            console.log('BioIds:', bioIds);
+            console.log('Dates:', dates);
+            console.log('Sugar Percentage:', sugarPercentageData);
+            console.log('Blood Pressure:', bloodPressureData);
+            console.log('Temperature Data:', temperatureData);
+
+            // Create a gradient for the blood pressure line
+            const gradient = ctx.createLinearGradient(0, 0, 0, 400);
+            gradient.addColorStop(0, 'rgba(248, 104, 52, 0.2)');
+            gradient.addColorStop(1, 'rgba(248, 104, 52, 0)');
+
+            // Create the chart
+            new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: dates, // Use the date for the x-axis
+                    datasets: [
+                        {
+                            label: 'Sugar Percentage (%)',
+                            data: sugarPercentageData,
+                            borderColor: 'rgba(40, 167, 69, 0.8)', // Green for sugar percentage
+                            backgroundColor: 'rgba(40, 167, 69, 0.2)', // Light green
+                            borderWidth: 2,
+                            fill: true,
+                            tension: 0.3,
+                            pointBackgroundColor: "rgba(40, 167, 69,1)",
+                            pointBorderColor: "#fff",
+                            pointBorderWidth: 2,
+                            pointRadius: 5,
+                            pointHoverRadius: 10,
+                        },
+                        {
+                            label: 'Blood Pressure (mmHg)',
+                            data: bloodPressureData,
+                            borderColor: 'rgba(248, 104, 52, 0.8)', // Orange for BP
+                            backgroundColor: gradient,
+                            borderWidth: 2,
+                            fill: true,
+                            tension: 0.3,
+                            pointBackgroundColor: "rgba(248, 104, 52,1)",
+                            pointBorderColor: "#fff",
+                            pointBorderWidth: 2,
+                            pointRadius: 5,
+                            pointHoverRadius: 10,
+                        },
+                        {
+                            label: 'Temperature (°C)',
+                            data: temperatureData,
+                            borderColor: 'rgba(0, 123, 255, 0.8)', // Blue for temperature
+                            backgroundColor: 'rgba(0, 123, 255, 0.2)', // Light blue
+                            borderWidth: 2,
+                            fill: true,
+                            tension: 0.3,
+                            pointBackgroundColor: "rgba(0, 123, 255,1)",
+                            pointBorderColor: "#fff",
+                            pointBorderWidth: 2,
+                            pointRadius: 5,
+                            pointHoverRadius: 10,
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        title: {
+                            display: true,
+                            text: 'Health Metrics Over Time',
+                            color: '#333',
+                            font: {
+                                size: 20,
+                                weight: 'bold',
+                                family: 'Arial'
+                            },
+                        },
+                    },
+                    scales: {
+                        x: {
+                            grid: {
+                                display: false
+                            },
+                            title: {
+                                display: true,
+                                text: "Date", // Now showing date on x-axis
+                            },
+                        },
+                        y: {
+                            title: {
+                                display: true,
+                                text: 'Metric Values',
+                            },
+                            min: 0,
+                            ticks: {
+                                stepSize: 20
+                            }
+                        }
+                    }
+                }
+            });
+        } else {
+            console.error('No valid data found.');
+            alert('No valid patient data to display.');
+        }
+    })
+    .catch(error => {
+        console.error('Error fetching data:', error);
+    });
+});

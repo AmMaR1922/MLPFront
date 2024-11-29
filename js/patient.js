@@ -3,6 +3,16 @@ const allPatientsApiUrl = 'https://anteshnatsh.tryasp.net/api/Patient/AllNames';
 const deletePatientApiUrl = 'https://anteshnatsh.tryasp.net/api/Patient/DeletePatient/'; // API endpoint for deleting a patient
 let hospitals = [];
 
+
+
+// Function to toggle the sidebar open/close
+function toggleSidebar() {
+    var sidebar = document.getElementById("sidebar");
+    sidebar.classList.toggle("open");  // Toggle the 'open' class on the sidebar
+}
+
+
+
 // Get the token from localStorage
 function getToken() {
     return localStorage.getItem('auth_token');

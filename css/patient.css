@@ -432,13 +432,7 @@ form button[type="button"]:hover {
         display: inline-block;
     }
 
-    button:hover {
-        background: linear-gradient(135deg, #0f766e 0%, #0e7490 100%);
-        transform: translateY(-2px);
-        box-shadow: 0 4px 12px rgba(13, 148, 136, 0.2);
-        /* box-shadow: 0 4px 12px rgba(0, 252, 122, 0.2); */
 
-    }
 
     button[type="button"] {
         background: #6c757d;
@@ -461,3 +455,116 @@ form button[type="button"]:hover {
 
 
 
+/* Basic Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+
+/* Basic Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Sidebar styles */
+.sidebar {
+    margin-top: 5%; 
+    height: 90%;
+    width: 0;  /* Initially hidden */
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: #333;
+    overflow-x: hidden;
+    transition: 0.3s;
+    padding-top: 10px;
+    z-index: 9999; /* Make sure sidebar stays on top of content */
+}
+
+.sidebar-item {
+    padding: 8px 16px;
+    text-decoration: none;
+    font-size: 18px;
+    color: white;
+    display: block;
+    transition: background-color 0.3s;
+}
+
+.sidebar-item i {
+    margin-right: 10px;
+}
+
+/* Hover effect */
+.sidebar-item:hover {
+    background-color: #dcdcdc;
+}
+
+/* Sidebar close button */
+.sidebar-close {
+    font-size: 36px;
+    color: #000;
+    background: none;
+    border: none;
+    position: absolute;
+    top: -15px;
+    right: -17px;
+}
+
+/* Sidebar toggle button (now on the left side of the screen) */
+.sidebar-toggle {
+    font-size: 28px;
+    background-color: #fff;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    position: fixed; /* Position the button fixed to the left */
+    top: 15px; /* Adjust top for vertical placement */
+    left: 15px; /* Place it on the left side */
+    z-index: 10000; /* Make sure the button is above everything else */
+}
+
+.sidebar-toggle:hover{
+    background-color: #fff !important;
+}
+
+.sidebar-toggle i {
+    margin-right: 8px;
+    color:black;
+}
+
+/* Animation when sidebar is open */
+.sidebar.open {
+    width: 250px; /* Sidebar expands when 'open' class is added */
+    /* background: transparent; */
+    background-color: #fff;
+}
+
+/* Optional content styles */
+.main-content {
+    padding: 100px;
+    transition: margin-left 0.3s;
+}
+
+
+.sidebar a{
+    margin-top: 0px;
+    color:#000;
+    padding:10px;
+}
+
+/* Mobile responsive */
+@media screen and (max-width: 768px) {
+    .sidebar-item {
+        font-size: 16px;
+        padding: 10px;
+    }
+    .sidebar-toggle {
+        padding: 10px 15px;
+    }
+}

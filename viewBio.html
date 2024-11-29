@@ -6,7 +6,8 @@
     <title>View Bio Data</title>
     <link rel="stylesheet" href="css/viewBio.css"> <!-- Linking the external CSS file -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.0/css/all.min.css" integrity="sha512-9xKTRVabjVeZmc+GUW8GgSmcREDunMM+Dt/GrzchfN8tkwHizc5RP4Ok/MXFFy5rIjJjzhndFScTceq5e6GvVQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> <!-- Load Chart.js first -->
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns"></script> <!-- Then load the adapter -->
 </head>
 <body>
 
@@ -35,6 +36,9 @@
         </header>
 
         
+
+
+          
     <h1 class="inbody">Bio Data for Patient</h1>
 
     <div class="PatientDataContainer">
@@ -43,6 +47,14 @@
         <span>Years Old</span>
         
     </div>
+
+
+    
+
+    <div class="chart-container">
+        <canvas id="SpecificPatientChart"></canvas>
+    </div>
+
 
 
     <button onclick="window.location.href='patient.html'">Back to patient</button>

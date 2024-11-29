@@ -34,6 +34,35 @@
         </div>
     </header>
 
+    <!-- <div class="ButtonsContainer">
+        <a href="temperature.html">temperature</a>
+        <a href="Patient-blood.html">Patient-blood</a>
+        <a href="SugarPercentage.html">SugarPercentage</a>
+    </div> -->
+
+    <button class="sidebar-toggle" onclick="toggleSidebar()">
+        <i class="fa fa-bars"></i> <!-- Hamburger Icon -->
+    </button>
+    
+    <!-- Sidebar -->
+    <div id="sidebar" class="sidebar">
+        <button class="sidebar-close" onclick="toggleSidebar()">&times;</button>
+        <a href="PatientGraph.html" class="sidebar-item">
+            <i class="fas fa-chart-line"></i> Critical Graph
+        </a>
+        <a href="temperature.html" class="sidebar-item">
+            <i class="fa fa-thermometer-half"></i> Temperature
+        </a>
+        <a href="Patient-blood.html" class="sidebar-item">
+            <i class="fa fa-tint"></i> Patient Blood
+        </a>
+        <a href="SuregerPercentageGraph.html" class="sidebar-item">
+            <i class="fa fa-syringe"></i> Sugar Percentage
+        </a>
+    </div>
+
+    
+
 
     <div class="patient-container">
         <h2>Patient Information</h2>

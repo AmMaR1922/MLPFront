@@ -224,3 +224,19 @@ button:hover {
     transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth transition for effect */
 }
 
+.chart-container {
+    margin-top: -50%;
+    width: 100%;       /* Ensures it fills the width of the page */
+    max-width: 100%;   /* Makes sure it doesn't exceed the page width */
+    height: 500px;     /* Set the height as needed */
+    overflow: hidden;  /* Prevents overflowing */
+    margin-top: 20px;  /* Adds margin to the top */
+}
+
+#SpecificPatientChart {
+    margin-top: 0 !important;
+    padding-top: 0 !important;
+    height: 400px; /* or whatever height you prefer */
+    width: 100% !important;
+}
+
