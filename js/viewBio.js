@@ -4,13 +4,19 @@ function getPatientNameFromUrl() {
     return urlParams.get('patientName');
 }
 
+function getPatientAgeFromUrl() {
+    const urlParams = new URLSearchParams(window.location.search);
+    return urlParams.get('patientAge');
+}
+
 const patientName = getPatientNameFromUrl(); // Get patient name from URL
+const patientAge = getPatientAgeFromUrl();
 const token = localStorage.getItem('auth_token'); // Get auth token from localStorage
 const getBioApiUrl = `https://anteshnatsh.tryasp.net/api/Patient/${patientName}`; // API endpoint
 const deleteBioApiUrl = 'https://anteshnatsh.tryasp.net/api/Patient/DeleteBio/'; // Delete Bio endpoint
 
 document.getElementById('PatientDataName').textContent = patientName;
-//document.getElementById('PatientDataAge').textContent = ;
+document.getElementById('PatientDataAge').textContent = patientAge;
 
 
 
