@@ -1,24 +1,30 @@
-// Import the language data (you could also fetch it from a separate file if needed)
-import { langData } from './langData.js';
-
 // Default language set to English
 let currentLang = 'en';
 
-// Function to change the language
-function changeLanguage(lang) {
-    const data = langData[lang];
-    document.getElementById('login-title').innerText = data.title;
-    document.getElementById('login-subtitle').innerText = data.subtitle;
-    document.getElementById('email-label').innerText = data.emailLabel;
-    document.getElementById('password-label').innerText = data.passwordLabel;
-    document.getElementById('forgot-password-link').innerText = data.forgotPassword;
-    document.getElementById('remember-text').innerText = data.rememberMe;
-    document.getElementById('sign-in-text').innerText = data.signInText;
+// Function to load language data (fetch from centralized JSON)
+async function loadLanguageData(lang) {
+    const response = await fetch('js/langData.json'); // Update path to your langData.json
+    const langData = await response.json();
+    return langData[lang];
+}
 
-    // Update the button text
+// Function to change the language dynamically
+async function changeLanguage(lang) {
+    const data = await loadLanguageData(lang);
+
+    // Update the login page text
+    document.getElementById('login-title').innerText = data.login.title;
+    document.getElementById('login-subtitle').innerText = data.login.subtitle;
+    document.getElementById('email-label').innerText = data.login.emailLabel;
+    document.getElementById('password-label').innerText = data.login.passwordLabel;
+    document.getElementById('forgot-password-link').innerText = data.login.forgotPassword;
+    document.getElementById('remember-text').innerText = data.login.rememberMe;
+    document.getElementById('sign-in-text').innerText = data.login.signInText;
+
+    // Update the language toggle button
     document.getElementById('lang-toggle-btn').innerText = data.langButtonText;
 
-    // Switch the language direction for Arabic (RTL)
+    // Switch to Arabic (RTL) if needed
     if (lang === 'ar') {
         document.documentElement.lang = 'ar';
         document.body.classList.add('rtl');
@@ -28,19 +34,13 @@ function changeLanguage(lang) {
     }
 }
 
-// Toggle the language on button click
+// Event listener for language toggle button
 document.getElementById('lang-toggle-btn').addEventListener('click', function () {
-    // Toggle between languages
-    if (currentLang === 'en') {
-        currentLang = 'ar';
-        this.classList.add('active');  // Add active class for Arabic
-    } else {
-        currentLang = 'en';
-        this.classList.remove('active');  // Remove active class for English
-    }
-
+    currentLang = currentLang === 'en' ? 'ar' : 'en'; // Toggle language
     changeLanguage(currentLang);
 });
 
-// Load the default language (English)
-changeLanguage(currentLang);
+// Load the default language (English) on page load
+document.addEventListener('DOMContentLoaded', () => {
+    changeLanguage(currentLang);
+});
