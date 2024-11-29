@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Patient Information</title>
+    <link rel="stylesheet" href="css/patient.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.0/css/all.min.css" integrity="sha512-9xKTRVabjVeZmc+GUW8GgSmcREDunMM+Dt/GrzchfN8tkwHizc5RP4Ok/MXFFy5rIjJjzhndFScTceq5e6GvVQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> <!-- Load Chart.js first -->
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns"></script> <!-- Then load the adapter -->
+
+
+</head>
+<body>
+
+        <!-- Header -->
+        <header class="header">
+            <div class="header-content">
+                <div class="header-left">
+                    <div class="logo">
+                        <div class="login-logo">
+                            <i class="fa-regular fa-hospital" style="color: #ffffff;"></i>
+                        </div>
+                    </div>
+                    <div class="user-info">
+                        <h1>Welcome, <span id="username">Loading...</span></h1>
+                        <p id="hospitalNameHeader">Loading...</p>
+                    </div>
+                </div>
+                <button class="logout-btn" onclick="handleLogout()" style="color: #000000;">
+                    <i class="fa-solid fa-arrow-right-from-bracket" style="color: #000000;"></i>
+                    Logout
+                </button>
+            </div>
+        </header>
+
+
+
+
+
+
+<!-- chart -->
+
+
+<div class="chart-container">
+    <canvas id="SugarPercentageChart" style="width: 100%; height: 500px;"></canvas>
+
+</div>
+
+<style>
+    #SugarPercentageChart{
+      width: 100% !important;  /* Make the chart take up full width of its container */
+      height: 500px !important;  /* Set a specific height (adjust as needed) */
+    }
+  </style>
+
+
+
+
+
+
+
+    <div class="patient-container">
+        <h2>Patients Sorted based on Suregure Percentage</h2>
+
+        <!-- Patient List Section -->
+        <div id="patientList" class="patient-list">
+            <!-- Patient list will be dynamically inserted here -->
+        </div>
+
+        <!-- Button to Navigate to Add Patient Form -->
+        <button onclick="window.location.href='addPatient.html'">Add Patient</button>
+        <button onclick="window.location.href='dashboard.html'">Back to Dashboardt</button>
+
+       
+    </div>
+
+    <script src="js/SurgerPercentageGraph.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>
