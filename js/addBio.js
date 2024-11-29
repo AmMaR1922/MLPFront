@@ -11,6 +11,8 @@ const addBioApiUrl = 'https://anteshnatsh.tryasp.net/api/Patient/AddBio/';
 // Set patient ID in hidden input
 document.getElementById('patientId').value = patientId;
 
+console.log(patientId);
+
 // Handle form submission
 document.getElementById('bioForm').addEventListener('submit', async (event) => {
     event.preventDefault();

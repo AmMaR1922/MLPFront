@@ -1,109 +1,43 @@
-/* Header styles */
-.header {
-    background: white;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-    padding: 1rem;
-    display: block;
-    position: fixed; /* Keep the header at the top */
-    top: 0; /* Align it to the top of the page */
-    left: 0;
-    width: 100%; /* Ensure it spans the full width of the page */
-    z-index: 999; /* Ensure*/
-}
-
-.header-content {
-    max-width: 1280px;
-    max-height: 50px;
-    margin: 0 auto;
-    padding: 0 1rem;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.header-left {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-}
-
-.logo {
-    background-color: #0d9488;
-    padding: 0.5rem;
-    border-radius: 0.5rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.logo i {
-    color: white;
-    font-size: 1.5rem;
-}
-
-.user-info h1 {
-    font-size: 1.25rem;
-    font-weight: 600;
-    color: #1a1a1a;
-}
-
-.user-info p {
-    font-size: 0.875rem;
-    color: #666;
-}
-
-.logout-btn {
-    font-size: 15px; /* Increase the font size */
-    padding: 12px 15px; /* Adjust the padding to make it larger */
-    border-radius: 8px; /* Optional: round the corners of the button */
-    background-color: #f0f0f0; /* Optional: background color */
-    border: none; /* Remove border */
-    cursor: pointer;
-    display: inline-flex; /* Make it an inline flex container */
-    align-items: center; /* Vertically center the icon and text */
-    gap: 10px; /* Space between icon and text */
-}
-
-.logout-btn i {
-    font-size: 24px; /* Increase the size of the icon */
-}
-
-.logout-btn:hover {
-    background-color: #dcdcdc; /* Optional: hover effect */
-}
+ 
 
 /* General Styles */
 body {
-    margin-top: 50px;
-    font-family: 'Arial', sans-serif;
     margin: 0;
     padding: 0;
-    background: linear-gradient(135deg, #e6f7f5 0%, #e6f0ff 100%);
-    color: #1a1a1a;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    min-height: 100vh;
+    font-family: 'Arial', sans-serif;
+    background: linear-gradient(135deg, #f9f9f9 0%, #e8f5f8 100%);
+    color: #333;
 }
-.yellow-sign {
+
+.yellow-sign, .red-sign, .green-sign {
     width: 10px;
     height: 10px;
-    background-color: yellow;
     border-radius: 50%;
     display: inline-block;
     margin-right: 5px;
 }
 
-/* Container for Patient Page */
+.yellow-sign {
+    background-color: yellow;
+}
+
+.red-sign {
+    background-color: red;
+}
+
+.green-sign {
+    background-color: green;
+}
+
+/* Container for Patient Form */
 .patient-container {
     background: white;
     border-radius: 1.5rem;
     padding: 2.5rem;
-    width: 100%;
-    margin: 100px;
-    max-width: 960px;
+    margin: 100px auto;
+    max-width: 768px;
     box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+    text-align: left;
     transform: translateY(0);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
@@ -114,59 +48,111 @@ body {
 }
 
 .patient-container h2 {
-    font-size: 1.75rem;
+    font-size: 2rem;
     font-weight: 700;
     color: #1a1a1a;
     margin-bottom: 1.5rem;
     text-align: center;
 }
 
-/* Patient Table */
+/* Form Styles */
+form {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+}
+
+form label {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #555;
+}
+
+form input,
+form select,
+form button {
+    padding: 0.75rem;
+    font-size: 1rem;
+    border-radius: 0.5rem;
+    border: 1px solid #ddd;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+form input:focus,
+form select:focus {
+    outline: none;
+    border-color: #0d9488;
+    box-shadow: 0 0 5px rgba(13, 148, 136, 0.2);
+}
+
+form button {
+    background: #0d9488;
+    color: white;
+    border: none;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-weight: bold;
+}
+
+form button:hover {
+    background: #0f766e;
+    box-shadow: 0 4px 12px rgba(13, 148, 136, 0.2);
+    transform: translateY(-2px);
+}
+
+form button[type="button"] {
+    background: #6c757d;
+}
+
+form button[type="button"]:hover {
+    background: #5a6268;
+}
+
+/* Hidden fields for conditional display */
+#pregnantField,
+#numberOfBirthsField {
+    display: none;
+}
+
+/* Table Styles */
 .patient-table {
     width: 100%;
     border-collapse: collapse;
-    margin-top: 1.5rem;
+    margin-top: 2rem;
     background-color: white;
-    /* border-radius: 1rem; */
+    border-radius: 1rem;
     overflow: hidden;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
-.patient-table th {
-    background: #ddd;
-    color: black;
+.patient-table th,
+.patient-table td {
     text-align: left;
     padding: 1rem;
-    text-transform: uppercase;
-    font-size: 0.9rem;
 }
 
-.patient-table td {
-    padding: 0.75rem 1rem;
-    font-size: 0.95rem;
-    color: #333;
-    border-bottom: 1px solid #f1f5f9;
+.patient-table th {
+    background: #ddd;
+    font-size: 0.9rem;
+    text-transform: uppercase;
 }
 
 .patient-table tr:hover {
     background-color: #e6f7f5;
 }
 
-.patient-table td:last-child {
-    display: flex;
-    gap: 0.5rem;
+.patient-table td {
+    border-bottom: 1px solid #f1f5f9;
 }
 
-/* Buttons in Table */
 .patient-table button {
-    border: none;
     padding: 0.5rem 1rem;
-    font-size: 0.85rem;
     border-radius: 0.5rem;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
     color: white;
-
+    cursor: pointer;
+    font-size: 0.85rem;
+    border: none;
 }
 
 #update {
@@ -174,67 +160,299 @@ body {
 }
 
 #update:hover {
-    background: #0f766e;
+    background: #0d9488;
 }
 
 #delete {
-    background:#db524b;
+    background: #db524b;
 }
 
 #delete:hover {
-    background:#de605a;
+    background: #de605a;
 }
 
-button {
-    background: #0f766e;;
-    color: white;
-    padding: 0.75rem 1.5rem;
-    border-radius: 0.75rem;
-    font-size: 1rem;
-    font-weight: 500;
-    cursor: pointer;
-    transition: all 0.2s ease;
-}
-/* Add this CSS in your existing styles */
-.red-sign {
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
-    background-color: red;
-    margin-right: 5px; /* Space between the dot and the text */
-    display: inline-block;
-}
-
-.green-sign {
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
-    background-color: green;
-    margin-right: 5px; /* Space between the dot and the text */
-    display: inline-block;
-}
-
-button:hover {
-    background: linear-gradient(135deg, #0f766e 0%, #0e7490 100%);
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(13, 148, 136, 0.2);
-    /* box-shadow: 0 4px 12px rgba(0, 252, 122, 0.2); */
-
-}
-
-button[type="button"] {
-    background: #6c757d;
-    color: white;
-}
-
-button[type="button"]:hover {
-    background: #5a6268;
-}
-
-.healthState{
+.healthState {
     color: #db524b !important;
-    /* color: #00ff8c;  */
 }
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+    .patient-container {
+        padding: 1.5rem;
+    }
+
+    form {
+        gap: 1rem;
+    }
+
+    form label,
+    form input,
+    form select,
+    form button {
+        font-size: 0.9rem;
+    }
+
+    .patient-container h2 {
+        font-size: 1.5rem;
+    }
+}
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    /* Header styles */
+    .header {
+        background: white;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        padding: 1rem;
+        display: block;
+        position: fixed; /* Keep the header at the top */
+        top: 0; /* Align it to the top of the page */
+        left: 0;
+        width: 100%; /* Ensure it spans the full width of the page */
+        z-index: 999; /* Ensure*/
+    }
+
+    .header-content {
+        max-width: 1280px;
+        max-height: 50px;
+        margin: 0 auto;
+        padding: 0 1rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .header-left {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+    }
+
+    .logo {
+        background-color: #0d9488;
+        padding: 0.5rem;
+        border-radius: 0.5rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .logo i {
+        color: white;
+        font-size: 1.5rem;
+    }
+
+    .user-info h1 {
+        font-size: 1.25rem;
+        font-weight: 600;
+        color: #1a1a1a;
+    }
+
+    .user-info p {
+        font-size: 0.875rem;
+        color: #666;
+    }
+
+    .logout-btn {
+        font-size: 15px; /* Increase the font size */
+        padding: 12px 15px; /* Adjust the padding to make it larger */
+        border-radius: 8px; /* Optional: round the corners of the button */
+        background-color: #f0f0f0; /* Optional: background color */
+        border: none; /* Remove border */
+        cursor: pointer;
+        display: inline-flex; /* Make it an inline flex container */
+        align-items: center; /* Vertically center the icon and text */
+        gap: 10px; /* Space between icon and text */
+    }
+
+    .logout-btn i {
+        font-size: 24px; /* Increase the size of the icon */
+    }
+
+    .logout-btn:hover {
+        background-color: #dcdcdc; /* Optional: hover effect */
+    }
+
+    /* General Styles */
+    body {
+        margin-top: 50px;
+        font-family: 'Arial', sans-serif;
+        margin: 0;
+        padding: 0;
+        background: linear-gradient(135deg, #e6f7f5 0%, #e6f0ff 100%);
+        color: #1a1a1a;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        min-height: 100vh;
+    }
+    .yellow-sign {
+        width: 10px;
+        height: 10px;
+        background-color: yellow;
+        border-radius: 50%;
+        display: inline-block;
+        margin-right: 5px;
+    }
+
+    /* Container for Patient Page */
+    .patient-container {
+        background: white;
+        border-radius: 1.5rem;
+        padding: 2.5rem;
+        width: 100%;
+        margin: 100px;
+        max-width: 960px;
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+        transform: translateY(0);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .patient-container:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 12px 32px rgba(0, 0, 0, 0.12);
+    }
+
+    .patient-container h2 {
+        font-size: 1.75rem;
+        font-weight: 700;
+        color: #1a1a1a;
+        margin-bottom: 1.5rem;
+        text-align: center;
+    }
+
+    /* Patient Table */
+    .patient-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 1.5rem;
+        background-color: white;
+        /* border-radius: 1rem; */
+        overflow: hidden;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    .patient-table th {
+        background: #ddd;
+        color: black;
+        text-align: left;
+        padding: 1rem;
+        text-transform: uppercase;
+        font-size: 0.9rem;
+    }
+
+    .patient-table td {
+        padding: 0.75rem 1rem;
+        font-size: 0.95rem;
+        color: #333;
+        border-bottom: 1px solid #f1f5f9;
+    }
+
+    .patient-table tr:hover {
+        background-color: #e6f7f5;
+    }
+
+    .patient-table td:last-child {
+        display: flex;
+        gap: 0.5rem;
+    }
+
+    /* Buttons in Table */
+    .patient-table button {
+        border: none;
+        padding: 0.5rem 1rem;
+        font-size: 0.85rem;
+        border-radius: 0.5rem;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+        color: white;
+
+    }
+
+    #update {
+        background: #0f766e;
+    }
+
+    #update:hover {
+        background: #0f766e;
+    }
+
+    #delete {
+        background:#db524b;
+    }
+
+    #delete:hover {
+        background:#de605a;
+    }
+
+    button {
+        background: #0f766e;;
+        color: white;
+        padding: 0.75rem 1.5rem;
+        border-radius: 0.75rem;
+        font-size: 1rem;
+        font-weight: 500;
+        cursor: pointer;
+        transition: all 0.2s ease;
+    }
+    /* Add this CSS in your existing styles */
+    .red-sign {
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        background-color: red;
+        margin-right: 5px; /* Space between the dot and the text */
+        display: inline-block;
+    }
+
+    .green-sign {
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        background-color: green;
+        margin-right: 5px; /* Space between the dot and the text */
+        display: inline-block;
+    }
+
+    button:hover {
+        background: linear-gradient(135deg, #0f766e 0%, #0e7490 100%);
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(13, 148, 136, 0.2);
+        /* box-shadow: 0 4px 12px rgba(0, 252, 122, 0.2); */
+
+    }
+
+    button[type="button"] {
+        background: #6c757d;
+        color: white;
+    }
+
+    button[type="button"]:hover {
+        background: #5a6268;
+    }
+
+    .healthState{
+        color: #db524b !important;
+        /* color: #00ff8c;  */
+    }
 
 
 

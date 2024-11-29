@@ -188,3 +188,39 @@ button:hover {
         padding: 8px 16px;
     }
 }
+
+/* General Styles for the Patient Data Container */
+.PatientDataContainer {
+    width: 100%;
+    max-width: 500px; /* Maximum width to make it more centered and readable */
+    margin: 20px auto; /* Centered with auto margin on left and right */
+    padding: 20px;
+    background-color: #f9f9f9; /* Light background */
+    border-radius: 10px; /* Rounded corners for a softer look */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Subtle shadow for 3D effect */
+    text-align: center; /* Centering text inside the container */
+    font-family: 'Arial', sans-serif; /* Choose a clean sans-serif font */
+}
+
+/* Style the Patient Name */
+#PatientDataName {
+    font-size: 24px; /* Larger font for the name */
+    font-weight: bold;
+    color: #333; /* Dark gray color for better readability */
+    margin-bottom: 10px; /* Space below the name */
+}
+
+/* Style the Patient Age */
+#PatientDataAge {
+    font-size: 18px; /* Smaller font for age */
+    font-weight: normal;
+    color: #666; /* Lighter gray for the age to differentiate from the name */
+}
+
+/* Optional: Adding hover effect for interactivity */
+.PatientDataContainer:hover {
+    transform: scale(1.05); /* Slight zoom effect on hover */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15); /* Stronger shadow on hover */
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth transition for effect */
+}
+
