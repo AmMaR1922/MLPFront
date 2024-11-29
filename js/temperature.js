@@ -67,14 +67,15 @@ document.addEventListener('DOMContentLoaded', function () {
 
                     return `
                         <tr style="${isAtRisk ? 'background-color: rgba(248,104,52,0.15);' : ''} 
-                                     ${isHealthy ? ' background-color: rgba(0, 252, 122, 0.1);' : ''}">
+                                     ${isHealthy ? ' background-color: rgba(0, 252, 122, 0.1);' : ''}
+                                     ">
                             <td>${patient.name}</td>
                             <td>${getHospitalName(patient.hospitalId)}</td>
                             <td>
-                                <button id="AddBio" onclick="window.location.href='addBio.html?patientId=${patient.id}'">Add Bio</button>
-                                <button id="ViewBio" onclick="window.location.href='viewBio.html?patientName=${patient.name}&patientAge=${patient.age}'">View Bio</button>
-                                <button id="update" onclick="window.location.href='updatePatient.Html?patientId=${patient.id}'">Update</button>
-                                <button id="delete" onclick="deletePatient('${patient.id}')">Delete</button>
+                                <button class="addBio" data-patient-id="${patient.id}">Add Bio</button>
+                                <button class="viewBio" data-patient-name="${patient.name}">View Bio</button>
+                                <button class="update" data-patient-id="${patient.id}">Update</button>
+                                <button class="delete" data-patient-id="${patient.id}">Delete</button>
                             </td>
                         </tr>
                     `;
@@ -85,33 +86,32 @@ document.addEventListener('DOMContentLoaded', function () {
 
         // Attach event listeners to buttons dynamically
         document.querySelectorAll('.delete').forEach(button => {
-            button.addEventListener('click', function () {
+            button.addEventListener('click', function() {
                 const patientId = button.getAttribute('data-patient-id');
-                showModal('Are you sure you want to delete this patient?', function () {
+                showModal('Are you sure you want to delete this patient?', function() {
                     deletePatient(patientId);
                 });
             });
         });
 
         document.querySelectorAll('.update').forEach(button => {
-            button.addEventListener('click', function () {
+            button.addEventListener('click', function() {
                 const patientId = button.getAttribute('data-patient-id');
-                showModal('Are you sure you want to update this patient?', function () {
-                    alert(`You are updating patient with ID: ${patientId}`);
+                showModal('Are you sure you want to update this patient?', function() {
                     window.location.href = `updatePatient.Html?patientId=${patientId}`;
                 });
             });
         });
 
         document.querySelectorAll('.addBio').forEach(button => {
-            button.addEventListener('click', function () {
+            button.addEventListener('click', function() {
                 const patientId = button.getAttribute('data-patient-id');
                 window.location.href = `addBio.html?patientId=${patientId}`;
             });
         });
 
         document.querySelectorAll('.viewBio').forEach(button => {
-            button.addEventListener('click', function () {
+            button.addEventListener('click', function() {
                 const patientName = button.getAttribute('data-patient-name');
                 window.location.href = `viewBio.html?patientName=${patientName}`;
             });
@@ -235,21 +235,36 @@ document.addEventListener('DOMContentLoaded', function () {
                     title: {
                         display: true,
                         text: 'Patients with Avg Temperature '
-                    }
+                    },
+                    font: {
+                        size: 20, // Font size
+                        weight: 'bold', // Font weight
+                        family: 'Arial' // Font family
+                    },
                 },
                 scales: {
                     x: {
                         type: 'time',
                         title: {
                             display: true,
-                            text: 'Date'
+                            text: 'Date',
+                            font: {
+                                weight: 'bold', // Make the font bold
+                                size: 14 // Optional: Adjust font size
+                            },
+                            color: '#f4531880' // Set to a suitable color (e.g., dark gray)
                         }
                     },
                     y: {
                         beginAtZero: true,
                         title: {
                             display: true,
-                            text: 'Count of Patients'
+                            text: 'Count of Patients',
+                            font: {
+                                weight: 'bold', // Make the font bold
+                                size: 14 // Optional: Adjust font size
+                            },
+                            color: '#f8683480' // Set to a suitable color (e.g., blue)
                         }
                     }
                 }
