@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Health Dashboard</title>
     <link rel="stylesheet" href="css/dashboard.css">
-    <!-- <link href="https://unpkg.com/lucide-static/font/lucide.css" rel="stylesheet">  -->
+    <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.0/css/all.min.css" integrity="sha512-9xKTRVabjVeZmc+GUW8GgSmcREDunMM+Dt/GrzchfN8tkwHizc5RP4Ok/MXFFy5rIjJjzhndFScTceq5e6GvVQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>   
 <body>
@@ -20,17 +20,22 @@
                         </div>
                     </div>
                     <div class="user-info">
-                        <h1>Welcome, <span id="username">Loading...</span></h1>
+                        <h1 id="welcomeMessage" style="display: inline;">Welcome, </h1><h1 style="display: inline;" id="username">Loading...</h1>
                         <p id="hospitalNameHeader">Loading...</p>
                     </div>
                 </div>
 
                 <div class="header-buttons">
-                   
+                    <!-- Language Selector -->
+                    <select id="languageSelector" onchange="changeLanguage(event)">
+                        <option value="en">English</option>
+                        <option value="ar">العربية</option>
+                    </select>
+
                     <!-- Logout Button -->
                     <button class="logout-btn" onclick="handleLogout()">
                         <i class="fa-solid fa-arrow-right-from-bracket" style="color: #000000;"></i>
-                        Logout
+                        <span id="logoutButton">Logout</span>
                     </button>
                 </div>
             </div>
@@ -41,10 +46,10 @@
             <div class="dashboard-grid">
                 <!-- Patients Count Card -->
                 <div class="dashboard-card" onclick="navigateTo('Patient')">
-                    <div class="card-icon" >
+                    <div class="card-icon">
                         <i class="fa-solid fa-users" style="color: #4CAF50;"></i>
                     </div>
-                    <h3 >Total Patients</h3>
+                    <h3 id="totalPatientsTitle">Total Patients</h3>
                     <p id="patientCount">Loading...</p>
                 </div>
                 <!-- Hospitals Count Card -->
@@ -52,22 +57,22 @@
                     <div class="card-icon">
                         <i class="fa-solid fa-hospital" style="color: #2196F3;"></i>
                     </div>
-                    <h3>Total Hospitals</h3>
+                    <h3 id="totalHospitalsTitle">Total Hospitals</h3>
                     <p id="hospitalCount">Loading...</p>
                 </div>
             </div>
         </main>
-        
 
         <!-- Footer -->
         <footer class="footer">
-            <p>&copy; <span id="currentYear"></span> Health Dashboard. All rights reserved.</p>
+            <p>&copy; <span id="currentYear"></span> <span id="footerMessage">Health Dashboard. All rights reserved.</span></p>
         </footer>
     </div>
 
+    <!-- Include DashLocal.js before other scripts -->
+    <script src="js/DashLocal.js"></script>  <!-- Load DashLocal.js first -->
     <script src="js/auth.js"></script>
     <script src="js/app.js"></script>
     <script src="js/dashboard.js"></script>
-    
 </body>
 </html>
