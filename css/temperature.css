@@ -1,71 +1,318 @@
-body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
+
+/* Header styles */
+.header {
+    background: white;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    padding: 1rem;
+    display: block;
+    position: fixed; /* Keep the header at the top */
+    top: 0; /* Align it to the top of the page */
+    left: 0;
+    width: 100%; /* Ensure it spans the full width of the page */
+    z-index: 999; /* Ensure*/
 }
 
-.header {
+.header-content {
+    max-width: 1280px;
+    max-height: 50px;
+    margin: 0 auto;
+    padding: 0 1rem;
     display: flex;
     justify-content: space-between;
-    padding: 10px;
-    background-color: #1b4525;
-    color: white;
+    align-items: center;
 }
 
-.header button {
-    background-color: #62a572;
-    border: none;
+.header-left {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.logo {
+    background-color: #0d9488;
+    padding: 0.5rem;
+    border-radius: 0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.logo i {
     color: white;
-    padding: 10px 20px;
+    font-size: 1.5rem;
+}
+
+.user-info h1 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: #1a1a1a;
+}
+
+.user-info p {
+    font-size: 0.875rem;
+    color: #666;
+}
+
+
+
+.logout-btn {
+    font-size: 15px; /* Increase the font size */
+    padding: 12px 15px; /* Adjust the padding to make it larger */
+    border-radius: 8px; /* Optional: round the corners of the button */
+    background-color: #f0f0f0; /* Optional: background color */
+    border: none; /* Remove border */
     cursor: pointer;
-    font-size: 16px;
-    border-radius: 5px;
+    display: inline-flex; /* Make it an inline flex container */
+    align-items: center; /* Vertically center the icon and text */
+    gap: 10px; /* Space between icon and text */
 }
 
-.header button:hover {
-    background-color: #4a8a56;
+.logout-btn i {
+    font-size: 24px; /* Increase the size of the icon */
 }
 
-table {
+.logout-btn:hover {
+    background-color: #dcdcdc; /* Optional: hover effect */
+}
+
+/* General Styles */
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(135deg, #e6f7f5 0%, #e6f0ff 100%);
+    color: #1a1a1a;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+}
+.yellow-sign {
+    width: 10px;
+    height: 10px;
+    background-color: yellow;
+    border-radius: 50%;
+    display: inline-block;
+    margin-right: 5px;
+}
+
+/* Container for Patient Page */
+.patient-container {
+    background: white;
+    border-radius: 1.5rem;
+    padding: 2.5rem;
+    width: 100%;
+    margin: 100px;
+    max-width: 960px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+    transform: translateY(0);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.patient-container:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.12);
+}
+
+.patient-container h2 {
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: #1a1a1a;
+    margin-bottom: 1.5rem;
+    text-align: center;
+}
+
+/* Patient Table */
+.patient-table {
     width: 100%;
     border-collapse: collapse;
-    margin: 20px 0;
+    margin-top: 1.5rem;
+    background-color: white;
+    border-radius: 1rem;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
-table th, table td {
-    border: 1px solid #ccc;
-    padding: 10px;
+.patient-table th {
+    background: #ddd;
+    color: black;
     text-align: left;
+    padding: 1rem;
+    text-transform: uppercase;
+    font-size: 0.9rem;
 }
 
-table th {
-    background-color: #f4f4f4;
+.patient-table td {
+    padding: 0.75rem 1rem;
+    font-size: 0.95rem;
+    color: #333;
+    border-bottom: 1px solid #f1f5f9;
 }
 
-canvas {
-    max-width: 100%;
-    height: 400px;
+.patient-table tr:hover {
+    background-color: #e6f7f5;
 }
 
-canvas 
+.patient-table td:last-child {
+    display: flex;
+    gap: 0.5rem;
+}
 
-{
-    background-color: #555;
+/* Buttons in Table */
+.patient-table button {
+    border: none;
+    padding: 0.5rem 1rem;
+    font-size: 0.85rem;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    color: white;
+    
+}
+
+#update {
+    background: #0f766e;
+}
+
+#update:hover {
+    background: #0f766e;
+}
+
+#delete {
+    background:#db524b;
+}
+
+#delete:hover {
+    background:#de605a;
+}
+
+button {
+    background: #0f766e;;
+    color: white;
+    padding: 0.75rem 1.5rem;
+    border-radius: 0.75rem;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+/* Add this CSS in your existing styles */
+.red-sign {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: red;
+    margin-right: 5px; /* Space between the dot and the text */
+    display: inline-block;
+}
+
+.green-sign {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: green;
+    margin-right: 5px; /* Space between the dot and the text */
+    display: inline-block;
+}
+
+button:hover {
+    background: linear-gradient(135deg, #0f766e 0%, #0e7490 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(13, 148, 136, 0.2);
+}
+
+button[type="button"] {
+    background: #6c757d;
+    color: white;
+}
+
+button[type="button"]:hover {
+    background: #5a6268;
+}
+
+.healthState{
+    color: #db524b !important; 
+}
+canvas{
+    margin-top: 5rem;
+    /* background-color: #f8683480; */
+
 }
 
 
+/* The Modal (background) */
+.modal {
+    display: none;  /* Hidden by default */
+    position: fixed; 
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scrolling if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+    padding-top: 60px;
+}
 
-/* Highlight patient state based on their health condition */
-.state-at-risk {
-    background-color: rgba(255, 0, 0, 0.2); /* Light red background */
-    color: red; /* Red text for better visibility */
+/* Modal Content */
+.modal-content {
+    background-color: #fefefe;
+    margin: 5% auto; /* Centering the modal */
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%; /* Could be more or less, depending on screen size */
+    max-width: 500px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    text-align: center;
+}
+
+/* The Close Button */
+.close {
+    color: #aaa;
+    font-size: 28px;
+    font-weight: bold;
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    cursor: pointer;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+/* Button Styles */
+.modal-actions {
+    margin-top: 20px;
+}
+
+.modal-actions button {
+    padding: 10px 20px;
+    font-size: 16px;
     border-radius: 5px;
-    padding: 5px;
+    margin: 5px;
 }
 
-.state-healthy {
-    background-color: rgba(0, 255, 0, 0.2); /* Light green background */
-    color: green; /* Green text for better visibility */
-    border-radius: 5px;
-    padding: 5px;
+.modal-actions .btn-danger {
+    background-color: #f44336;
+    color: white;
+}
+
+.modal-actions .btn-danger:hover {
+    background-color: #d32f2f;
+}
+
+.modal-actions .btn-secondary {
+    background-color: #8e8e8e;
+    color: white;
+}
+
+.modal-actions .btn-secondary:hover {
+    background-color: #6d6d6d;
 }

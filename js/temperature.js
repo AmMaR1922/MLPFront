@@ -1,62 +1,52 @@
 document.addEventListener('DOMContentLoaded', function () {
-    const ctx = document.getElementById('AverageTempratureChart').getContext('2d');
+    // API URLs and other constants
+    const allBiologicalIndicatorsApiUrl = 'https://anteshnatsh.tryasp.net/api/Patient/GetAllBiologicalIndicator';
+    const hospitalsApiUrl = 'https://anteshnatsh.tryasp.net/api/Hospital/GetHospitals';
+    const allPatientsApiUrl = 'https://anteshnatsh.tryasp.net/api/Patient/AllNames';
+    const deletePatientApiUrl = 'https://anteshnatsh.tryasp.net/api/Patient/DeletePatient/';
+    let hospitals = [];
 
-    // Get the token from localStorage
+    const ctx = document.getElementById('AverageTempratureChart').getContext('2d');
+    const gradient = ctx.createLinearGradient(0, 0, 0, 400);
+    gradient.addColorStop(0, 'rgba(248, 104, 52, 0.5)');
+    gradient.addColorStop(1, 'rgba(248, 104, 52, 0)');
+
+    // Utility function to get token
     function getToken() {
         return localStorage.getItem('auth_token');
     }
 
-    const token = getToken(); // Get token from localStorage
-    const allBiologicalIndicatorsApiUrl = 'https://anteshnatsh.tryasp.net/api/Patient/GetAllBiologicalIndicator'; // API endpoint
-    const hospitalsApiUrl = 'https://anteshnatsh.tryasp.net/api/Hospital/GetHospitals';
-    const allPatientsApiUrl = 'https://anteshnatsh.tryasp.net/api/Patient/AllNames';
-    const deletePatientApiUrl = 'https://anteshnatsh.tryasp.net/api/Patient/DeletePatient/'; // API endpoint for deleting a patient
-    let hospitals = [];
-const gradient = ctx.createLinearGradient(0, 0, 0, 400);
-gradient.addColorStop(0, 'rgba(248, 104, 52, 0.5)');
-gradient.addColorStop(1, 'rgba(248, 104, 52, 0)');
+    const token = getToken();
 
-    // Fetch hospitals and store them globally
+    // Fetch hospitals
     async function fetchHospitals() {
         try {
             const response = await fetch(hospitalsApiUrl, {
                 headers: { 'Authorization': `Bearer ${token}` }
             });
-
             if (!response.ok) throw new Error(`Error fetching hospitals: ${response.status}`);
             hospitals = await response.json();
-            console.log("Fetched Hospitals:", hospitals);
         } catch (error) {
             console.error('Error fetching hospitals:', error);
         }
     }
 
-    // Fetch and display patients after hospitals data is loaded
+    // Fetch patients
     async function fetchPatients() {
-        await fetchHospitals(); // Ensure hospitals are fetched first
-
+        await fetchHospitals();
         try {
             const response = await fetch(allPatientsApiUrl, {
                 headers: { 'Authorization': `Bearer ${token}` }
             });
-
             if (!response.ok) throw new Error(`Error fetching patients: ${response.status}`);
             const patients = await response.json();
-            console.log("Fetched Patients:", patients);
-
-            patients.sort((a, b) => {
-                const bpA = a.lastBiologicalIndicator?.averageTemprature ?? 0;
-                const bpB = b.lastBiologicalIndicator?.averageTemprature ?? 0;
-                return bpB - bpA;
-            });
-
             renderPatients(patients);
         } catch (error) {
             console.error('Error fetching patients:', error);
         }
     }
 
-    // Render the patients in the table
+    // Render patients in the table
     function renderPatients(patients) {
         const patientList = document.getElementById('patientList');
         patientList.innerHTML = `
@@ -64,16 +54,20 @@ gradient.addColorStop(1, 'rgba(248, 104, 52, 0)');
                 <thead>
                     <tr>
                         <th>Name</th>
-                        <th>State</th>
                         <th>Hospital</th>
                         <th>Actions</th>
                     </tr>
                 </thead>
                 <tbody>
-                    ${patients.map(patient => `
-                        <tr>
+                ${patients.map(patient => {
+                    const condition = patient.lastBiologicalIndicator?.healthCondition || 'Unspecified';
+                    const isAtRisk = condition === 'At Risk';
+                    const isHealthy = condition === 'Healthy';
+
+                    return `
+                        <tr style="${isAtRisk ? 'background-color: rgba(248,104,52,0.15);' : ''} 
+                                     ${isHealthy ? ' background-color: rgba(0, 252, 122, 0.1);' : ''}">
                             <td>${patient.name}</td>
-                            <td>${patient.lastBiologicalIndicator?.healthCondition || 'Unknown'}</td>
                             <td>${getHospitalName(patient.hospitalId)}</td>
                             <td>
                                 <button id="AddBio" onclick="window.location.href='addBio.html?patientId=${patient.id}'">Add Bio</button>
@@ -82,19 +76,73 @@ gradient.addColorStop(1, 'rgba(248, 104, 52, 0)');
                                 <button id="delete" onclick="deletePatient('${patient.id}')">Delete</button>
                             </td>
                         </tr>
-                    `).join('')}
+                    `;
+                }).join('')}
                 </tbody>
             </table>
         `;
+
+        // Attach event listeners to buttons dynamically
+        document.querySelectorAll('.delete').forEach(button => {
+            button.addEventListener('click', function() {
+                const patientId = button.getAttribute('data-patient-id');
+                showModal('Are you sure you want to delete this patient?', function() {
+                    deletePatient(patientId);
+                });
+            });
+        });
+
+        document.querySelectorAll('.update').forEach(button => {
+            button.addEventListener('click', function() {
+                const patientId = button.getAttribute('data-patient-id');
+                showModal('Are you sure you want to update this patient?', function() {
+                    window.location.href = `updatePatient.Html?patientId=${patientId}`;
+                });
+            });
+        });
+
+        document.querySelectorAll('.addBio').forEach(button => {
+            button.addEventListener('click', function() {
+                const patientId = button.getAttribute('data-patient-id');
+                window.location.href = `addBio.html?patientId=${patientId}`;
+            });
+        });
+
+        document.querySelectorAll('.viewBio').forEach(button => {
+            button.addEventListener('click', function() {
+                const patientName = button.getAttribute('data-patient-name');
+                window.location.href = `viewBio.html?patientName=${patientName}`;
+            });
+        });
     }
 
-    // Get the hospital name based on hospitalId
+    // Get hospital name by ID
     function getHospitalName(hospitalId) {
         const hospital = hospitals.find(h => h.id === hospitalId);
         return hospital ? hospital.name : 'Unknown';
     }
 
-    // Delete the patient using the API
+    // Show Modal
+    function showModal(message, onConfirm) {
+        modalMessage.textContent = message;
+        modal.style.display = "block";
+
+        confirmBtn.onclick = function () {
+            onConfirm();
+            closeModal();
+        };
+
+        cancelBtn.onclick = function () {
+            closeModal();
+        };
+    }
+
+    // Close Modal
+    function closeModal() {
+        modal.style.display = "none";
+    }
+
+    // Confirm delete patient
     async function deletePatient(patientId) {
         try {
             const response = await fetch(`${deletePatientApiUrl}${patientId}`, {
@@ -104,7 +152,6 @@ gradient.addColorStop(1, 'rgba(248, 104, 52, 0)');
                     'Content-Type': 'application/json'
                 }
             });
-
             if (response.ok) {
                 alert('Patient deleted successfully!');
                 fetchPatients();
@@ -117,20 +164,14 @@ gradient.addColorStop(1, 'rgba(248, 104, 52, 0)');
         }
     }
 
-    // Fetch biological indicators from API
+    // Fetch biological indicators
     async function fetchBiologicalIndicators() {
         try {
             const response = await fetch(allBiologicalIndicatorsApiUrl, {
-                method: 'GET',
-                headers: {
-                    'Authorization': `Bearer ${token}`,
-                    'Content-Type': 'application/json'
-                }
+                headers: { 'Authorization': `Bearer ${token}` }
             });
-
             if (!response.ok) throw new Error(`Error fetching data: ${response.status}`);
             const data = await response.json();
-            console.log("Biological Indicators Data:", data);
             return data;
         } catch (error) {
             console.error('Error fetching biological indicators:', error);
@@ -142,60 +183,48 @@ gradient.addColorStop(1, 'rgba(248, 104, 52, 0)');
     async function processGraphData() {
         const data = await fetchBiologicalIndicators();
         const dateCounts = {};
+        const patientData = {};
 
         data.forEach(record => {
-            console.log("Processing Record:", record);
+            const { date, averageTemprature, name, healthCondition, hospitalId } = record;
+            if (date && averageTemprature > 37.1) {
+                const formattedDate = new Date(date).toISOString().split('T')[0];
+                dateCounts[formattedDate] = (dateCounts[formattedDate] || 0) + 1;
 
-            const { date, averageTemprature } = record;
-
-            if (date && averageTemprature && averageTemprature > 37.1) {
-                if (!dateCounts[date]) {
-                    dateCounts[date] = 0;
+                if (!patientData[formattedDate]) {
+                    patientData[formattedDate] = [];
                 }
-                dateCounts[date]++;
-            } else {
-                console.warn("Skipped Record (Invalid Data):", record);
+                patientData[formattedDate].push({ name, healthCondition, hospitalId });
             }
         });
 
         const sortedDateCounts = Object.entries(dateCounts)
             .sort((a, b) => new Date(a[0]) - new Date(b[0]));
 
-        const timeLabels = sortedDateCounts.map(item => item[0]);
-        const counts = sortedDateCounts.map(item => item[1]);
-
-        return { timeLabels, counts };
+        return {
+            timeLabels: sortedDateCounts.map(item => item[0]),
+            counts: sortedDateCounts.map(item => item[1]),
+            patientData
+        };
     }
 
-    // Create graph using Chart.js
+    // Create graph
     async function createGraph() {
         const { timeLabels, counts } = await processGraphData();
-
-        console.log("Time Labels:", timeLabels);
-        console.log("Counts:", counts);
-
-        if (!timeLabels.length || !counts.length) {
-            console.error("No data available to display in the graph.");
-            return;
-        }
 
         new Chart(ctx, {
             type: 'line',
             data: {
                 labels: timeLabels,
                 datasets: [{
-                    label: 'Count of Patients with Avg Temp > 37.1',
+                    label: 'Count',
                     data: counts,
-                    borderColor: 'rgba(248, 104, 52, 0.8)',
+                    borderColor: 'rgba(248, 104, 52, 0.5)',
                     backgroundColor: gradient,
+                    pointBackgroundColor: 'rgba(248, 104, 52, 0.5)',
                     borderWidth: 2,
                     tension: 0.3,
-                    fill: true,
-                    pointBackgroundColor: "rgba(248, 104, 52,1)",
-                    pointBorderColor: "#fff",
-                    pointBorderWidth: 2,
-                    pointRadius: 5,
-                    pointHoverRadius: 10,
+                    fill: true
                 }]
             },
             options: {
@@ -203,64 +232,55 @@ gradient.addColorStop(1, 'rgba(248, 104, 52, 0)');
                 plugins: {
                     title: {
                         display: true,
-                        text: 'Patients with Avg Temperature > 37.1 by Date',
-                        font: { size: 18 }
-                    }
+                        text: 'Patients with Avg Temperature '
+                    },
+                    font: {
+                        size: 20, // Font size
+                        weight: 'bold', // Font weight
+                        family: 'Arial' // Font family
+                    },
                 },
                 scales: {
                     x: {
-                        grid: {
-                            display: false // Disable grid lines on the x-axis
-                        },
                         type: 'time',
-                        time: {
-                            unit: 'day',
-                            tooltipFormat: 'MMM dd, yyyy'
-                        },
                         title: {
                             display: true,
-                            text: 'Date'
+                            text: 'Date',
+                            font: {
+                                weight: 'bold', // Make the font bold
+                                size: 14 // Optional: Adjust font size
+                            },
+                            color: '#f4531880' // Set to a suitable color (e.g., dark gray)
                         }
                     },
                     y: {
-                        beginAtZero: false,
+                        beginAtZero: true,
                         title: {
                             display: true,
-                            text: 'Count of Patients'
+                            text: 'Count of Patients',
+                            font: {
+                                weight: 'bold',
+                                size: 14
+                            },
+                            color: '#f4531880'
                         }
                     }
                 }
             }
-            ,plugins: [
-                {
-                    id: 'hoverLine',
-                    afterDraw: (chart) => {
-                        const { ctx, tooltip } = chart;
-                        if (!tooltip || tooltip.opacity === 0) return;
-        
-                        const activePoint = tooltip.dataPoints[0];
-                        if (!activePoint) return;
-        
-                        const x = activePoint.element.x;
-                        const y = activePoint.element.y;
-                        const chartArea = chart.chartArea;
-        
-                        // Draw the line from the hovered point to the x-axis
-                        ctx.save();
-                        ctx.beginPath();
-                        ctx.moveTo(x, y);
-                        ctx.lineTo(x, chartArea.bottom);
-                        ctx.strokeStyle = 'rgba(248, 104, 52,1)';
-                        ctx.lineWidth = 2;
-                        ctx.stroke();
-                        ctx.restore();
-                    }
-                }
-            ]
         });
     }
 
-    // Fetch data and initialize graph
+    // Modal Elements
+    const modal = document.getElementById("modal");
+    const closeBtn = document.querySelector(".close");
+    const confirmBtn = document.getElementById("modal-confirm");
+    const cancelBtn = document.getElementById("modal-cancel");
+    const modalMessage = document.getElementById("modal-message");
+
+    // Close modal when clicking on the close button
+    closeBtn.addEventListener('click', closeModal);
+
+    // Fetch initial data
     fetchPatients();
     createGraph();
 });
