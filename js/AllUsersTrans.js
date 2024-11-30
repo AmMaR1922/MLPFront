@@ -3,16 +3,26 @@ const translations = {
         welcomeMessage: "Welcome, ",
         hospitalNameHeader: "Loading...",
         logoutButton: "Logout",
+        Username: "Username",
+        Hospital: "Hospoital",
+        Email: "Email",
         Action:"Action",
         delete:"Delete",
+        UsersData: "Users Data",
+        AddUser : "AddUser"
         // Add any other fields you want to translate
     },
     ar: {
         welcomeMessage: "أهلاً وسهلاً، ",
         hospitalNameHeader: "جارٍ التحميل...",
         logoutButton: "تسجيل الخروج",
+        Username: "اسم المستخدم",
+        Hospital: "المستشفي",
+        Email: "البريد الالكتروني",
         Action:"التحكم",
-        delete:"حذف"
+        delete:"حذف",
+        UsersData: "بيانات المستخدمين",
+        AddUser : "اضافة مستخدم"
 
         // Add any other fields you want to translate
     }
@@ -33,6 +43,17 @@ function changeLanguage() {
     document.getElementById("welcomeMessage").innerText = translation.welcomeMessage;
     document.getElementById("hospitalNameHeader").innerText = translation.hospitalNameHeader;
     document.getElementById("logoutButton").innerText = translation.logoutButton;
+    document.getElementById("Username").innerText = translation.Username;
+    document.getElementById("Email").innerText = translation.Email;
+    document.getElementById("Hospital").innerText = translation.Hospital;
+    document.getElementById("Action").innerText = translation.Action;
+    document.getElementById("UsersData").innerText = translation.UsersData;
+    document.getElementById("AddUser").innerText = translation.AddUser;
+
+
+
+
+
     
     
     // Save the selected language in localStorage
