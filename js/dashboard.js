@@ -7,6 +7,7 @@ document.addEventListener("DOMContentLoaded", () => {
             console.error("Auth token not found");
             document.getElementById("patientCount").innerText = "Unauthorized";
             document.getElementById("hospitalCount").innerText = "Unauthorized";
+            document.getElementById("userCount").innerText = "Unauthorized";
             return;
         }
 
@@ -46,6 +47,26 @@ document.addEventListener("DOMContentLoaded", () => {
         } catch (error) {
             console.error("Error fetching hospital count:", error);
             document.getElementById("hospitalCount").innerText = "Error";
+        }
+
+
+        try {
+            // Fetch user count
+            const userResponse = await fetch("https://anteshnatsh.tryasp.net/api/Account/GetAllUsers", {
+                method: "GET",
+                headers: {
+                    "Authorization": `Bearer ${token}`
+                }
+            });
+
+            if (!userResponse.ok) throw new Error("Failed to fetch users");
+
+            const userList = await userResponse.json();
+            const userCount = Array.isArray(userList) ? userList.length : 0;
+            countUp("userCount", userCount);
+        } catch (error) {
+            console.error("Error fetching user count:", error);
+            document.getElementById("userCount").innerText = "Error";
         }
     };
 

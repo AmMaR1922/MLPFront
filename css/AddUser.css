@@ -1,0 +1,134 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+.container {
+    background-color: #fff;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    width: 400px;
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+label {
+    display: block;
+    font-size: 14px;
+    margin-bottom: 5px;
+    color: #333;
+}
+
+input {
+    width: 100%;
+    padding: 10px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+button {
+    width: 100%;
+    padding: 10px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+
+
+/* Style the select container */
+select {
+    font-family: Arial, sans-serif;
+    font-size: 1rem;
+    color: #333;
+    padding: 10px 15px;
+    width: 100%;
+    /* max-width: 300px;  Limiting width */
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+    appearance: none;  /* Remove default styling in most browsers */
+    cursor: pointer;
+    transition: all 0.3s ease; /* Smooth transition for hover and focus states */
+}
+
+/* Focus state: when the user clicks on the dropdown */
+select:focus {
+    border-color: #0f766e;  /* Highlight border color when focused */
+    outline: none;  /* Remove the default focus outline */
+    box-shadow: 0 0 5px rgba(15, 118, 110, 0.3);  /* Subtle box-shadow for focus effect */
+}
+
+/* Placeholder styling for the first option */
+option:first-child {
+    color: #aaa;  /* Light gray for the default "Select a Hospital" option */
+}
+
+/* Hover effect for the dropdown */
+select:hover {
+    border-color: #0d615a;  /* Change border color when hovered */
+}
+
+/* Style for the dropdown arrow */
+select::-ms-expand {
+    display: none;  /* Remove the default dropdown arrow for IE */
+}
+
+/* Custom dropdown icon (optional) */
+.select-wrapper {
+    position: relative;
+    display: inline-block;
+}
+
+.select-wrapper::after {
+    content: '\25BC';  /* Downward arrow character */
+    font-size: 1.2rem;
+    color: #0f766e;  /* Green arrow */
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);  /* Center the arrow */
+    pointer-events: none;  /* So it doesn’t interfere with clicking */
+}
+
+/* Optional: Style for the container around the select element */
+.select-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 20px 0;
+}
+
+.select-container label {
+    font-size: 1rem;
+    margin-right: 10px;
+    font-weight: 600;
+    color: #333;
+}

@@ -6,6 +6,7 @@ const translations = {
         welcomeMessage: "Welcome, ",
         totalPatientsTitle: "Total Patients",
         totalHospitalsTitle: "Total Hospitals",
+        totalUsersTitle: "Total Users",
         footerMessage: "Health Dashboard. All rights reserved.",
         hospitalNameHeader: "Loading...",
         logoutButton: "Logout",
@@ -14,6 +15,7 @@ const translations = {
         welcomeMessage: "أهلاً وسهلاً، ",
         totalPatientsTitle: "إجمالي المرضى",
         totalHospitalsTitle: "إجمالي المستشفيات",
+        totalUsersTitle: "إجمالي المستخدمين",
         footerMessage: "لوحة تحكم الصحة. جميع الحقوق محفوظة.",
         hospitalNameHeader: "جارٍ التحميل...",
         logoutButton: "تسجيل الخروج",
@@ -29,6 +31,7 @@ function changeLanguage(event) {
     document.getElementById("welcomeMessage").innerText = translation.welcomeMessage;
     document.getElementById("totalPatientsTitle").innerText = translation.totalPatientsTitle;
     document.getElementById("totalHospitalsTitle").innerText = translation.totalHospitalsTitle;
+    document.getElementById("totalUsersTitle").innerText = translation.totalUsersTitle;
     document.getElementById("footerMessage").innerText = translation.footerMessage;
     document.getElementById("hospitalNameHeader").innerText = translation.hospitalNameHeader;
     document.getElementById("logoutButton").innerText = translation.logoutButton;

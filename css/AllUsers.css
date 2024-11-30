@@ -1,0 +1,248 @@
+/* Basic reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    color: #333;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+/* Header Styles */
+.header {
+    background: white;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    padding: 1rem;
+    position: fixed; 
+    top: 0; 
+    left: 0;
+    width: 100%; 
+    z-index: 999; 
+}
+
+.header-content {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.header-left {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.logo {
+    background-color: #0d9488;
+    padding: 0.5rem;
+    border-radius: 0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.logo i {
+    color: white;
+    font-size: 1.5rem;
+}
+
+.user-info h1 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: #1a1a1a;
+}
+
+.user-info p {
+    font-size: 0.875rem;
+    color: #666;
+}
+
+.logout-btn {
+    font-size: 15px;
+    padding: 12px 15px;
+    border-radius: 8px;
+    background-color: #f0f0f0;
+    border: none;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.logout-btn i {
+    font-size: 24px;
+}
+
+.logout-btn:hover {
+    background-color: #dcdcdc;
+}
+
+/* Main Container */
+.container {
+    width: 100%;
+    max-width: 900px;
+    margin: 0 auto;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin-top: 80px; /* Adjust for fixed header */
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* Table container */
+.table-container {
+    max-height: 400px;
+    overflow-y: auto;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+}
+
+thead {
+    position: sticky;
+    top: 0;
+    background: #f3f4f6;
+    z-index: 2;
+}
+
+th, td {
+    padding: 12px;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+th {
+    background-color: #f2f2f2;
+    font-weight: bold;
+}
+
+tbody tr:hover {
+    background-color: #f2f2f2;
+}
+
+.table-container::-webkit-scrollbar {
+    display: none;
+}
+
+/* Action buttons (optional) */
+button.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 0.5rem;
+    font-weight: 500;
+    font-size: 1rem;
+    line-height: 1.25rem;
+    color: white;
+    background-color: #0f766e;
+    box-shadow: var(--shadow-md);
+    transition: all 0.2s ease;
+    margin-top: 20px;
+    cursor: pointer;
+}
+
+button.btn:hover {
+    background-color: #0d615a;
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-lg);
+}
+
+button.btn:active {
+    background-color: #118278;
+    transform: translateY(0);
+    box-shadow: var(--shadow-sm);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .container {
+        padding: 10px;
+    }
+
+    th, td {
+        padding: 10px;
+    }
+
+    h1 {
+        font-size: 1.5rem;
+    }
+}
+
+
+/* Button styles */
+.btn-update, .btn-delete {
+    padding: 8px 16px;           /* Add padding for larger clickable area */
+    border-radius: 5px;          /* Rounded corners */
+    border: none;                /* Remove border */
+    font-size: 14px;             /* Slightly larger text */
+    font-weight: 600;            /* Make text bold */
+    cursor: pointer;            /* Change cursor on hover */
+    transition: all 0.3s ease;   /* Smooth transition for hover effects */
+    display: inline-flex;        /* Make sure buttons align nicely */
+    align-items: center;         /* Vertically center text and icon */
+    justify-content: center;     /* Center the content inside the button */
+    gap: 5px;                    /* Space between icon and text */
+}
+
+/* Update button */
+.btn-update {
+    background-color: rgba(17, 130, 120,0.8);   /* Green background for Update */
+    color: white;                /* White text */
+    border: 2px solid rgba(17, 130, 120,0.9);   /* Green border */
+}
+
+/* Delete button */
+.btn-delete {
+    background-color: rgb(200, 73, 67);   /* Red background for Delete */
+    color: white;                /* White text */
+    border: 2px solid rgb(200, 73, 67);   /* Red border */
+}
+
+/* Hover effects */
+.btn-update:hover {
+    background-color: rgba(17, 130, 120,1);   /* Darker green on hover */
+    border-color: rgba(17, 130, 120,1);       /* Darker green border on hover */
+}
+
+.btn-delete:hover {
+    background-color: rgb(189, 62, 55);   /* Darker red on hover */
+    border-color: rgb(189, 62, 55);       /* Darker red border on hover */
+}
+
+/* Active (pressed) effect */
+.btn-update:active, .btn-delete:active {
+    transform: scale(0.98);       /* Slightly shrink button when pressed */
+}
+
+/* Disabled state for buttons */
+.btn-update:disabled, .btn-delete:disabled {
+    background-color: #dcdcdc;   /* Light grey background */
+    color: #aaa;                 /* Light grey text */
+    border-color: #aaa;          /* Light grey border */
+    cursor: not-allowed;         /* Change cursor to indicate the button is disabled */
+}
+
+/* Optional: Adding some spacing between buttons */
+table td button {
+    margin-right: 8px;           /* Space between buttons */
+}
