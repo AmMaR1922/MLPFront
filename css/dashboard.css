@@ -12,6 +12,8 @@ body {
     background: linear-gradient(135deg, #e6f7f5 0%, #e6f0ff 100%);
     min-height: 100vh;
     color: #1a1a1a;
+    
+
 }
 
 .app-container {
@@ -193,4 +195,42 @@ body {
     .dashboard-grid {
         grid-template-columns: 1fr;
     }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+body {
+    position: relative;
+    background: url('https://i.pinimg.com/736x/bb/35/ca/bb35ca9d8e48620bc990c93afaaba0b9.jpg');
+     
+    background-size: cover;
+    background-position: center;
+    height: 100vh;
+    margin: 0;
+}
+
+body::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: inherit; /* Inherit the background image */
+    filter: blur(8px); /* Apply the blur effect */
+    z-index: -1; /* Place the blurred background behind the content */
 }
