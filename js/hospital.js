@@ -59,11 +59,44 @@ function displayHospitals(hospitals) {
                 <td>${hospital.country}</td>
                 <td>
                     <button class="btn-update" onclick="updateHospital('${hospital.id}')">Update</button>
-                    <button class="btn-action" onclick="deleteHospital('${hospital.id}')">Delete</button>
+                    <button class="btn-action" onclick="showConfirmationModal('delete', '${hospital.id}')">Delete</button>
                 </td>
             </tr>
         `).join('');
     }
+}
+
+// Show the confirmation modal
+function showConfirmationModal(actionType, hospitalId) {
+    const modal = document.getElementById('confirmationModal');
+    const confirmationMessage = document.getElementById('confirmationMessage');
+    const confirmBtn = document.getElementById('confirmActionBtn');
+    const cancelBtn = document.getElementById('cancelActionBtn');
+
+    // Set the appropriate message based on the action type
+    if (actionType === 'delete') {
+        confirmationMessage.textContent = 'Are you sure you want to delete this hospital?';
+    } else if (actionType === 'update') {
+        confirmationMessage.textContent = 'Are you sure you want to update this hospital?';
+    }
+
+    // Display the modal
+    modal.style.display = 'flex';
+
+    // Handle the confirm button click
+    confirmBtn.onclick = function() {
+        if (actionType === 'delete') {
+            deleteHospital(hospitalId); // Call delete function
+        } else if (actionType === 'update') {
+            updateHospital(hospitalId); // Call update function
+        }
+        modal.style.display = 'none'; // Close the modal
+    };
+
+    // Handle the cancel button click
+    cancelBtn.onclick = function() {
+        modal.style.display = 'none'; // Close the modal
+    };
 }
 
 // Function to handle updating a hospital
@@ -71,35 +104,29 @@ function updateHospital(hospitalId) {
     // Redirect to the update page with the hospitalId as a query parameter
     window.location.href = `update-hospital.html?hospitalId=${hospitalId}`;
 }
+
 // Function to handle deleting a hospital
 function deleteHospital(hospitalId) {
-    if (confirm("Are you sure you want to delete this hospital?")) {
-        const token = getAuthToken();
+    const token = getAuthToken();
 
-        if (!token) {
-            console.error('No token found. Please log in.');
-            return;
+    fetch(`https://anteshnatsh.tryasp.net/api/Hospital/DeleteHospital/${hospitalId}`, {
+        method: 'POST',
+        headers: {
+            'Authorization': `Bearer ${token}`,
+            'Content-Type': 'application/json',
         }
-
-        fetch(`https://anteshnatsh.tryasp.net/api/Hospital/DeleteHospital/${hospitalId}`, {
-            method: 'POST',
-            headers: {
-                'Authorization': `Bearer ${token}`,
-                'Content-Type': 'application/json',
+    })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`Failed to delete hospital. Status: ${response.status}`);
             }
+            alert('Hospital deleted successfully.');
+            fetchHospitals(); // Reload the table after deletion
         })
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error(`Failed to delete hospital. Status: ${response.status}`);
-                }
-                alert('Hospital deleted successfully.');
-                fetchHospitals(); // Reload the table
-            })
-            .catch(error => {
-                console.error('Error deleting hospital:', error);
-                alert('Failed to delete hospital.');
-            });
-    }
+        .catch(error => {
+            console.error('Error deleting hospital:', error);
+            alert('Failed to delete hospital.');
+        });
 }
 
 // Fetch hospitals on page load

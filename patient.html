@@ -76,8 +76,21 @@
         <button id="AddPatient"  onclick="window.location.href='addPatient.html'">Add Patient</button>
         <button id="BackDash" onclick="window.location.href='dashboard.html'">Back to Dashboard</button>
 
-       
+ 
     </div>
+
+
+
+    <div id="confirmationModal" class="modal">
+        <div class="modal-content">
+            <p id="modalMessage"></p>
+            <div class="modal-buttons">
+                <button id="confirmButton" class="confirm">Yes</button>
+                <button onclick="closeModal()" class="cancel">No</button>
+            </div>
+        </div>
+    </div>
+    
     <script src="js/PatientLocal.js"></script>
     <script src="js/app.js"></script>
     <script src="js/patient.js"></script>

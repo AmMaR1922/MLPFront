@@ -57,6 +57,14 @@ async function fetchAndDisplayBioData() {
 
 // Function to delete a bio entry by ID
 async function deleteBio(bioId) {
+
+      // Show a confirmation alert
+      const confirmation = confirm('Are you sure you want to delete this bio entry?');
+    
+      if (!confirmation) {
+          // If the user cancels, exit the function
+          return;
+      }
     const url = `${deleteBioApiUrl}${bioId}`;
     try {
         const response = await fetch(url, {
@@ -148,13 +156,7 @@ fetchAndDisplayBioData();
 
 
 
-
-
-
-
-
-
-
+ 
 
 
 
@@ -310,3 +312,62 @@ document.addEventListener('DOMContentLoaded', function () {
         console.error('Error fetching data:', error);
     });
 });
+
+
+
+
+
+
+
+
+
+
+
+// Show the confirmation modal
+function showConfirmationModal(callback) {
+    const modal = document.getElementById('confirmationModal');
+    const confirmBtn = document.getElementById('confirmDeleteBtn');
+    const cancelBtn = document.getElementById('cancelDeleteBtn');
+
+    // Display the modal
+    modal.style.display = 'flex';
+
+    // Handle the confirm button click
+    confirmBtn.onclick = function() {
+        callback(); // Execute the provided callback function (e.g., delete the bio entry)
+        modal.style.display = 'none'; // Close the modal
+    };
+
+    // Handle the cancel button click
+    cancelBtn.onclick = function() {
+        modal.style.display = 'none'; // Close the modal
+    };
+}
+
+// Example usage for deleting a bio entry
+async function deleteBio(bioId) {
+    showConfirmationModal(async function() {
+        const url = `${deleteBioApiUrl}${bioId}`;
+        try {
+            const response = await fetch(url, {
+                method: 'POST', // Assuming DELETE method might be blocked, using POST as provided
+                headers: {
+                    'Authorization': `Bearer ${token}`,
+                    'Content-Type': 'application/json'
+                }
+            });
+
+            if (response.ok) {
+                alert('Bio entry deleted successfully.');
+                fetchAndDisplayBioData(); // Refresh the table
+            } else {
+                const errorDetails = await response.json();
+                console.error('Error:', errorDetails);
+                alert(`Failed to delete bio entry: ${errorDetails.title}`);
+            }
+        } catch (error) {
+            console.error('Request Error:', error);
+            alert(`Request failed: ${error.message}`);
+        }
+    });
+}
