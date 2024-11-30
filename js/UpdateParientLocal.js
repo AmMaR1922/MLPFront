@@ -66,8 +66,5 @@ function changeLanguage() {
     document.getElementById("UPI").innerText = translation.UPI;
     document.getElementById("UP").innerText = translation.UP;
 
-
-  
-
 }
 changeLanguage()
