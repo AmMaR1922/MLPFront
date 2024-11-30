@@ -1,55 +1,57 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Add Bio</title>
-<link rel="stylesheet" href="css/addBio.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Bio</title>
+    <link rel="stylesheet" href="css/addBio.css">
 </head>
 <body>
-    <h2>Add Biological Indicators</h2>
+    <!-- Form Heading -->
+    <h2 id="AddBioH2">Add Biological Indicators</h2>
+
     <form id="bioForm">
         <input type="hidden" id="patientId" />
 
         <!-- Health Condition -->
         <div>
-        <!-- <label for="healthCondition">Health Condition:</label> -->
             <input hidden type="text" id="healthCondition" value="string" placeholder="Enter health condition" readonly required />
         </div>
 
         <!-- Sugar Percentage -->
         <div>
-            <label for="sugarPercentage">Sugar Percentage:</label>
+            <label for="sugarPercentage" id="sugarPercentageLabel">Sugar Percentage:</label>
             <input type="text" id="sugarPercentage" value="" placeholder="Enter sugar percentage" required />
         </div>
 
         <!-- Blood Pressure -->
         <div>
-            <label for="bloodPressure">Blood Pressure:</label>
+            <label for="bloodPressure" id="bloodPressureLabel">Blood Pressure:</label>
             <input type="text" id="bloodPressure" value="" placeholder="Enter blood pressure" required />
         </div>
 
         <!-- Average Temperature -->
         <div>
-            <label for="averageTemperature">Average Temperature:</label>
+            <label for="averageTemperature" id="averageTemperatureLabel">Average Temperature:</label>
             <input type="text" id="averageTemperature" value="" placeholder="Enter average temperature" required />
         </div>
 
         <!-- Date -->
         <div>
-            <label for="date">Date:</label>
+            <label for="date" id="dateLabel">Date:</label>
             <input type="date" id="date" value="2024-11-16" required />
         </div>
 
         <!-- Time -->
         <div>
-            <label for="time">Time:</label>
+            <label for="time" id="timeLabel">Time:</label>
             <input type="text" id="time" value="12:00:00" required />
         </div>
 
-        <button type="submit">Submit</button>
+        <button type="submit" id="submitButton">Submit</button>
     </form>
 
     <script src="js/addBio.js"></script>
+    <script src="js/AddBioLocal.Js"></script> <!-- Add this script for localization -->
 </body>
 </html>
