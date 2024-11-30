@@ -1,12 +1,27 @@
 const translations = {
     en: {
         
-        Name:"Name",
+        Name:"Name:",
+        phoneNumber: "Phone Number:",
+        Address:"Address:"
         
     },
     ar: {
        
-        Name:"الاسم",
+        Name:":الاسم",
+        phoneNumber: ":رقم الهاتف",
+        Address:":العنوان",
+        Sex:":الجنس",
+        Select:"اختار",
+        Male:"ذكر",
+        Female:"انثي",
+        Pregnant:":حامل",
+        SelectForPregnant:"اختار",
+        Yes:"نعم",
+        No:"لا",
+        NumberofBirths:":عدد مرات الحمل",
+        Hospital:":المستشفي",
+        SelectaHospital:"اختار مستشفي"
         
     }
 };
@@ -17,23 +32,7 @@ function changeLanguage() {
     const translation = translations[selectedLanguage] || translations.en; 
   
     document.getElementById("Name").innerText = translation.Name;
-
-    buttons.forEach(button => {
-         key = button.getAttribute('data-key');
-        button.textContent =translation[key];
-    });
-
-
- document.getElementById("AddPatient").innerText = translation.AddPatient;
- document.getElementById("BackDash").innerText = translation.BackDash;
-
-
-    document.getElementById("hospitalNameHeader").innerText = translation.hospitalNameHeader;
-    document.getElementById("logoutButton").innerText = translation.logoutButton;
-    document.getElementById("Table1").innerText = translation.Table1;
-
-    // Save the selected language to localStorage
-    
-    updateUserInfo();
+    document.getElementById("phoneNumber").innerText = translation.phoneNumber;
+    document.getElementById("Address").innerText = translation.Address;
 }
 changeLanguage()

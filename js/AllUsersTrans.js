@@ -22,7 +22,6 @@ const translations = {
 function changeLanguage() {
     // Get the selected language from the dropdown
     const selectedLanguage = localStorage.getItem('selectedLang'); 
-    const buttons = document.querySelectorAll('.delete-button');
 
     
     // Get the translations based on the selected language
@@ -34,19 +33,12 @@ function changeLanguage() {
     document.getElementById("welcomeMessage").innerText = translation.welcomeMessage;
     document.getElementById("hospitalNameHeader").innerText = translation.hospitalNameHeader;
     document.getElementById("logoutButton").innerText = translation.logoutButton;
-
-    document.getElementById("Action").innerText = translation.Action;
-    buttons.forEach(button => {
-        key = button.getAttribute('data-key');
-       button.textContent =translation[key];
-   });
-
-
     
     
     // Save the selected language in localStorage
    
 }
+changeLanguage();
 
 // Initialize language on page load based on localStorage
 

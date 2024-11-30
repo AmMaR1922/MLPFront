@@ -67,19 +67,5 @@ function changeLanguage() {
     document.getElementById("Btpl").innerText = translation.Btpl;
 
 
-
-
-    
-
-
-
-
-
-   
-
-   
-   
-    
-
 }
 changeLanguage()
