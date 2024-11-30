@@ -212,7 +212,6 @@ body {
 
 
 
-<<<<<<< HEAD
 
 body {
     position: relative;
@@ -235,5 +234,3 @@ body::before {
     filter: blur(8px); /* Apply the blur effect */
     z-index: -1; /* Place the blurred background behind the content */
 }
-=======
->>>>>>> d4f4c925d023541599daf209c389c544926cb111
