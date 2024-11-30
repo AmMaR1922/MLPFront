@@ -93,10 +93,12 @@ document.addEventListener("DOMContentLoaded", () => {
     // Update the year dynamically in the footer
     document.getElementById("currentYear").innerText = new Date().getFullYear();
 });
-
+<<<<<<< HEAD
 
  
 
+
+=======
 function hideAdminCard() {
     var card = document.getElementById('AdminCard');
     
