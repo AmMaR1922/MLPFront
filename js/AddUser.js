@@ -79,7 +79,7 @@ document.getElementById('addUserForm').addEventListener('submit', function(event
         if (!response.ok) {
             if(response.status == 500)
                 {throw new Error('Hospital has an admin already');}
-
+            
             throw new Error('Failed to create user');
         }
         return response.json();
@@ -88,7 +88,10 @@ document.getElementById('addUserForm').addEventListener('submit', function(event
         // Handle the response from the API (if successful)
         console.log('User created successfully:', data);
         alert('User added successfully!');
-
+        
+        // Reload the page after success
+        location.reload();  // This will reload the current page
+        
         // Optionally, reset the form
         document.getElementById('addUserForm').reset();
     })
