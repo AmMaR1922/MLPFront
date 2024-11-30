@@ -94,14 +94,14 @@ function renderBioData(bioDataList) {
         <table class="bio-table">
             <thead>
                 <tr>
-                    <th>Health Condition Score</th>
-                    <th>Health Condition</th>
-                    <th>Sugar Percentage</th>
-                    <th>Blood Pressure</th>
-                    <th>Average Temperature</th>
-                    <th>Date</th>
-                    <th>Time</th>
-                    <th>Actions</th> <!-- Added actions column for Delete button -->
+                    <th id="HCS" >Health Condition Score</th>
+                    <th id="HC">Health Condition</th>
+                    <th id ="SP">Sugar Percentage</th>
+                    <th id="BP">Blood Pressure</th>
+                    <th id="AT">Average Temperature</th>
+                    <th id="Date">Date</th>
+                    <th id="Time">Time</th>
+                    <th id="Action">Actions</th> <!-- Added actions column for Delete button -->
                 </tr>
             </thead>
             <tbody>
@@ -118,7 +118,7 @@ function renderBioData(bioDataList) {
                 <td>${bio.date}</td>
                 <td>${bio.time}</td>
                 <td>
-                    <button class="delete-button" onclick="deleteBio(${bio.id})">Delete</button>
+                    <button class="delete-button"  data-key="delete" onclick="deleteBio(${bio.id})">Delete</button>
                 </td>
             </tr>
         `;
@@ -130,11 +130,11 @@ function renderBioData(bioDataList) {
     `;
 
     bioListContainer.innerHTML = tableHTML;
+    changeLanguage();
 }
 
 // Initialize the page
 fetchAndDisplayBioData();
-
 
 
 

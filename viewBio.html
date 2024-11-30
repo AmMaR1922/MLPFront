@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>View Bio Data</title>
+    <title id="viewBioTitle">View Bio Data</title>
     <link rel="stylesheet" href="css/viewBio.css"> <!-- Linking the external CSS file -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.0/css/all.min.css" integrity="sha512-9xKTRVabjVeZmc+GUW8GgSmcREDunMM+Dt/GrzchfN8tkwHizc5RP4Ok/MXFFy5rIjJjzhndFScTceq5e6GvVQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> <!-- Load Chart.js first -->
@@ -21,48 +21,49 @@
                         </div>
                     </div>
                     <div class="user-info">
-                        <h1>Welcome, <span id="username">Loading...</span></h1>
+                        <h1 id="welcomeMessage" style="display: inline;">Welcome, </h1><h1 style="display: inline;" id="username">Loading...</h1>
                         <p id="hospitalNameHeader">Loading...</p>
                     </div>
                 </div>
     
                 <div class="header-buttons">
-                    <button class="logout-btn" onclick="handleLogout()" style="color: #000000;">
+                    <!-- Language Selector -->
+                    <select id="languageSelector" onchange="changeLanguage(event)">
+                        <option value="en">English</option>
+                        <option value="ar">العربية</option>
+                    </select>
+    
+                    <!-- Logout Button -->
+                    <button class="logout-btn" onclick="handleLogout()">
                         <i class="fa-solid fa-arrow-right-from-bracket" style="color: #000000;"></i>
-                        Logout
+                        <span id="logoutButton">Logout</span>
                     </button>
                 </div>
             </div>
         </header>
 
-        
+        <!-- Body Content -->
+        <h1 class="inbody" id="bioDataHeading">Bio Data for Patient</h1>
 
+        <div class="PatientDataContainer">
+            <h2 id="PatientDataName">Loading...</h2>
+            <span id="PatientDataAge">Loading...</span>
+            <span id="PatientDataAgeText">Years Old</span>
+        </div>
 
-          
-    <h1 class="inbody">Bio Data for Patient</h1>
+        <div class="chart-container">
+            <canvas id="SpecificPatientChart"></canvas>
+        </div>
 
-    <div class="PatientDataContainer">
-        <h2 id="PatientDataName"></h2>
-        <span id="PatientDataAge"></span>
-        <span>Years Old</span>
-        
-    </div>
-
-
-    
-
-    <div class="chart-container">
-        <canvas id="SpecificPatientChart"></canvas>
-    </div>
-
-
-
-    <button onclick="window.location.href='patient.html'">Back to patient</button>
-    <div id="bioList"></div>
-
+        <button id="backToPatientButton" onclick="window.location.href='patient.html'">Back to patient</button>
+        <div id="bioList"></div>
+   
     <script src="js/viewBio.js"></script>
+    <script src="js/ViweBioLocal.js"></script>
     <script src="js/app.js"></script>
     <script src="js/auth.js"></script>
+    
+    
 
 </body>
 </html>
