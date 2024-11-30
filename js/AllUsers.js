@@ -51,7 +51,6 @@ document.addEventListener('DOMContentLoaded', function () {
                 const updateButton = document.createElement('button');
                 updateButton.classList.add('btn-update');
                 updateButton.textContent = 'Update';
-                window.location.href = 'UpdateUser.html';
                 updateButton.addEventListener('click', function () {
                     handleUpdateUser(user.id);  // You can pass user.id or any other identifier
                 });
