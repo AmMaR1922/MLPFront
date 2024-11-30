@@ -59,9 +59,9 @@ function renderPatients(patients) {
             <thead>
                 <tr>
 
-                    <th>Name</th>
-                    <th>Hospital</th>
-                    <th>Actions</th>
+                    <th id="Name">Name</th>
+                    <th id ="Hospital">Hospital</th>
+                    <th id="Actions" >Actions</th>
                 </tr>
             </thead>
             <tbody>
@@ -93,6 +93,7 @@ function renderPatients(patients) {
             </tbody>
         </table>
     `;
+    changeLanguage();
 }
 
 // Get the hospital name based on hospitalId
