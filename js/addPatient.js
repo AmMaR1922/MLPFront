@@ -42,6 +42,15 @@ async function savePatient(event) {
     const numberOfBirths = parseInt(document.getElementById('numberOfBirths').value, 10);
     const hospitalId = parseInt(document.getElementById('hospital').value, 10);
 
+
+    console.log({ name, phoneNumber, address, sex, pregnant, numberOfBirths, hospitalId });
+
+    // Check for empty fields and alert if missing
+    if (!phoneNumber || !address) {
+        alert('Phone Number, and Address are required fields!');
+        return; // Stop execution if validation fails
+    }
+
     const patientData = {
         id: 0,
         name,
