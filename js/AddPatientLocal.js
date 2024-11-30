@@ -3,7 +3,8 @@ const translations = {
         AddNewPatient:"Add New Patient",
         SavePatient:"Save Patient",
         Name:"Name:",
-        phoneNumber:"phone Number:",
+       
+        SelectaHospital:"Select a Hospital", phoneNumber:"phone Number:",
         address:"Address:",
         Sex:"Sex:",
         Select:"Select",
@@ -15,7 +16,6 @@ const translations = {
         No:"No", 
         NumberofBirths:"Number of Births:" ,
         Hospital:"Hospital:",
-        SelectaHospital:"Select a Hospital",
         Btpl:"Back to Patient List"
         
       
