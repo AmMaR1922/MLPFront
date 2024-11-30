@@ -8,53 +8,55 @@
 </head>
 <body>
     <div class="patient-container">
-        <h2>Add New Patient</h2>
+        <h2 id="AddNewPatient" >Add New Patient</h2>
 
         <form id="patientForm">
-            <label for="name">Name:</label>
+            <label id="Name"  for="name">Name:</label>
             <input type="text" id="name" name="name" required>
 
-            <label for="phoneNumber">Phone Number:</label>
+            <label id="phoneNumber" for="phoneNumber">Phone Number:</label>
             <input type="tel" id="phoneNumber" name="phoneNumber" required>
 
-            <label for="address">Address:</label>
+            <label id="address" for="address">Address:</label>
             <input type="text" id="address" name="address" required>
 
-            <label for="sex">Sex:</label>
+            <label id="Sex" for="sex">Sex:</label>
             <select id="sex" name="sex" required>
-                <option value="">Select</option>
-                <option value="true">Male</option>
-                <option value="false">Female</option>
+                <option id="Select" value="">Select</option>
+                <option id="Male" value="true">Male</option>
+                <option id="Female" value="false">Female</option>
             </select>
 
             <div id="pregnantField" style="display: none;">
-                <label for="pregnant">Pregnant:</label>
+                <label id="Pregnant" for="pregnant">Pregnant:</label>
                 <select id="pregnant" name="pregnant">
-                    <option value="">Select</option>
-                    <option value="true">Yes</option>
-                    <option value="false">No</option>
+                    <option id="SelectForPregnant" value="">Select</option>
+                    <option id="Yes" value="true">Yes</option>
+                    <option id="No" value="false">No</option>
                 </select>
             </div>
 
             <div id="numberOfBirthsField" style="display: none;">
-                <label for="numberOfBirths">Number of Births:</label>
+                <label id="NumberofBirths" for="numberOfBirths">Number of Births:</label>
                 <input type="number" id="numberOfBirths" name="numberOfBirths" min="0">
             </div>
 
-            <label for="hospital">Hospital:</label>
+            <label id="Hospital" for="hospital">Hospital:</label>
             <select id="hospital" name="hospital" required>
-                <option value="">Select a Hospital</option>
+                <option id="SelectaHospital" value="">Select a Hospital</option>
                 <!-- Hospitals will be populated here -->
             </select>
 
-            <button type="submit">Save Patient</button>
+            <button id="SavePatient" type="submit">Save Patient</button>
         </form>
 
         <p id="responseMessage"></p>
 
-        <button onclick="window.location.href='patient.html'">Back to Patient List</button>
+        <button id="Btpl" onclick="window.location.href='patient.html'">Back to Patient List</button>
     </div>
 
     <script src="js/addPatient.js"></script>
+    <script src="js/AddPatientLocal.js"></script>
+
 </body>
 </html>

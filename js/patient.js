@@ -82,18 +82,21 @@ function renderPatients(patients) {
                         <td>${getHospitalName(patient.hospitalId)}</td>
                         <td>
                         
-                            <button id="AddBio" onclick="window.location.href='addBio.html?patientId=${patient.id}'">Add Bio</button>
-                            <button id="ViewBio" onclick="window.location.href='viewBio.html?patientName=${patient.name}&patientAge=${patient.age}'">View Bio</button>
-                            <button id="update" onclick="window.location.href='updatePatient.Html?patientId=${patient.id}'">Update</button>
-                            <button id="delete" onclick="deletePatient('${patient.id}')">Delete</button>
+                            <button class="localizable-button" id="AddBio" data-key="AddBio" onclick="window.location.href='addBio.html?patientId=${patient.id}'">Add Bio</button>
+                            <button class="localizable-button" id="ViewBio"data-key="ViewBio" onclick="window.location.href='viewBio.html?patientName=${patient.name}&patientAge=${patient.age}'">View Bio</button>
+                            <button class="localizable-button" id="update" data-key="update" onclick="window.location.href='updatePatient.Html?patientId=${patient.id}'">Update</button>
+                            <button class="localizable-button" id="delete" data-key="delete" onclick="deletePatient('${patient.id}')">Delete</button>
+                            
                         </td>
                     </tr>
                 `;
+                
                 }).join('')}
             </tbody>
         </table>
     `;
     changeLanguage();
+
 }
 
 // Get the hospital name based on hospitalId

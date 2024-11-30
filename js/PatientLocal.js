@@ -9,6 +9,12 @@ const translations = {
         logoutButton: "Logout",
         Name:"Name",
         Actions:"Actions",
+        AddBio:"AddBio",
+        ViewBio:"ViewBio",
+        update:"Update",
+        delete:"Delete",
+        BackDash:"Back to Dashboard",
+        AddPatient:"Add Patient",
         Hospital:"Hospital",
         Table1:"Patient Information"
     },
@@ -21,6 +27,12 @@ const translations = {
         Name:"الاسم",
         Hospital:"المستشفي",
         Actions:"التحكم",
+        AddBio:"اضافه تحليل",
+        ViewBio:"رؤيه التحاليل",
+        update:"تحديث",
+        delete:"حذف",
+        BackDash:"الرجوع الي القائمه",
+        AddPatient:"اضافه مريض",
         hospitalNameHeader: "جارٍ التحميل...",
         logoutButton: "تسجيل الخروج",
         Table1:"معلومات المريض "
@@ -29,7 +41,8 @@ const translations = {
 
 // Function to change the UI language
 function changeLanguage() {
-    const selectedLanguage =  localStorage.getItem('selectedLang'); 
+    const selectedLanguage = localStorage.getItem('selectedLang'); 
+    const buttons = document.querySelectorAll('.localizable-button');
     const translation = translations[selectedLanguage] || translations.en; 
     document.getElementById("welcomeMessage").innerText = translation.welcomeMessage;
     document.getElementById("sidebar1").innerHTML =  '<i class="fas fa-chart-line"></i>'+translation.sidebar1;
@@ -38,7 +51,17 @@ function changeLanguage() {
     document.getElementById("sidebar4").innerHTML = '<i class="fa fa-syringe"></i>'+translation.sidebar4;
     document.getElementById("Name").innerText = translation.Name;
     document.getElementById("Hospital").innerText = translation.Hospital;
-    document.getElementById("Actions").innerText = translation.Actions;
+
+    buttons.forEach(button => {
+         key = button.getAttribute('data-key');
+        button.textContent =translation[key];
+    });
+
+
+ document.getElementById("AddPatient").innerText = translation.AddPatient;
+ document.getElementById("BackDash").innerText = translation.BackDash;
+
+
     document.getElementById("hospitalNameHeader").innerText = translation.hospitalNameHeader;
     document.getElementById("logoutButton").innerText = translation.logoutButton;
     document.getElementById("Table1").innerText = translation.Table1;
