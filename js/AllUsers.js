@@ -48,13 +48,15 @@ document.addEventListener('DOMContentLoaded', function () {
                 // Create the action buttons (Update and Delete)
                 const actionsCell = document.createElement('td');
 
-                const updateButton = document.createElement('button');
-                updateButton.classList.add('btn-update');
-                updateButton.textContent = 'Update';
-                window.location.href = 'UpdateUser.html';
-                updateButton.addEventListener('click', function () {
-                    handleUpdateUser(user.id);  // You can pass user.id or any other identifier
-                });
+
+                // const updateButton = document.createElement('button');
+                // updateButton.classList.add('btn-update');
+                // updateButton.textContent = 'Update';
+
+                // updateButton.addEventListener('click', function () {
+                // window.location.href = 'UpdateUser.html';
+                // });
+
 
                 const deleteButton = document.createElement('button');
                 deleteButton.classList.add('btn-delete');
@@ -63,7 +65,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     handleDeleteUser(user.email);  // Pass the user id to the delete function
                 });
 
-                actionsCell.appendChild(updateButton);
+                // actionsCell.appendChild(updateButton);
                 actionsCell.appendChild(deleteButton);
 
                 // Append all cells to the row
@@ -97,11 +99,11 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 // Handle the Update User action
-function handleUpdateUser(userId) {
-    console.log('Updating user with ID:', userId);
-    // Redirect to the update page (you could pass the user ID as a query param, or open a modal)
-    window.location.href = `updateuser.html?id=${userId}`;  // Example of passing userId to updateuser.html
-}
+// function handleUpdateUser(userId) {
+//     console.log('Updating user with ID:', userId);
+//     // Redirect to the update page (you could pass the user ID as a query param, or open a modal)
+//     window.location.href = `updateuser.html?id=${userId}`;  // Example of passing userId to updateuser.html
+// }
 
 // Handle the Delete User action
 function handleDeleteUser(email) {
