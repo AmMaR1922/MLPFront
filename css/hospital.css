@@ -93,7 +93,7 @@ body {
 .container {
     width: 100%;
     max-width: 900px;
-    margin: 0 auto;
+    margin: 0 20px;
     background-color: #fff;
     padding: 20px;
     border-radius: 8px;
@@ -245,4 +245,15 @@ a.btn:active {
     background-color: #118278; /* Lighter shade on active click */
     transform: translateY(0); /* Reset lift effect */
     box-shadow: var(--shadow-sm); /* Subtle shadow on active click */
+}
+
+
+.container {
+    width: 100%;
+    max-width: 900px;
+    margin-top:50px;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }

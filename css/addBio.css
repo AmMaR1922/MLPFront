@@ -15,7 +15,8 @@ h2 {
 
 /* Form container */
 form {
-    max-width: 600px;
+    
+    max-width: 500px;
     margin: auto;
     background-color: #fff;
     padding: 30px;

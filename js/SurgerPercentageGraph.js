@@ -48,6 +48,8 @@ document.addEventListener('DOMContentLoaded', function () {
                 const spB = b.lastBiologicalIndicator?.sugarPercentage ?? 0;
                 return spB - spA; // Higher sugar first
             });
+
+            
     
             // Render the sorted patients
             renderPatients(patients);
@@ -65,16 +67,26 @@ document.addEventListener('DOMContentLoaded', function () {
                 <thead>
                     <tr>
                         <th>Name</th>
-                        <th>Sugar Condition</th>
                         <th>Hospital</th>
                         <th>Actions</th>
                     </tr>
                 </thead>
                 <tbody>
-                    ${patients.map(patient => `
-                        <tr>
+                ${patients.map(patient => {
+                    const condition = patient.lastBiologicalIndicator?.healthCondition || 'Unspecified';
+                    const isAtRisk = condition === 'At Risk';
+                    const isHealthy = condition === 'Healthy';
+                    const isUnspecified = condition === 'Moderate';
+
+                    return `
+                    <tr style="
+                    ${isAtRisk ? 'background-color: rgba(248,104,52,0.15);' : ''}
+                    ${isHealthy ? ' background-color: rgba(0, 252, 122, 0.1);' : ''}
+                    ${isUnspecified ? ' background-color: rgb(0, 0, 0);' : ''}
+
+                    ">
+   
                             <td>${patient.name}</td>
-                            <td>${getSugarCondition(patient.lastBiologicalIndicator?.sugarPercentage)}</td>
                             <td>${getHospitalName(patient.hospitalId)}</td>
                             <td>
                                 <button id="AddBio" onclick="window.location.href='addBio.html?patientId=${patient.id}'">Add Bio</button>
@@ -83,7 +95,7 @@ document.addEventListener('DOMContentLoaded', function () {
                                 <button id="delete" onclick="deletePatient('${patient.id}')">Delete</button>
                             </td>
                         </tr>
-                    `).join('')}
+                    `}).join('')}
                 </tbody>
             </table>
         `;
