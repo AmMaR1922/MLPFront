@@ -93,3 +93,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // Update the year dynamically in the footer
     document.getElementById("currentYear").innerText = new Date().getFullYear();
 });
+
+ 
+
+
