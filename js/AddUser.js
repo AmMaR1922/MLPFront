@@ -1,4 +1,3 @@
-
 document.addEventListener('DOMContentLoaded', function () {
     const token = localStorage.getItem('auth_token'); // Assuming token for authentication (optional)
     const apiUrl = 'https://anteshnatsh.tryasp.net/api/Hospital/GetHospitals';  // Replace with your API URL
@@ -77,9 +76,9 @@ document.getElementById('addUserForm').addEventListener('submit', function(event
     })
     .then(response => {
         if (!response.ok) {
-            if(response.status == 500)
-                {throw new Error('Hospital has an admin already');}
-            
+            if (response.status == 500) {
+                throw new Error('Hospital has an admin already');
+            }
             throw new Error('Failed to create user');
         }
         return response.json();
@@ -94,6 +93,9 @@ document.getElementById('addUserForm').addEventListener('submit', function(event
         
         // Optionally, reset the form
         document.getElementById('addUserForm').reset();
+
+        // Redirect to AllUsers.html
+        window.location.href = 'AllUsers.html';  // Redirects to the user listing page after successful submission
     })
     .catch(error => {
         console.error('Error creating user:', error);
