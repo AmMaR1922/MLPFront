@@ -65,6 +65,9 @@ function changeLanguage() {
     document.getElementById("hospitalNameHeader").innerText = translation.hospitalNameHeader;
     document.getElementById("logoutButton").innerText = translation.logoutButton;
     document.getElementById("Table1").innerText = translation.Table1;
+    document.getElementById("Actions").innerText = translation.Actions;
+
+
 
     // Save the selected language to localStorage
     
