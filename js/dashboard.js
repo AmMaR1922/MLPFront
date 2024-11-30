@@ -93,3 +93,37 @@ document.addEventListener("DOMContentLoaded", () => {
     // Update the year dynamically in the footer
     document.getElementById("currentYear").innerText = new Date().getFullYear();
 });
+function hideAdminCard() {
+    var card = document.getElementById('AdminCard');
+    
+    // Retrieve user data from localStorage
+    const userData = localStorage.getItem('user_data');
+    
+    // Check if user data exists
+    if (userData) {
+        try {
+            // Parse the user data and check for role
+            const { role } = JSON.parse(userData);
+            
+            // Log to check the role
+            console.log("User role:", role);
+
+            // Hide the card if the role is not Admin
+            if (role !== "Admin") {
+                console.log("Hiding Admin Card for non-admin user.");
+                card.style.display = 'none';
+            } else {
+                card.style.display = 'block';  // Show the card if role is Admin
+            }
+        } catch (error) {
+            console.error("Error parsing user data:", error);
+        }
+    } else {
+        console.log("User data not found in localStorage.");
+        // Optionally, hide the card if no user data is found
+        card.style.display = 'none';
+    }
+}
+
+// Call the function to hide the Admin card
+hideAdminCard();
