@@ -221,12 +221,16 @@ document.addEventListener('DOMContentLoaded', function () {
                 datasets: [{
                     label: 'Count',
                     data: counts,
-                    borderColor: 'rgba(248, 104, 52, 0.5)',
+                    borderColor: "rgba(248, 104, 52,0.8)",
                     backgroundColor: gradient,
-                    pointBackgroundColor: 'rgba(248, 104, 52, 0.5)',
-                    borderWidth: 2,
-                    tension: 0.3,
-                    fill: true
+                    borderWidth: 3,
+                    fill: true,
+                    tension: 0.4,
+                    pointBackgroundColor: "rgba(248, 104, 52,1)",
+                    pointBorderColor: "#fff",
+                    pointBorderWidth: 2,
+                    pointRadius: 5,
+                    pointHoverRadius: 10,
                 }]
             },
             options: {
@@ -244,6 +248,9 @@ document.addEventListener('DOMContentLoaded', function () {
                 },
                 scales: {
                     x: {
+                        grid: {
+                            display: false // Disable grid lines on the x-axis
+                        },
                         type: 'time',
                         title: {
                             display: true,
@@ -256,7 +263,7 @@ document.addEventListener('DOMContentLoaded', function () {
                         }
                     },
                     y: {
-                        beginAtZero: true,
+                        beginAtZero: false,
                         title: {
                             display: true,
                             text: 'Count of Patients',
@@ -269,7 +276,59 @@ document.addEventListener('DOMContentLoaded', function () {
                     }
                 }
             }
-        });
+             ,plugins: [
+        {
+            id: 'hoverLine',
+            afterDraw: (chart) => {
+                const { ctx, tooltip } = chart;
+                if (!tooltip || tooltip.opacity === 0) return;
+
+                const activePoint = tooltip.dataPoints[0];
+                if (!activePoint) return;
+
+                const x = activePoint.element.x;
+                const y = activePoint.element.y;
+                const chartArea = chart.chartArea;
+
+                // Draw the line from the hovered point to the x-axis
+                ctx.save();
+                ctx.beginPath();
+                ctx.moveTo(x, y);
+                ctx.lineTo(x, chartArea.bottom);
+                ctx.strokeStyle = 'rgba(248, 104, 52,1)';
+                ctx.lineWidth = 2;
+                ctx.stroke();
+                ctx.restore();
+            }
+        }
+    ]
+    
+    ,plugins: [
+        {
+            id: 'hoverLine',
+            afterDraw: (chart) => {
+                const { ctx, tooltip } = chart;
+                if (!tooltip || tooltip.opacity === 0) return;
+
+                const activePoint = tooltip.dataPoints[0];
+                if (!activePoint) return;
+
+                const x = activePoint.element.x;
+                const y = activePoint.element.y;
+                const chartArea = chart.chartArea;
+
+                // Draw the line from the hovered point to the x-axis
+                ctx.save();
+                ctx.beginPath();
+                ctx.moveTo(x, y);
+                ctx.lineTo(x, chartArea.bottom);
+                ctx.strokeStyle = 'rgba(248, 104, 52,1)';
+                ctx.lineWidth = 2;
+                ctx.stroke();
+                ctx.restore();
+            }
+        }
+    ]});
     }
 
     // Modal Elements
