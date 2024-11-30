@@ -94,8 +94,9 @@ document.addEventListener("DOMContentLoaded", () => {
     document.getElementById("currentYear").innerText = new Date().getFullYear();
 });
 
-function hideAdminCard() {
-    var card = document.getElementById('AdminCard');
+function hideSecondCard() {
+    // Select all cards in the grid
+    var cards = document.querySelectorAll('.dashboard-grid .dashboard-card');
     
     // Retrieve user data from localStorage
     const userData = localStorage.getItem('user_data');
@@ -109,22 +110,31 @@ function hideAdminCard() {
             // Log to check the role
             console.log("User role:", role);
 
-            // Hide the card if the role is not Admin
+            // Hide the second card if the role is not Admin
             if (role !== "Admin") {
-                console.log("Hiding Admin Card for non-admin user.");
-                card.style.display = 'none';
+                console.log("Hiding second card for non-admin user.");
+                // Ensure there is at least 2 cards, then hide the second one
+                if (cards.length >= 2) {
+                    cards[1].style.display = 'none';  // Hide the second card but retain space
+                }
             } else {
-                card.style.display = 'block';  // Show the card if role is Admin
+                // Show the second card if the role is Admin
+                if (cards.length >= 2) {
+                    cards[1].style.visibility = 'visible';  // Show the second card
+                }
             }
         } catch (error) {
             console.error("Error parsing user data:", error);
         }
     } else {
         console.log("User data not found in localStorage.");
-        // Optionally, hide the card if no user data is found
-        card.style.display = 'none';
+        // Optionally, hide the second card if no user data is found
+        if (cards.length >= 2) {
+            cards[1].style.visibility = 'hidden';  // Hide the second card if no user data
+        }
     }
 }
 
-// Call the function to hide the Admin card
-hideAdminCard();
+// Call the function to hide the second card
+hideSecondCard();
+
