@@ -9,9 +9,7 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.0/css/all.min.css" integrity="sha512-9xKTRVabjVeZmc+GUW8GgSmcREDunMM+Dt/GrzchfN8tkwHizc5RP4Ok/MXFFy5rIjJjzhndFScTceq5e6GvVQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
      <!-- Chart.js Library -->
-    <script src="js/patientGraph.js" defer></script>
-    <!-- <script src="js/patient.js" defer></script> -->
-    <script src="js/app.js" defer></script>
+
     
      <!-- JavaScript logic -->
 </head>
@@ -25,7 +23,7 @@
                     </div>
                 </div>
                 <div class="user-info">
-                    <h1>Welcome, <span id="username">Loading...</span></h1>
+                    <h1 id="welcomeMessage">Welcome, <span id="Username">Loading...</span></h1>
                     <p id="hospitalNameHeader">Loading...</p>
                 </div>
             </div>
@@ -34,7 +32,7 @@
                 <!-- Patient Button -->
                 
                 <!-- Logout Button -->
-                <button class="logout-btn" onclick="handleLogout()" style="color: #000000;">
+                <button id="logoutButton" class="logout-btn" onclick="handleLogout()" style="color: #000000;">
                     <i class="fa-solid fa-arrow-right-from-bracket" style="color: #000000;"></i>
                     Logout
                 </button>
@@ -46,7 +44,7 @@
         <canvas id="patientChart"></canvas>
 
         <div class="patient-container">
-            <h2>Patient Information<h2 id ="DateOfCritical"></h2></h2>
+            <h2 id="PatientInformation">Patient Information<h2 id ="DateOfCritical"></h2></h2>
     
             <!-- Patient List Section -->
             <div id="patientList" class="patient-list">
@@ -54,10 +52,9 @@
             </div>
     
             <!-- Button to Navigate to Add Patient Form -->
-            <button onclick="window.location.href='addPatient.html'">Add Patient</button>
-            <button onclick="window.location.href='dashboard.html'">Back to Dashboardt</button>
-    
-           
+            <button id="AddPatient" onclick="window.location.href='addPatient.html'">Add Patient</button>
+            <button id="BackToDashboard" onclick="window.location.href='dashboard.html'">Back to Dashboardt</button>
+     
         </div>
         <div class="navigation-container">
             <button id="backToDashboardBtn">Back to Dashboard</button>
@@ -65,5 +62,9 @@
         </div>
 
     </main>
+    <script src="js/patientGraph.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/PatientGraphTrans.js"></script>
+
 </body>
 </html>

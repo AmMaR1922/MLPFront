@@ -257,6 +257,8 @@ function renderPatientTable(patients,selectedDate) {
             </tbody>
         </table>
     `;
+changeLanguage();
+
 }
 
 // Retrieve Auth Token
