@@ -23,8 +23,8 @@ const translations = {
 };
 
 // Function to change the UI language
-function changeLanguage(event) {
-    const selectedLanguage = event.target.value; // Get the selected language
+function changeLanguage() {
+    const selectedLanguage =  localStorage.getItem('selectedLang'); // Get the selected language
     const translation = translations[selectedLanguage] || translations.en; // Default to English if no match
 
     // Update the UI text based on selected language
@@ -37,6 +37,9 @@ function changeLanguage(event) {
     document.getElementById("logoutButton").innerText = translation.logoutButton;
 
     // Save the selected language to localStorage
-    localStorage.setItem('language', selectedLanguage);
+   
     updateUserInfo();
 }
+changeLanguage()
+
+
