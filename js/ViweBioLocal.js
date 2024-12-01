@@ -77,7 +77,6 @@ function changeLanguage() {
     // Save the selected language in localStorage
    
 }
-
 // Initialize language on page load based on localStorage
 
 // Call the function to set the language on page load

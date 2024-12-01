@@ -147,6 +147,7 @@ function renderBioData(bioDataList) {
 
     bioListContainer.innerHTML = tableHTML;
     changeLanguage();
+    updateUserInfo();
 }
 
 // Initialize the page

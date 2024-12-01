@@ -253,6 +253,7 @@ function renderPatientTable(patients, selectedDate) {
             </tbody>
         </table>
     `;
+    updateUserInfo();
 }
 
 // Confirmation Dialog Function

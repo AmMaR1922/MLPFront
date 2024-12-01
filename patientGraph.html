@@ -19,18 +19,15 @@
                     </div>
                 </div>
                 <div class="user-info">
-                    <h1 id="welcomeMessage">Welcome, <span id="Username">Loading...</span></h1>
+                    <h1 id="welcomeMessage" style="display: inline;">Welcome, </h1><h1 style="display: inline;" id="username">Loading...</h1>
                     <p id="hospitalNameHeader">Loading...</p>
                 </div>
             </div>
 
-            <div class="header-buttons">
-                <!-- Patient Button -->
-                
                 <!-- Logout Button -->
-                <button id="logoutButton" class="logout-btn" onclick="handleLogout()" style="color: #000000;">
-                    <i class="fa-solid fa-arrow-right-from-bracket" style="color: #000000;"></i>
-                    Logout
+                <button class="logout-btn" onclick="handleLogout()">
+                    <i class="fa-solid fa-arrow-right-from-bracket" style="color: #000000 !important;"></i>
+                    <span id="logoutButton" style="color: #000000 !important;" >Logout</span>
                 </button>
             </div>
         </div>
@@ -71,9 +68,9 @@
     
 
          <!-- Chart.js Library -->
-         <script src="js/patientGraph.js" defer></script>
-         <!-- <script src="js/patient.js" defer></script> -->
-         <script src="js/app.js" defer></script>
+         <script src="js/app.js" ></script>
+         <script src="js/patientGraph.js" ></script>
+        
          
           <!-- JavaScript logic -->
 </body>
