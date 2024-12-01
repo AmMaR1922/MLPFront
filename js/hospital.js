@@ -63,7 +63,9 @@ function displayHospitals(hospitals) {
                 </td>
             </tr>
         `).join('');
+        
     }
+    
 }
 
 // Show the confirmation modal

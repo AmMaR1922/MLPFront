@@ -665,20 +665,20 @@ form button[type="button"]:hover {
 }
 
 
-.DeleteButton{
+#DeleteButton{
     background-color: rgb(245, 5, 5);
 }
 
-.DeleteButton:hover{
+#DeleteButton:hover{
     background-color:rgba(245, 5, 5,0.8);
 }
 
 
-.AddBioButton,.UpdateButton,.ViewBioButton{
+#AddBioButton,#UpdateButton,#ViewBioButton{
     background-color: #0d9488;
 }
 
-.AddBioButton:hover,.UpdateButton:hover,.ViewBioButton:hover{
+#AddBioButton:hover,#UpdateButton:hover,#ViewBioButton:hover{
     background-color: #59cac1;
 }
 

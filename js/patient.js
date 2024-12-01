@@ -78,10 +78,10 @@ function renderPatients(patients) {
                         <td>${patient.name}</td>
                         <td>${getHospitalName(patient.hospitalId)}</td>
                         <td>
-                            <button class="AddBioButton" onclick="window.location.href='addBio.html?patientId=${patient.id}'">Add Bio</button>
-                            <button class="ViewBioButton" onclick="window.location.href='viewBio.html?patientName=${patient.name}&patientAge=${patient.age}'">View Bio</button>
-                            <button class="UpdateButton" onclick="showConfirmationModal('update', '${patient.id}')">Update</button>
-                            <button class="DeleteButton" onclick="showConfirmationModal('delete', '${patient.id}')" >Delete</button>
+                            <button class="localizable-button" data-key="AddBio" id="AddBioButton" onclick="window.location.href='addBio.html?patientId=${patient.id}'">Add Bio</button>
+                            <button class="localizable-button"   data-key="ViewBio" id="ViewBioButton" onclick="window.location.href='viewBio.html?patientName=${patient.name}&patientAge=${patient.age}'">View Bio</button>
+                            <button class="localizable-button" data-key="update" id="UpdateButton" onclick="showConfirmationModal('update', '${patient.id}')">Update</button>
+                            <button class="localizable-button" data-key="delete" id="DeleteButton" onclick="showConfirmationModal('delete', '${patient.id}')" >Delete</button>
                         </td>
                     </tr>
                     `;
@@ -89,6 +89,7 @@ function renderPatients(patients) {
             </tbody>
         </table>
     `;
+    changeLanguage();
 }
 
 // Get the hospital name based on hospitalId

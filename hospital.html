@@ -10,46 +10,42 @@
 <body>
 
     <!-- Header -->
-    <header class="header">
-        <div class="header-content">
-            <div class="header-left">
-                <div class="logo">
-                    <div class="login-logo">
-                        <i class="fa-regular fa-hospital" style="color: #ffffff;"></i>
+        <header class="header">
+            <div class="header-content">
+                <div class="header-left">
+                    <div class="logo">
+                        <div class="login-logo">
+                            <i class="fa-regular fa-hospital" style="color: #ffffff;"></i>
+                        </div>
+                    </div>
+                    <div class="user-info">
+                        <h1 id="welcomeMessage" style="display: inline;">Welcome, </h1><h1 style="display: inline;" id="username">Loading...</h1>
+                        <p id="hospitalNameHeader">Loading...</p>
                     </div>
                 </div>
-                <div class="user-info">
-                    <h1>Welcome, <span id="username">Loading...</span></h1>
-                    <p id="hospitalNameHeader">Loading...</p>
+
+                <div class="header-buttons">
+                    <button class="logout-btn" onclick="handleLogout()">
+                        <i class="fa-solid fa-arrow-right-from-bracket" style="color: #000000;"></i>
+                        <span id="logoutButton">Logout</span>
+                    </button>
                 </div>
             </div>
-
-            <div class="header-buttons">
-                <!-- Patient Button -->
-               
-                <!-- Logout Button -->
-                <button class="logout-btn" onclick="handleLogout()">
-                    <i class="fa-solid fa-arrow-right-from-bracket" style="color: #000000;"></i>
-                    Logout
-                </button>
-            </div>
-        </div>
-    </header>
-
+        </header>
 
     <div class="container">
-        <h1>Hospital List</h1>
+        <h1 id="HospitalListH1">Hospital List</h1>
 
         <div class="table-container">
             <table>
                 <thead>
                     <tr>
-                        <th>Image</th>
-                        <th>Name</th>
-                        <th>Address</th>
-                        <th>City</th>
-                        <th>Country</th>
-                        <th>Actions</th> <!-- Optional if actions are included -->
+                        <th id="ImageLocalization">Image</th>
+                        <th id="NameLocalization">Name</th>
+                        <th id="AddressLocalization">Address</th>
+                        <th id="CityLocalization">City</th>
+                        <th id="CountryLocalization">Country</th>
+                        <th id="ActionLocalization">Actions</th> <!-- Optional if actions are included -->
                     </tr>
                 </thead>
                 <tbody id="hospitalList">
@@ -57,7 +53,7 @@
                 </tbody>
             </table>
         </div>
-        <a href="add-hospital.html" class="btn" style="margin-top: 20px;">Add New Hospital</a>
+        <a id="AddNewHospitalBtn" href="add-hospital.html" class="btn" style="margin-top: 20px;">Add New Hospital</a>
     </div>
     <!-- Modal for confirmation alert -->
 <div id="confirmationModal" class="modal">
@@ -73,6 +69,8 @@
     <script src="js/auth.js"></script>
     <script src="js/app.js"></script>
     <script src="js/hospital.js"></script>
+    <script src="js/hospitalLocalization.js"></script>
+
 
 
 </body>
