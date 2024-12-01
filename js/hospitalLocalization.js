@@ -13,7 +13,8 @@ const translations = {
         CountryLocalization: "Country",
         ActionLocalization : "Action",
         AddNewHospitalBtn: "Add new hospital",
-        HospitalListH1 : "Hospital List"
+        HospitalListH1 : "Hospital List",
+        UpdateHospitalButton: "Update"
     },
     ar: {
         welcomeMessage: "أهلاً وسهلاً، ",
@@ -26,7 +27,8 @@ const translations = {
         CountryLocalization: "الدولة",
         ActionLocalization : "التحكم",
         AddNewHospitalBtn : "اضافة مستشفي",
-        HospitalListH1 : "قائمة المستشفيات"
+        HospitalListH1 : "قائمة المستشفيات",
+        UpdateHospitalButton: "تعديل"
     }
 };
 
@@ -48,6 +50,8 @@ function changeLanguage() {
     document.getElementById("ActionLocalization").innerText = translation.ActionLocalization;
     document.getElementById("AddNewHospitalBtn").innerText = translation.AddNewHospitalBtn;
     document.getElementById("HospitalListH1").innerText = translation.HospitalListH1;
+    document.getElementById("UpdateHospitalButton").innerText = translation.UpdateHospitalButton;
+    
 
 
 
