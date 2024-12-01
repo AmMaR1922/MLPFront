@@ -18,52 +18,50 @@
                     </div>
                 </div>
                 <div class="user-info">
-                    <h1>Welcome, <span id="username">Loading...</span></h1>
+                    <h1 id="welcomeMessage" style="display: inline;">Welcome, </h1><h1 style="display: inline;" id="username">Loading...</h1>
                     <p id="hospitalNameHeader">Loading...</p>
                 </div>
             </div>
 
             <div class="header-buttons">
-                <!-- Patient Button -->
-                
-                <!-- Logout Button -->
                 <button class="logout-btn" onclick="handleLogout()">
                     <i class="fa-solid fa-arrow-right-from-bracket" style="color: #000000;"></i>
-                    Logout
+                    <span id="logoutButton">Logout</span>
                 </button>
             </div>
         </div>
     </header>
+
 
     <div class="container">
         <main class="main-content">
             <div id="addHospitalForm" class="form-container">
                 <form id="hospitalForm">
                     <div class="form-header">
-                        <h2>Add New Hospital</h2>
-                        <p class="form-subtitle">Enter the hospital details below</p>
+                        <h2 id="AddNewHospitalH2">Add New Hospital</h2>
+                        <p id="AddNewHospitalP" class="form-subtitle">Enter the hospital details below</p>
                     </div>
 
                     <div class="form-body">
                         <div class="form-section">
                             <div class="input-group">
-                                <label for="name">Hospital Name</label>
+                                <label id="HospitalNameLabel" for="name">Hospital Name</label>
                                 <input type="text" id="name" placeholder="Enter hospital name" required />
                             </div>
 
                             <div class="input-group">
-                                <label for="address">Address</label>
+                                <label id="AddressLabel" for="address">Address</label>
                                 <input type="text" id="address" placeholder="Enter full address" required />
                             </div>
 
                             <div class="form-row">
                                 <div class="input-group">
-                                    <label for="city">City</label>
+                                    <label id="CityLabel" for="city">City</label>
                                     <input type="text" id="city" placeholder="Enter city" required />
                                 </div>
 
                                 <div class="input-group">
-                                    <label for="country">Country</label>
+                                    <label id="CountryLabel" for="country">Country</label>
                                     <input type="text" id="country" placeholder="Enter country" required />
                                 </div>
                             </div>
@@ -74,8 +72,8 @@
                                 <label for="fileUpload" class="file-upload-label">
                                     <div class="upload-icon"></div>
                                     <div class="upload-content">
-                                        <span class="file-text">Drag & drop your files here</span>
-                                        <span class="file-info">or click to browse</span>
+                                        <span id="Dragdropyourfileshere" class="file-text">Drag & drop your files here</span>
+                                        <span id="orclicktobrowse" class="file-info">or click to browse</span>
                                     </div>
                                 </label>
                                 <input type="file" id="fileUpload" accept="image/*" />
@@ -83,8 +81,8 @@
                         </div>
 
                         <div class="form-actions">
-                            <button type="submit" class="btn btn-primary">Add Hospital</button>
-                            <button type="button" class="btn btn-secondary" id="closeFormBtn">Cancel</button>
+                            <button id="AddHospitalButton" type="submit" class="btn btn-primary">Add Hospital</button>
+                            <button id="CancelButton" type="button" class="btn btn-secondary" id="closeFormBtn">Cancel</button>
                         </div>
                     </div>
                 </form>
@@ -95,6 +93,7 @@
     </div>
 
     <script src="js/add-hospital.js"></script>
+    <script src="js/add-hospitalLocalization.js"></script>
     <script src="js/auth.js"></script>
     <script src="js/app.js"></script>
 </body>
