@@ -78,10 +78,10 @@ function renderPatients(patients) {
                         <td>${patient.name}</td>
                         <td>${getHospitalName(patient.hospitalId)}</td>
                         <td>
-                            <button class="localizable-button" data-key="AddBio" onclick="window.location.href='addBio.html?patientId=${patient.id}'">Add Bio</button>
-                            <button class="ViewBioButton"data-key="ViewBio" onclick="window.location.href='viewBio.html?patientName=${patient.name}&patientAge=${patient.age}'">View Bio</button>
-                            <button class="UpdateButton" data-key="update" onclick="showConfirmationModal('update', '${patient.id}')">Update</button>
-                            <button class="DeleteButton" data-key="delete" onclick="showConfirmationModal('delete', '${patient.id}')" >Delete</button>
+                            <button class="localizable-button" data-key="AddBio" id="AddBioButton" onclick="window.location.href='addBio.html?patientId=${patient.id}'">Add Bio</button>
+                            <button class="localizable-button"   data-key="ViewBio" id="ViewBioButton" onclick="window.location.href='viewBio.html?patientName=${patient.name}&patientAge=${patient.age}'">View Bio</button>
+                            <button class="localizable-button" data-key="update" id="UpdateButton" onclick="showConfirmationModal('update', '${patient.id}')">Update</button>
+                            <button class="localizable-button" data-key="delete" id="DeleteButton" onclick="showConfirmationModal('delete', '${patient.id}')" >Delete</button>
                         </td>
                     </tr>
                     `;

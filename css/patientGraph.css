@@ -60,3 +60,71 @@ canvas {
     margin-right:150px ; /* Center it with margin */
     display: block; /* Ensures it stays aligned */
 }
+
+
+
+
+
+/* Modal background */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black */
+    justify-content: center;
+    align-items: center;
+}
+
+/* Modal content box */
+.modal-content {
+    background: white;
+    padding: 20px 30px;
+    border-radius: 8px;
+    text-align: center;
+    width: 90%;
+    max-width: 400px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Modal message text */
+#modalMessage {
+    margin: 20px 0;
+    font-size: 18px;
+    color: #333;
+}
+
+/* Modal buttons */
+.modal-actions {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 20px;
+}
+
+.btn {
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.btn.cancel {
+    background: #ccc;
+    color: #333;
+}
+
+.btn.confirm {
+    background: #ff4b4b;
+    color: white;
+}
+
+
+
+.btn.confirm :hover {
+    background: #f20000;
+    color: white;
+}
