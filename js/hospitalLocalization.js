@@ -14,7 +14,9 @@ const translations = {
         ActionLocalization : "Action",
         AddNewHospitalBtn: "Add new hospital",
         HospitalListH1 : "Hospital List",
-        UpdateHospitalButton: "Update"
+        UpdateHospitalButton: "Update",
+        DeleteHospitalButton : "Delete"
+
     },
     ar: {
         welcomeMessage: "أهلاً وسهلاً، ",
@@ -28,13 +30,15 @@ const translations = {
         ActionLocalization : "التحكم",
         AddNewHospitalBtn : "اضافة مستشفي",
         HospitalListH1 : "قائمة المستشفيات",
-        UpdateHospitalButton: "تعديل"
+        UpdateHospitalButton: "تعديل",
+        DeleteHospitalButton : "حذف"
     }
 };
 
 // Function to change the UI language
 function changeLanguage() {
     const selectedLanguage =  localStorage.getItem('selectedLang'); // Get the selected language
+    const buttons = document.querySelectorAll('.localizable-button');
     const translation = translations[selectedLanguage] || translations.en; // Default to English if no match
 
     // Update the UI text based on selected language
@@ -50,15 +54,19 @@ function changeLanguage() {
     document.getElementById("ActionLocalization").innerText = translation.ActionLocalization;
     document.getElementById("AddNewHospitalBtn").innerText = translation.AddNewHospitalBtn;
     document.getElementById("HospitalListH1").innerText = translation.HospitalListH1;
-    document.getElementById("UpdateHospitalButton").innerText = translation.UpdateHospitalButton;
-    
+    // document.getElementById("UpdateHospitalButton").innerText = translation.UpdateHospitalButton;
+    // document.getElementById("DeleteHospitalButton").innerText = translation.DeleteHospitalButton;
 
+    
+    buttons.forEach(button => {
+        key = button.getAttribute('data-key');
+       button.textContent = translation[key];
+    });
 
 
     // Save the selected language to localStorage
    
     updateUserInfo();
 }
-changeLanguage()
 
 

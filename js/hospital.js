@@ -67,13 +67,15 @@ function displayHospitals(hospitals) {
                 <td>${hospital.city}</td>
                 <td>${hospital.country}</td>
                 <td>
-                    <button id="UpdateHospitalButton" class="btn-update" onclick="updateHospital('${hospital.id}')">Update</button>
-                    <button id="DeleteHospitalButton" class="btn-action" onclick="showConfirmationModal('delete', '${hospital.id}')">Delete</button>
+                    <button data-key="UpdateHospitalButton" class="btn-update localizable-button" onclick="updateHospital('${hospital.id}')">Update</button>
+                    <button data-key="DeleteHospitalButton" class="btn-action localizable-button" onclick="showConfirmationModal('delete', '${hospital.id}')">Delete</button>
                 </td>
             </tr>
         `).join('');
         
     }
+    changeLanguage();
+
     
 }
 
