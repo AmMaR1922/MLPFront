@@ -1,3 +1,12 @@
+
+
+
+
+
+
+
+
+
 // Function to retrieve the token (assuming it's stored in localStorage)
 function getAuthToken() {
     return localStorage.getItem('auth_token'); // Get token from localStorage
@@ -58,8 +67,8 @@ function displayHospitals(hospitals) {
                 <td>${hospital.city}</td>
                 <td>${hospital.country}</td>
                 <td>
-                    <button class="btn-update" onclick="updateHospital('${hospital.id}')">Update</button>
-                    <button class="btn-action" onclick="showConfirmationModal('delete', '${hospital.id}')">Delete</button>
+                    <button id="UpdateHospitalButton" class="btn-update" onclick="updateHospital('${hospital.id}')">Update</button>
+                    <button id="DeleteHospitalButton" class="btn-action" onclick="showConfirmationModal('delete', '${hospital.id}')">Delete</button>
                 </td>
             </tr>
         `).join('');
@@ -135,3 +144,4 @@ function deleteHospital(hospitalId) {
 window.onload = function () {
     fetchHospitals();
 };
+
