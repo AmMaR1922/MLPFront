@@ -5,7 +5,6 @@ const deletePatientApiUrl = 'https://anteshnatsh.tryasp.net/api/Patient/DeletePa
 const ctx = document.getElementById("patientChart").getContext("2d");
 let chartData = []; // This will store the entire response data
 
-
 // Create a gradient for the graph background
 const gradientFill = ctx.createLinearGradient(0, 0, 0, 400);
 gradientFill.addColorStop(0, "rgba(248, 104, 52,0.4)");
@@ -136,13 +135,11 @@ let patientChart = new Chart(ctx, {
                 const index = activePoints[0].index;
                 const selectedDate = chartData[index].date;
                 const patientsOnSelectedDate = chartData[index].patients;
-                renderPatientTable(patientsOnSelectedDate,selectedDate);
+                renderPatientTable(patientsOnSelectedDate, selectedDate);
             }
         }
     }
-
-
-    ,plugins: [
+    , plugins: [
         {
             id: 'hoverLine',
             afterDraw: (chart) => {
@@ -198,7 +195,7 @@ async function fetchData() {
 
         // Render the patient table for the first date by default
         const firstDatePatients = sortedData[0].patients;
-        renderPatientTable(firstDatePatients,sortedData[0].date);
+        renderPatientTable(firstDatePatients, sortedData[0].date);
 
     } catch (error) {
         console.error("Error fetching data:", error);
@@ -219,7 +216,7 @@ function updateGraph(dates, counts) {
 }
 
 // Render Patient List in Table
-function renderPatientTable(patients,selectedDate) {
+function renderPatientTable(patients, selectedDate) {
     const patientList = document.getElementById('patientList');
     document.getElementById('DateOfCritical').textContent = selectedDate;
     patientList.innerHTML = `
@@ -236,20 +233,19 @@ function renderPatientTable(patients,selectedDate) {
                     const condition = patient.lastBiologicalIndicator?.healthCondition || 'Unspecified';
                     const isAtRisk = condition === 'At Risk';
                     const isHealthy = condition === 'Healthy';
-                    const isUnspecified = condition === 'Unspecified';
 
                     return `
-                         <tr style="${isAtRisk ? 'background-color: rgba(248,104,52,0.15);' : ''}
-                    
-                    ${isHealthy ? ' background-color: rgba(0, 252, 122, 0.1);' : ''}
-                    ">
+                        <tr style="${isAtRisk ? 'background-color: rgba(248,104,52,0.15);' : ''}
+                                   ${isHealthy ? 'background-color: rgba(0, 252, 122, 0.1);' : ''}">
                             <td>${patient.name}</td>
                             <td>${getHospitalName(patient.hospitalId)} </td>
                             <td>
                                 <button id="AddBio" onclick="window.location.href='addBio.html?patientId=${patient.id}'">Add Bio</button>
                                 <button id="ViewBio" onclick="window.location.href='viewBio.html?patientName=${patient.name}&patientAge=${patient.age}'">View Bio</button>
-                                <button id="update" onclick="window.location.href='updatePatient.Html?patientId=${patient.id}'">Update</button>
-                                <button id="delete" onclick="deletePatient('${patient.id}')">Delete</button>
+                                <button id="update" 
+                                    onclick="confirmAction('update', '${patient.id}')">Update</button>
+                                <button id="delete" 
+                                    onclick="confirmAction('delete', '${patient.id}')">Delete</button>
                             </td>
                         </tr>
                     `;
@@ -257,9 +253,63 @@ function renderPatientTable(patients,selectedDate) {
             </tbody>
         </table>
     `;
-changeLanguage();
-
 }
+
+// Confirmation Dialog Function
+function confirmAction(actionType, patientId) {
+    const message = actionType === 'delete' 
+        ? 'Are you sure you want to delete this patient?' 
+        : 'Are you sure you want to update this patient?';
+
+    if (confirm(message)) {
+        if (actionType === 'delete') {
+            deletePatient(patientId);
+        } else if (actionType === 'update') {
+            window.location.href = `updatePatient.Html?patientId=${patientId}`;
+        }
+    }
+}
+
+
+
+function confirmAction(actionType, patientId) {
+    const modal = document.getElementById('confirmationModal');
+    const modalMessage = document.getElementById('modalMessage');
+    const modalCancel = document.getElementById('modalCancel');
+    const modalConfirm = document.getElementById('modalConfirm');
+
+    // Set the message based on the action type
+    modalMessage.textContent = actionType === 'delete' 
+        ? 'Are you sure you want to delete this patient?' 
+        : 'Are you sure you want to update this patient?';
+
+    // Show the modal
+    modal.style.display = 'flex';
+
+    // Handle Cancel button
+    modalCancel.onclick = () => {
+        modal.style.display = 'none'; // Hide modal on cancel
+    };
+
+    // Handle Confirm button
+    modalConfirm.onclick = () => {
+        modal.style.display = 'none'; // Hide modal on confirm
+        if (actionType === 'delete') {
+            deletePatient(patientId);
+        } else if (actionType === 'update') {
+            window.location.href = `updatePatient.html?patientId=${patientId}`;
+        }
+    };
+}
+
+// Close the modal if the user clicks outside of it
+window.onclick = function(event) {
+    const modal = document.getElementById('confirmationModal');
+    if (event.target === modal) {
+        modal.style.display = 'none';
+    }
+};
+
 
 // Retrieve Auth Token
 function getAuthToken() {
