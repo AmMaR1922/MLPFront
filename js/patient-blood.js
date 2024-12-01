@@ -70,16 +70,15 @@ function renderPatients(patients) {
                     const isUnspecified = condition === 'Unspecified';
                     return `
                     <tr style="${isAtRisk ? 'background-color: rgba(248,104,52,0.15);' : ''}
-                    
                     ${isHealthy ? ' background-color: rgba(0, 252, 122, 0.1);' : ''}
                     ">
                         <td>${patient.name}</td>
                         <td>${getHospitalName(patient.hospitalId)}</td>
                         <td>
-                            <button onclick="window.location.href='addBio.html?patientId=${patient.id}'">Add Bio</button>
+                        <button onclick="window.location.href='addBio.html?patientId=${patient.id}'">Add Bio</button>
                             <button id="ViewBio" onclick="window.location.href='viewBio.html?patientName=${patient.name}&patientAge=${patient.age}'">View Bio</button>
-                            <button onclick="window.location.href='updatePatient.html?patientId=${patient.id}'">Update</button>
-                            <button onclick="deletePatient('${patient.id}')">Delete</button>
+                            <button onclick="confirmAction('update', '${patient.id}')">Update</button>
+                            <button onclick="confirmAction('delete', '${patient.id}')">Delete</button>
                         </td>
                     </tr>`;
                 }).join('')}
@@ -115,6 +114,24 @@ async function deletePatient(patientId) {
         }
     } catch (error) {
         alert(`Request failed: ${error.message}`);
+    }
+}
+
+// Confirm action before updating or deleting
+function confirmAction(action, patientId) {
+    let confirmationMessage = '';
+    let confirmedAction = null;
+
+    if (action === 'update') {
+        confirmationMessage = 'Are you sure you want to update this patient?';
+        confirmedAction = () => window.location.href = `updatePatient.html?patientId=${patientId}`;
+    } else if (action === 'delete') {
+        confirmationMessage = 'Are you sure you want to delete this patient?';
+        confirmedAction = () => deletePatient(patientId);
+    }
+
+    if (confirm(confirmationMessage)) {
+        confirmedAction();
     }
 }
 
@@ -206,8 +223,8 @@ document.addEventListener('DOMContentLoaded', function () {
                                 min: 0,
                             }
                         }
-                    }
-                    ,plugins: [
+                    },
+                    plugins: [
                         {
                             id: 'hoverLine',
                             afterDraw: (chart) => {
@@ -242,3 +259,21 @@ document.addEventListener('DOMContentLoaded', function () {
             console.error('Error fetching data:', error);
         });
 });
+ 
+
+ // Function to show the alert
+function showAlert(message) {
+    const alertBox = document.getElementById('alertBox');
+    const alertMessage = document.getElementById('alertMessage');
+    
+    alertMessage.textContent = message;
+    alertBox.style.display = 'flex'; // Show the alert box
+    setTimeout(() => alertBox.classList.add('show'), 10); // Add the show class to trigger the fade-in effect
+}
+
+// Function to close the alert
+function closeAlert() {
+    const alertBox = document.getElementById('alertBox');
+    alertBox.classList.remove('show'); // Trigger fade-out
+    setTimeout(() => alertBox.style.display = 'none', 300); // Hide after the fade-out effect
+}

@@ -683,28 +683,62 @@ form button[type="button"]:hover {
 }
 
 
+/* Patient-Blood */
+ /* Basic Styles */
+.alert-box {
+    display: none; /* Hidden by default */
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(0, 0, 0, 0.7); /* Semi-transparent background */
+    color: #fff;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    z-index: 1000; /* Ensure it's above other content */
+    max-width: 400px;
+    width: 90%; /* Ensure it works on smaller screens */
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+}
 
+/* Alert content */
+.alert-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
 
+/* Alert message */
+#alertMessage {
+    font-size: 16px;
+    flex-grow: 1;
+}
 
+/* Close button */
+.close-btn {
+    background: transparent;
+    border: none;
+    color: #fff;
+    font-size: 20px;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
 
+.close-btn:hover {
+    color: #f8a834; /* Change color on hover */
+}
 
+/* Fade-in effect when shown */
+.alert-box.show {
+    display: flex;
+    opacity: 1;
+}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+/* Responsiveness */
+@media (max-width: 600px) {
+    .alert-box {
+        width: 95%; /* Adjust width for smaller screens */
+    }
+}
