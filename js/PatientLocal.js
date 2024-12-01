@@ -49,8 +49,11 @@ function changeLanguage() {
     document.getElementById("sidebar2").innerHTML = ' <i class="fa fa-thermometer-half"></i>'+translation.sidebar2;
     document.getElementById("sidebar3").innerHTML = ' <i class="fa fa-tint"></i>'+translation.sidebar3;
     document.getElementById("sidebar4").innerHTML = '<i class="fa fa-syringe"></i>'+translation.sidebar4;
+    document.getElementById("Table1").innerText = translation.Table1;
     document.getElementById("Name").innerText = translation.Name;
     document.getElementById("Hospital").innerText = translation.Hospital;
+    document.getElementById("Actions").innerText = translation.Actions;
+
 
     buttons.forEach(button => {
          key = button.getAttribute('data-key');
@@ -60,17 +63,12 @@ function changeLanguage() {
 
  document.getElementById("AddPatient").innerText = translation.AddPatient;
  document.getElementById("BackDash").innerText = translation.BackDash;
-
-
-    document.getElementById("hospitalNameHeader").innerText = translation.hospitalNameHeader;
-    document.getElementById("logoutButton").innerText = translation.logoutButton;
-    document.getElementById("Table1").innerText = translation.Table1;
-    document.getElementById("Actions").innerText = translation.Actions;
-
+document.getElementById("hospitalNameHeader").innerText = translation.hospitalNameHeader;
+document.getElementById("logoutButton").innerText = translation.logoutButton;
+   
 
 
     // Save the selected language to localStorage
     
     updateUserInfo();
 }
-changeLanguage()
