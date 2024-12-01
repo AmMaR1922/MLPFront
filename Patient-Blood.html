@@ -79,7 +79,26 @@
        
     </div>
 
- 
+<!-- Modal HTML Structure -->
+<div id="confirmationModal" class="modal">
+    <div class="modal-content">
+        <h2 id="modalTitle">Are you sure?</h2>
+        <p id="modalMessage">Do you really want to proceed with this action?</p>
+        <div class="modal-actions">
+            <button id="confirmButton">Yes</button>
+            <button id="cancelButton">No</button>
+        </div>
+    </div>
+</div>
+
+
+<!-- Alert Box -->
+<div id="alertBox" class="alert-box">
+    <div class="alert-content">
+        <span id="alertMessage"></span>
+        <button class="close-btn" onclick="closeAlert()">×</button>
+    </div>
+</div>
 
 
 
