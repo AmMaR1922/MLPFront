@@ -242,7 +242,7 @@ function renderPatientTable(patients, selectedDate) {
                             <td>
                                 <button id="AddBio" onclick="window.location.href='addBio.html?patientId=${patient.id}'">Add Bio</button>
                                 <button id="ViewBio" onclick="window.location.href='viewBio.html?patientName=${patient.name}&patientAge=${patient.age}'">View Bio</button>
-                                <button id="update" 
+                                <button id="updatepatientgraph" 
                                     onclick="confirmAction('update', '${patient.id}')">Update</button>
                                 <button id="delete" 
                                     onclick="confirmAction('delete', '${patient.id}')">Delete</button>

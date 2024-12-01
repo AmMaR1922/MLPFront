@@ -309,3 +309,33 @@ table td button {
 .btn-cancel:hover {
     background-color: #31b0d5;
 }
+
+
+
+
+
+   
+
+body {
+    position: relative;
+    /* background-image: url('/MLPFront/Images/DALL·E\ 2024-11-30\ 20.37.15\ -\ A\ photo\ of\ a\ hospital\ door\,\ modern\ design\,\ with\ sliding\ glass\ panels\ and\ a\ clear\ view\ into\ the\ hospital\ corridor.\ The\ door\ is\ framed\ with\ stainless\ st\ \(1\).webp'); */
+   background-image:url('https://i.pinimg.com/736x/de/94/8c/de948c8cac01c3357ca44c46f870757b.jpg') ;
+   
+    background-size: cover;
+    background-position: center;
+    height: 100vh;
+    margin: 0;
+    overflow: hidden;
+}
+
+body::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw; /* Ensure it covers the full viewport width */
+    height: 100vh; /* Ensure it covers the full viewport height */
+    background: inherit; /* Inherit the background image */
+    filter: blur(8px); /* Apply the blur effect */
+    z-index: -1; /* Place the blurred background behind the content */
+}

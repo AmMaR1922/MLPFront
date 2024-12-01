@@ -75,10 +75,10 @@ function renderPatients(patients) {
                         <td>${patient.name}</td>
                         <td>${getHospitalName(patient.hospitalId)}</td>
                         <td>
-                        <button onclick="window.location.href='addBio.html?patientId=${patient.id}'">Add Bio</button>
-                            <button id="ViewBio" onclick="window.location.href='viewBio.html?patientName=${patient.name}&patientAge=${patient.age}'">View Bio</button>
-                            <button onclick="confirmAction('update', '${patient.id}')">Update</button>
-                            <button onclick="confirmAction('delete', '${patient.id}')">Delete</button>
+                        <button id="AddBioPatientBlood" onclick="window.location.href='addBio.html?patientId=${patient.id}'">Add Bio</button>
+                            <button id="ViewBioPatientBlood" onclick="window.location.href='viewBio.html?patientName=${patient.name}&patientAge=${patient.age}'">View Bio</button>
+                            <button id="UpdatePatientBlood" onclick="confirmAction('update', '${patient.id}')">Update</button>
+                            <button id="DeletePatientBlood" onclick="confirmAction('delete', '${patient.id}')">Delete</button>
                         </td>
                     </tr>`;
                 }).join('')}

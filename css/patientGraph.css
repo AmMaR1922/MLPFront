@@ -31,7 +31,7 @@ button {
 }
 
 button:hover {
-    background-color: #0056b3;
+    background-color: #1cafa3;
 }
 
 /* Navigation Buttons */
@@ -128,3 +128,6 @@ canvas {
     background: #f20000;
     color: white;
 }
+
+
+

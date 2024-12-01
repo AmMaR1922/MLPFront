@@ -396,11 +396,11 @@ form button[type="button"]:hover {
     }
 
     #delete {
-        background:#db524b;
+        background-color: rgb(245, 5, 5);
     }
 
     #delete:hover {
-        background:#de605a;
+        background-color:rgba(245, 5, 5,0.8);
     }
 
     button {
@@ -742,3 +742,92 @@ form button[type="button"]:hover {
         width: 95%; /* Adjust width for smaller screens */
     }
 }
+
+
+
+
+
+/* PatientBlood */
+
+#AddPatient,#BackDash{
+    margin-top: 15px;
+}
+
+#AddPatient:hover,#BackDash:hover{
+  background-color: #1cafa3;
+}
+
+
+
+#Add-patient-Blood,#Back-patient-Blood{
+    margin-top:15px ;
+}
+
+#Add-patient-Blood:hover{
+    background-color: #1cafa3;
+}
+
+
+#Back-patient-Blood:hover{
+    background-color: #1cafa3;
+}
+#DeletePatientBlood{
+    background-color: rgb(245, 5, 5);
+}
+ 
+#DeletePatientBlood:hover {
+    background-color:rgba(245, 5, 5,0.8);
+}
+ 
+
+#AddBioPatientBlood:hover{
+    background-color: #1cafa3;
+}
+
+
+#ViewBioPatientBlood:hover{
+    background-color: #1cafa3;
+}
+
+
+#UpdatePatientBlood:hover{
+    background-color: #1cafa3;
+}
+
+
+/* SugarGraph */
+
+#Add-Sugar-Graph,#Back-Sugar-Graph{
+    margin-top: 15px;
+}
+
+
+
+#Add-Sugar-Graph:hover,#Back-Sugar-Graph:hover{
+ background-color:#1cafa3 ;
+}
+
+
+
+#deleteSugar{
+    background-color: rgb(245, 5, 5);
+}
+
+
+#deleteSugar:hover{
+    background-color:rgba(245, 5, 5,0.8);
+}
+
+
+
+#AddBioSugar:hover,#updateSugar:hover,#ViewBioSugar:hover{
+background-color:#1cafa3 ;
+}
+
+
+
+
+
+
+
+

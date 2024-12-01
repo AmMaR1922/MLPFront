@@ -179,12 +179,13 @@ body {
     background: #0f766e;
 }
 
-#delete {
-    background:#db524b;
+.delete {
+    background:#f1372d;
 }
 
-#delete:hover {
-    background:#de605a;
+.delete:hover {
+  
+    background:#ed443b;
 }
 
 button {
@@ -316,3 +317,18 @@ canvas{
 .modal-actions .btn-secondary:hover {
     background-color: #6d6d6d;
 }
+
+
+
+
+
+ #Add-Patient-Temp,#Update-Patient-Temp{
+    margin-top: 15px;
+ }
+
+
+ #updatepatientgraph:hover{
+    background-color: #1cafa3;
+    }
+    
+   
