@@ -45,15 +45,23 @@ async function fetchAndDisplayBioData() {
         }
 
         const bioDataList = await response.json();
-        console.log("Bio Data List:", bioDataList);
+        console.log("Original Bio Data List:", bioDataList);
 
-        renderBioData(bioDataList);
+        // Sort by `date` (ascending order, from oldest to newest)
+        const sortedBioDataList = bioDataList.sort((a, b) => {
+            return   new Date(b.date)-new Date(a.date);
+        });
+
+        console.log("Sorted Bio Data List by Date:", sortedBioDataList);
+
+        renderBioData(sortedBioDataList);
 
     } catch (error) {
         console.error('Request Error:', error);
         alert(`Request failed: ${error.message}`);
     }
 }
+
 
 // Function to delete a bio entry by ID
 async function deleteBio(bioId) {

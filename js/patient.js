@@ -42,7 +42,7 @@ async function fetchPatients() {
         headers: { 'Authorization': `Bearer ${token}` }
     });
     const patients = await response.json();
-    renderPatients(patients);
+    renderPatients(patients.reverse());
 }
 
 // Render the patients in the table
